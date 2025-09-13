@@ -1,6 +1,13 @@
 fx_version 'cerulean'
 game 'gta5'
 
+shared_script 'init.lua'
+server_scripts {
+    'modules/detecter/supported/server.lua',
+    'modules/detecter/resources/server.lua',
+    'modules/selector/server.lua',
+    'modules/provider/server.lua',
+}
 files {
     'compatibilities/ambulance/main.lua',
     'compatibilities/ambulance/ars_ambulance/client.lua',
@@ -78,3 +85,28 @@ files {
     'compatibilities/weather/qb-weathersync/client.lua',
     'compatibilities/weather/renewed-weathersync/client.lua',
 }
+provide 'LegacyFuel'
+provide 'Renewed-Fuel'
+provide 'Renewed-Vehiclekeys'
+provide 'ars_ambulance'
+provide 'bub-mdt'
+provide 'cdn-fuel'
+provide 'fd_banking'
+provide 'lc_fuel'
+provide 'polyzone'
+provide 'progressbar'
+provide 'ps-dispatch'
+provide 'ps-fuel'
+provide 'ps-housing'
+provide 'qb-ambulance'
+provide 'qb-banking'
+provide 'qb-doorlock'
+provide 'qb-fuel'
+provide 'qb-housing'
+provide 'qb-input'
+provide 'qb-inventory'
+provide 'qb-menu'
+provide 'qb-radialmenu'
+provide 'qb-target'
+provide 'renewed-banking'
+provide 'renewed-weathersync'
