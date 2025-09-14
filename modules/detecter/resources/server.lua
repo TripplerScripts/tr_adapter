@@ -1,3 +1,5 @@
+-- this will grab the names of all resources that are installed in the server
+  -- store the detected resources names from the server in a table
 AddEventHandler('onResourceStart', function(startedResource)
   if GetCurrentResourceName() == startedResource then
     Wait(1000)

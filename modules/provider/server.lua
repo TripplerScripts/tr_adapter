@@ -1,5 +1,6 @@
+-- this will edit your fxmanifest providing the scripts that are missing automatically :)
 while not IsReadyToProvide do
-  Wait(100)
+  Wait(1000)
 end
 
 local manifestPath = GetResourcePath(GetCurrentResourceName()) .. '/fxmanifest.lua'
@@ -39,7 +40,7 @@ else
   filesEnd = #content
 end
 
-local provideEntries = "\n"
+local provideEntries = ""
 for _, scriptName in ipairs(ScriptsToProvide) do
   provideEntries = provideEntries .. "provide '" .. scriptName .. "'\n"
 end
@@ -51,3 +52,5 @@ if not writeFile then return false end
 
 writeFile:write(newContent)
 writeFile:close()
+
+IsReadyToLoad = true

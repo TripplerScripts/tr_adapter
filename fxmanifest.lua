@@ -11,6 +11,7 @@ server_scripts {
     'modules/detecter/resources/server.lua',
     'modules/selector/server.lua',
     'modules/provider/server.lua',
+    'modules/loader/server.lua',
 }
 files {
     'compatibilities/ambulance/main.lua',
