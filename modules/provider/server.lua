@@ -41,7 +41,7 @@ else
 end
 
 local provideEntries = ""
-for _, scriptName in ipairs(ScriptsToProvide) do
+for _, scriptName in ipairs(MissingScripts) do
   provideEntries = provideEntries .. "provide '" .. scriptName .. "'\n"
 end
 

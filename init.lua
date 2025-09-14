@@ -1,2 +1,9 @@
-AreDetectedResourcesReady, AreSupportedResourcesReady, IsReadyToProvide, IsReadyToLoad = false, false, false, false
-ServerResourcesNames, SupportedResourcesData, SupportedResourcesNames, ScriptsToProvide, ScriptsThatProvide = ServerResourcesNames or {}, ScriptsCategories or {}, SupportedResourcesNames or {}, ScriptsToProvide or {}, ScriptsThatProvide or {}
+AreDetectedResourcesReady = false
+AreSupportedResourcesReady = false
+IsReadyToProvide = false
+IsReadyToLoad = false
+
+ServerResourcesNames = {}
+MissingScripts = {}
+AvailableScripts = {}
+SupportedResourcesData = {}

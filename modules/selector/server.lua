@@ -1,49 +1,49 @@
 -- this will filter the supported resources names that are:
-  -- missing | stored in ScriptsToProvide
-  -- will be provided by the tr_adapter | stored in ScriptsThatProvide
+  -- missing | stored in MissingScripts
+  -- will be provided by the tr_adapter | stored in AvailableScripts
   -- provided by another script | ignored
 while not AreSupportedResourcesReady do
   Wait(1000)
 end
 
-for _, name in ipairs(SupportedResourcesNames) do
-  local state = GetResourceState(name)
+for _, data in ipairs(SupportedResourcesData) do
+  local state = GetResourceState(data.name)
   local foundInServer = false
 
   for _, serverName in ipairs(ServerResourcesNames) do
-    if serverName == name then
+    if serverName == data.name then
       foundInServer = true
       break
     end
   end
 
   if state ~= "missing" and not foundInServer then
-    print("^2✓ Found: " .. name .. ' (^3Provided by another script)')
+    print("^2✓ Found: " .. data.name .. ' (^3Provided by another script)')
   else
     if state ~= "missing" then
-      ScriptsThatProvide[#ScriptsThatProvide + 1] = name
-      print("^2✓ Found: " .. name)
+      AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name }
+      print("^2✓ Found: " .. data.name)
     else
-      ScriptsToProvide[#ScriptsToProvide + 1] = name
-      print("^1✗ Missing: " .. name)
+      MissingScripts[#MissingScripts + 1] = data.name
+      print("^1✗ Missing: " .. data.name)
     end
   end
 end
 
-print("^2[Resource Selector] ^7Found " .. #ScriptsToProvide .. " scripts to support")
-for _, name in ipairs(ScriptsToProvide) do
+print("^2[Resource Selector] ^7Found " .. #MissingScripts .. " scripts to support")
+for _, name in ipairs(MissingScripts) do
   print("^3- ^7" .. name)
 end
 
-print("^2[Resource Selector] ^7Found " .. #ScriptsThatProvide .. " scripts that provide")
+print("^2[Resource Selector] ^7Found " .. #AvailableScripts .. " scripts that are going to provide")
 local categoryLookup = {}
 for _, data in ipairs(SupportedResourcesData) do
   categoryLookup[data.name] = data.category
 end
 
-for _, name in ipairs(ScriptsThatProvide) do
-  local category = categoryLookup[name] or "unknown"
-  print("^3- ^7" .. name .. " ^6[" .. category .. "]")
+for _, data in ipairs(AvailableScripts) do
+  local category = categoryLookup[data.name] or "unknown"
+  print("^3- ^7" .. data.name .. " ^6[" .. category .. "]")
 end
 
 IsReadyToProvide = true

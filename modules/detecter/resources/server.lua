@@ -15,9 +15,9 @@ AddEventHandler('onResourceStart', function(startedResource)
 
     print("^2[Resource Detector] ^7Stored " .. #ServerResourcesNames .. " resource names")
 
-    for _, name in ipairs(ServerResourcesNames) do
-      print("^3- ^7" .. name)
-    end
+    --for _, name in ipairs(ServerResourcesNames) do
+    --  print("^3- ^7" .. name)
+    --end
     AreDetectedResourcesReady = true
   end
 end)

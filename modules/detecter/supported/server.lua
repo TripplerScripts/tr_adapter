@@ -28,11 +28,9 @@ local function extractResourceNames()
     end
 
     for name, _ in pairs(foundNames) do
-        table.insert(SupportedResourcesNames, name)
         table.insert(SupportedResourcesData, foundData[name])
     end
 
-    table.sort(SupportedResourcesNames)
 
     table.sort(SupportedResourcesData, function(a, b)
         if a.category == b.category then
@@ -41,7 +39,7 @@ local function extractResourceNames()
         return a.category < b.category
     end)
 
-    print("^2[Resource Extractor] ^7Found " .. #SupportedResourcesNames .. " resource names:")
+    print("^2[Resource Extractor] ^7Found " .. #SupportedResourcesData .. " resource names:")
 
     local currentCategory = ""
     for _, data in ipairs(SupportedResourcesData) do
