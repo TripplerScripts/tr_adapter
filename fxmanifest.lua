@@ -24,7 +24,7 @@ files {
     'compatibilities/banking/_init/client.lua',
     'compatibilities/banking/fd_banking/client.lua',
     'compatibilities/banking/qb-banking/client.lua',
-    'compatibilities/banking/renewed-banking/client.lua',
+    'compatibilities/banking/Renewed-Banking/client.lua',
 
     'compatibilities/core/_init/client.lua',
     'compatibilities/core/_init/server.lua',
@@ -74,7 +74,7 @@ files {
     'compatibilities/menu/qb-menu/client.lua',
     
     'compatibilities/polyzone/_init/client.lua',
-    'compatibilities/polyzone/ox_lib/client.lua',
+    'compatibilities/polyzone/PolyZone/client.lua',
     'compatibilities/polyzone/polyzone/client.lua',
 
     'compatibilities/progressbar/_init/client.lua',
@@ -97,13 +97,12 @@ files {
     'compatibilities/weather/_init/client.lua',
     'compatibilities/weather/cd_easytime/client.lua',
     'compatibilities/weather/qb-weathersync/client.lua',
-    'compatibilities/weather/renewed-weathersync/client.lua',
+    'compatibilities/weather/Renewed-Weathersync/client.lua',
 }
 provide 'ars_ambulance'
 provide 'qb-ambulance'
 provide 'fd_banking'
 provide 'qb-banking'
-provide 'renewed-banking'
 provide 'bub-mdt'
 provide 'ps-dispatch'
 provide 'qb-doorlock'
@@ -118,9 +117,9 @@ provide 'qb-housing'
 provide 'qb-input'
 provide 'qb-inventory'
 provide 'qb-menu'
+provide 'PolyZone'
 provide 'polyzone'
 provide 'progressbar'
 provide 'qb-radialmenu'
 provide 'qb-target'
 provide 'Renewed-Vehiclekeys'
-provide 'renewed-weathersync'

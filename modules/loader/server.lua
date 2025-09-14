@@ -47,3 +47,5 @@ for _, data in ipairs(AvailableScripts) do
   end
   ::continue::
 end
+
+print(exports['qb-inventory']:GetInventory(source))
