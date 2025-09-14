@@ -1,4 +1,4 @@
-﻿Progressbar.Progress = function(data, cb)
+Progressbar.Progress = function(data, cb)
     local success = exports.progressbar:Progress(data, cb)
     return success
 end

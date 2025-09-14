@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Polyzone = {}
 
 Polyzone.CreateZone = function(name, points, options)

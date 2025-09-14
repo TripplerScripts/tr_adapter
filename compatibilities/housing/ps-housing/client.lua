@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Housing.GetPlayerHouses = function(source)
     return exports['ps-housing']:GetPlayerHouses(source)
 end

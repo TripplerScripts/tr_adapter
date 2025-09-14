@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Polyzone.CreateZone = function(name, points, options)
     return exports.ox_lib:addPolyZone(name, points, options)
 end

@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Inventory = {}
 
 Inventory.Search = function(source, item, metadata)

@@ -3,9 +3,10 @@ while not IsReadyToLoad do
 end
 
 for _, data in ipairs(AvailableScripts) do
+  if data.duplicityVersion then goto continue end
   local success, error = pcall(function()
     -- Load _init client file (main/core file)
-    local initContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/client.lua')
+    local initContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/client.lua') and not LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/server.lua')
     if not initContent then
       print('^3[LOADER WARNING]^7 Init file not found: ' .. data.category .. '/_init/client.lua')
     else
@@ -43,4 +44,5 @@ for _, data in ipairs(AvailableScripts) do
   if not success then
     print('^1[LOADER ERROR]^7 ' .. error)
   end
+  ::continue::
 end

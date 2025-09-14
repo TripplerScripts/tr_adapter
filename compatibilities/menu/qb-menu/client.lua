@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Menu.OpenMenu = function(data)
     return exports['qb-menu']:openMenu(data)
 end

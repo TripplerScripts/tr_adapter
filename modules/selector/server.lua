@@ -21,7 +21,7 @@ for _, data in ipairs(SupportedResourcesData) do
     print("^2✓ Found: " .. data.name .. ' (^3Provided by another script)')
   else
     if state ~= "missing" then
-      AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name }
+      AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name, duplicityVersion = data.duplicityVersion }
       print("^2✓ Found: " .. data.name)
     else
       MissingScripts[#MissingScripts + 1] = data.name

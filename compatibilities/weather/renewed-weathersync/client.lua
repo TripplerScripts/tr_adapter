@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Weather.SetWeather = function(weather)
     return exports['renewed-weathersync']:SetWeather(weather)
 end

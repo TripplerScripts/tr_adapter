@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Fuel.SetFuel = function(vehicle, fuel)
     return exports['Renewed-Fuel']:SetFuel(vehicle, fuel)
 end

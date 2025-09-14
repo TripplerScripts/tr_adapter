@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 VehicleKeys.GiveKeys = function(source, plate)
     print('hello')
     return exports.qbx_vehiclekeys:GiveKeys(source, plate)

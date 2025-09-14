@@ -17,12 +17,13 @@ local function extractResourceNames()
     local foundData = {}
 
     for line in content:gmatch("[^\r\n]+") do
-        local category, resourceName = line:match("'compatibilities/([^/]+)/([^/]+)/[^']+'")
-        if category and resourceName then
+        local category, resourceName, fileName = line:match("'compatibilities/([^/]+)/([^/]+)/([^/]+%.lua)'")
+        if category and resourceName and resourceName ~= '_init' then
             foundNames[resourceName] = true
             foundData[resourceName] = {
                 category = category,
-                name = resourceName
+                name = resourceName,
+                duplicityVersion = fileName == "server.lua",
             }
         end
     end

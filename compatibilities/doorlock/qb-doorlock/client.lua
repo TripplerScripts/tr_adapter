@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Doorlock.SetDoorState = function(doorId, state)
     return exports['qb-doorlock']:SetDoorState(doorId, state)
 end

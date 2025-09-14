@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 RadialMenu.OpenMenu = function(data)
     return exports['qb-radialmenu']:OpenMenu(data)
 end

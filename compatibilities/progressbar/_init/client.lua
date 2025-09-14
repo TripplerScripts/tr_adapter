@@ -1,4 +1,4 @@
-﻿Progressbar = {}
+Progressbar = {}
 
 Progressbar.Progress = function(data, cb)
     print('No progressbar resource available - Progress called', 'warn')

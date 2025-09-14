@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Banking.AddMoney = function(source, account, amount)
     return exports['qb-banking']:AddMoney(source, account, amount)
 end

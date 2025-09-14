@@ -29,7 +29,9 @@ files {
     'compatibilities/core/_init/client.lua',
     'compatibilities/core/_init/server.lua',
     'compatibilities/core/qb-core/client.lua',
+    'compatibilities/core/qb-core/server.lua',
     'compatibilities/core/qbx_core/client.lua',
+    'compatibilities/core/qbx_core/server.lua',
 
     'compatibilities/dispatch/_init/client.lua',
     'compatibilities/dispatch/bub-mdt/client.lua',
@@ -59,7 +61,9 @@ files {
     'compatibilities/inventory/_init/client.lua',
     'compatibilities/inventory/_init/server.lua',
     'compatibilities/inventory/ox_inventory/client.lua',
+    'compatibilities/inventory/ox_inventory/server.lua',
     'compatibilities/inventory/qb-inventory/client.lua',
+    'compatibilities/inventory/qb-inventory/server.lua',
 
     'compatibilities/management/_init/client.lua',
     'compatibilities/management/qb-management/client.lua',
@@ -119,5 +123,4 @@ provide 'progressbar'
 provide 'qb-radialmenu'
 provide 'qb-target'
 provide 'Renewed-Vehiclekeys'
-provide '_init'
 provide 'renewed-weathersync'

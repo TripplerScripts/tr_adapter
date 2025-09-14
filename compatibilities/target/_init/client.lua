@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Target = {}
 
 Target.AddBoxZone = function(name, center, length, width, options, targetoptions)

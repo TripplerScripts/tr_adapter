@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 VehicleKeys = {}
 
 VehicleKeys.GiveKeys = function(source, plate)

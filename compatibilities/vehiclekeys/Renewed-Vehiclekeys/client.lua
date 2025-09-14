@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 VehicleKeys.GiveKeys = function(source, plate)
     return exports['Renewed-Vehiclekeys']:GiveKeys(source, plate)
 end

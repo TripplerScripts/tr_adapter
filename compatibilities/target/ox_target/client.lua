@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Target.AddBoxZone = function(name, center, length, width, options, targetoptions)
     return exports.ox_target:addBoxZone(name, center, length, width, options, targetoptions)
 end

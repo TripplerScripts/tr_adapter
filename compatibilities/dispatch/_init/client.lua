@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Dispatch = {}
 
 Dispatch.SendAlert = function(alertData)

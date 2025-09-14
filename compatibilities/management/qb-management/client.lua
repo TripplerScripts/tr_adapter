@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Management.GetEmployees = function(jobName)
     return exports['qb-management']:GetEmployees(jobName)
 end

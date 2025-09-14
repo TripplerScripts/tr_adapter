@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Inventory.AddItem = function(source, item, count, metadata, slot)
     return exports['qb-inventory']:AddItem(source, item, count, metadata, slot)
 end

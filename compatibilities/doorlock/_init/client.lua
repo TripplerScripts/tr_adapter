@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Doorlock = {}
 
 Doorlock.SetDoorState = function(doorId, state)

@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Dispatch.SendAlert = function(alertData)
     return exports['ps-dispatch']:SendAlert(alertData)
 end

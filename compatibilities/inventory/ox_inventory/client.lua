@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Inventory.Search = function(source, item, metadata)
     return exports.ox_inventory:Search(source, item, metadata)
 end

@@ -1,4 +1,4 @@
-﻿---@diagnostic disable: duplicate-set-field
+---@diagnostic disable: duplicate-set-field
 Ambulance.RevivePlayer = function(source)
     return exports.ars_ambulance:RevivePlayer(source)
 end
