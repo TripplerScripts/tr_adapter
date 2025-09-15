@@ -4,6 +4,6 @@ IsReadyToProvide = false
 IsReadyToLoad = false
 
 ServerResourcesNames = {}
-MissingScripts = {}
+ScriptsToSupport = {}
 AvailableScripts = {}
 SupportedResourcesData = {}

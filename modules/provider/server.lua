@@ -41,8 +41,8 @@ else
 end
 
 local provideEntries = ""
-for _, scriptName in ipairs(MissingScripts) do
-  provideEntries = provideEntries .. "provide '" .. scriptName .. "'\n"
+for _, data in ipairs(ScriptsToSupport) do
+  provideEntries = provideEntries .. "provide '" .. data.name .. "'\n"
 end
 
 local newContent = content:sub(1, filesEnd) .. provideEntries .. content:sub(filesEnd + 1)

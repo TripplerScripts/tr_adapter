@@ -1,5 +1,5 @@
 -- this will filter the supported resources names that are:
-  -- missing | stored in MissingScripts
+  -- missing | stored in ScriptsToSupport
   -- will be provided by the tr_adapter | stored in AvailableScripts
   -- provided by another script | ignored
 while not AreSupportedResourcesReady do
@@ -9,7 +9,6 @@ end
 for _, data in ipairs(SupportedResourcesData) do
   local state = GetResourceState(data.name)
   local foundInServer = false
-
   for _, serverName in ipairs(ServerResourcesNames) do
     if serverName == data.name then
       foundInServer = true
@@ -24,15 +23,15 @@ for _, data in ipairs(SupportedResourcesData) do
       AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name, duplicityVersion = data.duplicityVersion }
       print("^2✓ Found: " .. data.name)
     else
-      MissingScripts[#MissingScripts + 1] = data.name
+      ScriptsToSupport[#ScriptsToSupport + 1] = { name = data.name, category = data.category }
       print("^1✗ Missing: " .. data.name)
     end
   end
 end
 
-print("^2[Resource Selector] ^7Found " .. #MissingScripts .. " scripts to support")
-for _, name in ipairs(MissingScripts) do
-  print("^3- ^7" .. name)
+print("^2[Resource Selector] ^7Found " .. #ScriptsToSupport .. " scripts to support")
+for _, data in ipairs(ScriptsToSupport) do
+  print("^3- ^7" .. data.name .. " ^6[" .. data.category .. "]")
 end
 
 print("^2[Resource Selector] ^7Found " .. #AvailableScripts .. " scripts that are going to provide")

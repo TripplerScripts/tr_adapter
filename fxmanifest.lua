@@ -99,6 +99,7 @@ files {
     'compatibilities/weather/qb-weathersync/client.lua',
     'compatibilities/weather/Renewed-Weathersync/client.lua',
 }
+
 provide 'ars_ambulance'
 provide 'qb-ambulance'
 provide 'fd_banking'
