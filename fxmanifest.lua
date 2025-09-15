@@ -68,14 +68,13 @@ files {
     'compatibilities/management/_init/client.lua',
     'compatibilities/management/qb-management/client.lua',
     'compatibilities/management/qbx_management/client.lua',
-    
+
     'compatibilities/menu/_init/client.lua',
     'compatibilities/menu/ox_lib/client.lua',
     'compatibilities/menu/qb-menu/client.lua',
-    
+
     'compatibilities/polyzone/_init/client.lua',
     'compatibilities/polyzone/PolyZone/client.lua',
-    'compatibilities/polyzone/polyzone/client.lua',
 
     'compatibilities/progressbar/_init/client.lua',
     'compatibilities/progressbar/ox_lib/client.lua',
@@ -88,7 +87,7 @@ files {
     'compatibilities/target/_init/client.lua',
     'compatibilities/target/ox_target/client.lua',
     'compatibilities/target/qb-target/client.lua',
-    
+
     'compatibilities/vehiclekeys/_init/client.lua',
     'compatibilities/vehiclekeys/qb-vehiclekeys/client.lua',
     'compatibilities/vehiclekeys/qbx_vehiclekeys/client.lua',
@@ -119,7 +118,6 @@ provide 'qb-input'
 provide 'qb-inventory'
 provide 'qb-menu'
 provide 'PolyZone'
-provide 'polyzone'
 provide 'progressbar'
 provide 'qb-radialmenu'
 provide 'qb-target'

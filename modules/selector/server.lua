@@ -23,7 +23,7 @@ for _, data in ipairs(SupportedResourcesData) do
       AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name, duplicityVersion = data.duplicityVersion }
       print("^2✓ Found: " .. data.name)
     else
-      ScriptsToSupport[#ScriptsToSupport + 1] = { name = data.name, category = data.category }
+      ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
       print("^1✗ Missing: " .. data.name)
     end
   end

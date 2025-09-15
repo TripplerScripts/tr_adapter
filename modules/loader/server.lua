@@ -3,8 +3,9 @@ while not IsReadyToLoad do
 end
 for _, data in ipairs(AvailableScripts) do
   if not data.duplicityVersion then goto continue end
-    local success, error = pcall(function()
-    local initContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/server.lua')
+  local success, error = pcall(function()
+    local initContent = LoadResourceFile(GetCurrentResourceName(),
+      'compatibilities/' .. data.category .. '/_init/server.lua')
     if not initContent then
       print('^3[LOADER WARNING]^7 Init file not found: ' .. data.category .. '/_init/server.lua')
     else
@@ -14,7 +15,7 @@ for _, data in ipairs(AvailableScripts) do
         print('^2[LOADER]^7 Successfully loaded: ' .. data.category .. '/_init/server.lua')
       else
         print('^1[LOADER ERROR]^7 Failed to compile ' ..
-        data.category .. '/_init/server.lua: ' .. (errInit or 'Unknown error'))
+          data.category .. '/_init/server.lua: ' .. (errInit or 'Unknown error'))
       end
     end
 
@@ -33,7 +34,7 @@ for _, data in ipairs(AvailableScripts) do
         print('^2 - [LOADER]^7 Successfully loaded: ' .. data.category .. '/' .. data.name .. '/server.lua')
       else
         print('^1 - [LOADER ERROR]^7 Failed to compile ' ..
-        data.category .. '/' .. data.name .. '/server.lua: ' .. (errScript or 'Unknown error'))
+          data.category .. '/' .. data.name .. '/server.lua: ' .. (errScript or 'Unknown error'))
       end
     end)
 
@@ -47,5 +48,3 @@ for _, data in ipairs(AvailableScripts) do
   end
   ::continue::
 end
-
-print(exports['qb-inventory']:GetInventory(source))

@@ -1,9 +1,9 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory.GetInventory = function()
-    return exports.ox_inventory:TestInventory()
+  return exports['ps-inventory']:TestInventory()
 end
 
 UniqueFunctions = {
-    'OXUniqueFunction_A',
-    'OXUniqueFunction_B',
+  'PSUniqueFunction_A',
+  'PSUniqueFunction_B',
 }
