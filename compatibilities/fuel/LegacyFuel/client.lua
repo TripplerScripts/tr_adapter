@@ -1,9 +1,9 @@
 ---@diagnostic disable: duplicate-set-field
 
 ---@class GetFuel
----@param entity integer
----@return number
+---@field entity integer
+---@return type number
 
 ---@class SetFuel
----@param entity integer
----@param fuel number
+---@field entity integer
+---@field fuel number
