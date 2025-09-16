@@ -1,22 +1,29 @@
 ---@diagnostic disable: duplicate-set-field
+---@version 1.2.3
+
+---@class SetFuelType
+---@param entity integer
+---@param fuelType string
+
+---@class setFuelType
+---@return type function, SetFuelType
 
 ---@class GetFuel
----@field entity integer
+---@param entity integer
 ---@return type number
+Fuel.GetFuel = function(entity)
+  return exports.lc_fuel:GetFuel(entity)
+end
 
 ---@class SetFuel
----@field entity integer
----@field fuel number
+---@param entity integer
+---@param fuel number
+Fuel.SetFuel = function(entity, fuel)
+  exports.lc_fuel:SetFuel(entity, fuel | 100)
+end
 
 ---@class getFuel
----@return type GetFuel
+---@return type function, GetFuel
 
 ---@class setFuel
 ---@field SetFuel function
-
----@class SetFuelType
----@field entity integer
----@field fuelType string
-
----@class setFuelType
----@return type function
