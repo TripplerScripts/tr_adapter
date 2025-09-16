@@ -16,30 +16,4 @@ server_scripts {
     'modules/detecter/extractor/server.lua',
     'modules/detecter/resources/server.lua',
 }
-files {
-    
-}
-
-provide 'ars_ambulance'
-provide 'qb-ambulance'
-provide 'fd_banking'
-provide 'qb-banking'
-provide 'bub-mdt'
-provide 'ps-dispatch'
-provide 'qb-doorlock'
-provide 'LegacyFuel'
-provide 'Renewed-Fuel'
-provide 'cdn-fuel'
-provide 'lc_fuel'
-provide 'ps-fuel'
-provide 'qb-fuel'
-provide 'ps-housing'
-provide 'qb-housing'
-provide 'qb-input'
-provide 'qb-inventory'
-provide 'qb-menu'
-provide 'PolyZone'
-provide 'progressbar'
-provide 'qb-radialmenu'
-provide 'qb-target'
-provide 'Renewed-Vehiclekeys'
+files {}
