@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 author 'Trippler Hub'
-version '0.2.0'
+version '0.3.0'
 
 shared_script 'init.lua'
 client_scripts {
