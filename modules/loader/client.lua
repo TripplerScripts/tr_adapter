@@ -2,7 +2,6 @@ local function loadScripts()
   for _, data in ipairs(AvailableScripts) do
     if data.duplicityVersion then goto continue end
     local success, error = pcall(function()
-      -- Load _init client file (main/core file)
       local initContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/client.lua') and not LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/server.lua')
       if not initContent then
         print('^3[LOADER WARNING]^7 Init file not found: ' .. data.category .. '/_init/client.lua', 'warn')
@@ -16,7 +15,6 @@ local function loadScripts()
         end
       end
 
-      -- Load specific script client file
       local scriptSuccess, scriptError = pcall(function()
         local scriptContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/' .. data.name .. '/client.lua')
         if not scriptContent then

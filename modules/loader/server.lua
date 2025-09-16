@@ -16,7 +16,6 @@ function LoadScripts()
         end
       end
 
-      -- Load specific script server file
       local scriptSuccess, scriptError = pcall(function()
         local scriptContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/' .. data.name .. '/server.lua')
         if not scriptContent then
