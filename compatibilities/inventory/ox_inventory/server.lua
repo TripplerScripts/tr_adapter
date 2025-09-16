@@ -1,9 +1,4 @@
 ---@diagnostic disable: duplicate-set-field
-Inventory.GetInventory = function()
-    return exports.ox_inventory:TestInventory()
+Inventory.GetPlayer = function()
+    return exports.ox_inventory:PlayerInfo()
 end
-
-UniqueFunctions = {
-    'OXUniqueFunction_A',
-    'OXUniqueFunction_B',
-}

@@ -12,7 +12,16 @@ end
 
 local differentAliasses = {
   ['qb-inventory'] = {
-    GetInventory = 'GetQBInventory',
+    GetInventory = {
+      label = 'GetQBInventory',
+      returned = {
+        values = {
+          name = 'string',
+          items = 'table',
+          amount = 'number',
+        }
+      }
+    },
     -- LoadInventory = 'LoadInventory', same name so not needed
   },
   ['ps-inventory'] = {

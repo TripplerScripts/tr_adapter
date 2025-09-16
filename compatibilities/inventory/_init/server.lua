@@ -1,32 +1,59 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
-Inventory.GetInventory = function()
-  print('No inventory resource available - GetInventory called', 'warn')
+Inventory.GetPlayer = function()
+  print('No inventory resource available - GetPlayer called', 'warn')
   return {}
 end
-
-for _, table in ipairs(ScriptsToSupport) do
-  if table.category == "inventory" then
-    local initContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. table.category .. '/' .. table.name .. '/server.lua')
-    if not initContent then
-      print('^3[LOADER WARNING]^7 Init file not found: ' .. table.category .. '/' .. table.name .. '/server.lua')
-    else
-      local chunkInit, errInit = load(initContent, '@' .. table.category .. '/' .. table.name .. '/server.lua')
-      if chunkInit then
-        chunkInit()
-        print('^2[LOADER]^7 Successfully loaded: ' .. table.category .. '/' .. table.name .. '/server.lua')
-      else
-        print('^1[LOADER ERROR]^7 Failed to compile ' ..
-          table.category .. '/' .. table.name .. '/server.lua: ' .. (errInit or 'Unknown error'))
+---@alias expectedReturn string[] | table<string, string>
+local backwardsCompatibility = {
+  ['qb-inventory'] = {
+    GetPlayer = {
+      label = 'GetPlayerData',
+      expectedReturn = { 'undefined', 'undefined', 'undefined' },
+      smartMapping = function()
+        return {
+          Inventory.GetPlayer().citizenId,
+          Inventory.GetPlayer().charInfo.firstName,
+          Inventory.GetPlayer().charInfo.lastName
+        }
       end
-    end
-    for _, export in pairs(UniqueFunctions) do
-      print(table.name .. ':' .. export)
-      AddEventHandler(('__cfx_export_%s_%s'):format(table.name, export), function(setCB)
-        setCB(function()
-          return Inventory.GetInventory()
-        end)
-      end)
+    },
+  },
+  ['ox_inventory'] = {
+    GetPlayer = {
+      label = 'PlayerInfo',
+      expectedReturn = {
+        citizenId = 'undefined',
+        charinfo = {
+          firstName = 'undefined',
+          lastName  = 'undefined',
+        }
+      },
+      smartMapping = function()
+        return {
+          citizenId = function() return Inventory.GetPlayer().citizenId end,
+          charinfo = function() return Inventory.GetPlayer().charInfo end,
+        }
+      end
+    },
+  },
+}
+
+-- calling qb-inventory not like calling ps-inventory so we need to use the backward compatibility table, return values are different
+function InitScripts()
+  for resourceName, aliases in pairs(backwardsCompatibility) do
+    for i = 1, #ScriptsToSupport do
+      if resourceName == ScriptsToSupport[i].name then
+        if not AvailableScripts[resourceName] then
+          for functionName, func in pairs(Inventory) do
+            local exportName = aliases[functionName].label or functionName
+            AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, exportName), function(setCB)
+              setCB(func) -- this is only calling one functions which is not the case for ps-inventory or qb-inventory, this will return the expected values for ox_inventory which it'll not server ps, qb or whatever
+            end)
+          end
+        end
+        break
+      end
     end
   end
 end

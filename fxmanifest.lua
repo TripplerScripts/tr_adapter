@@ -10,11 +10,11 @@ client_scripts {
     'modules/loader/client.lua'
 }
 server_scripts {
-    'modules/detecter/supported/server.lua',
-    'modules/detecter/resources/server.lua',
-    'modules/selector/server.lua',
-    'modules/provider/server.lua',
     'modules/loader/server.lua',
+    'modules/provider/server.lua',
+    'modules/selector/server.lua',
+    'modules/detecter/extractor/server.lua',
+    'modules/detecter/resources/server.lua',
 }
 files {
     'compatibilities/ambulance/_init/client.lua',
