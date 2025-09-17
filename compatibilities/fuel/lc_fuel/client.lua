@@ -19,7 +19,7 @@ end
 ---@param entity integer
 ---@param fuel number
 Fuel.SetFuel = function(entity, fuel)
-  exports.lc_fuel:SetFuel(entity, fuel | 100)
+  exports.lc_fuel:SetFuel(entity, fuel | 100) -- Optional / Default Values
 end
 
 ---@class getFuel
