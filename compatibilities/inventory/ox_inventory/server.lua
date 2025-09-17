@@ -4,7 +4,7 @@
 ---@param player table
 ---@param data table?
 Inventory.SetPlayerInventory = function(player, data)
-  return exports.ox_inventory:setPlayerInventory(player, data)
+  exports.ox_inventory:setPlayerInventory(player, data)
 end
 
 ---@param playerId number
@@ -23,7 +23,7 @@ Inventory.RegisterHook = function(event, cb, options)
 end
 
 Inventory.RemoveHooks = function(id)
-  return exports.ox_inventory:removeHooks(id)
+  exports.ox_inventory:removeHooks(id)
 end
 
 ---@param inv inventory
@@ -54,13 +54,13 @@ end
 
 ---@param inv inventory
 Inventory.RemoveInventory = function(inv)
-  return exports.ox_inventory:RemoveInventory(inv)
+  exports.ox_inventory:RemoveInventory(inv)
 end
 
 ---@param oldPlate string
 ---@param newPlate string
 Inventory.UpdateVehicle = function(oldPlate, newPlate)
-  return exports.ox_inventory:UpdateVehicle(oldPlate, newPlate)
+  exports.ox_inventory:UpdateVehicle(oldPlate, newPlate)
 end
 
 ---@param inv inventory
@@ -105,26 +105,26 @@ end
 ---@param slotId number
 ---@param durability number
 Inventory.SetDurability = function(inv, slotId, durability)
-  return exports.ox_inventory:SetDurability(inv, slotId, durability)
+  exports.ox_inventory:SetDurability(inv, slotId, durability)
 end
 
 ---@param inv inventory
 ---@param slotId number
 ---@param metadata { [string]: any }
 Inventory.SetMetadata = function(inv, slotId, metadata)
-  return exports.ox_inventory:SetMetadata(inv, slotId, metadata)
+  exports.ox_inventory:SetMetadata(inv, slotId, metadata)
 end
 
 ---@param inv inventory
 ---@param slots number
 Inventory.SetSlotCount = function(inv, slots)
-  return exports.ox_inventory:SetSlotCount(inv, slots)
+  exports.ox_inventory:SetSlotCount(inv, slots)
 end
 
 ---@param inv inventory
 ---@param maxWeight number
 Inventory.SetMaxWeight = function(inv, maxWeight)
-  return exports.ox_inventory:SetMaxWeight(inv, maxWeight)
+  exports.ox_inventory:SetMaxWeight(inv, maxWeight)
 end
 
 ---@param inv inventory
@@ -204,17 +204,17 @@ Inventory.CreateDropFromPlayer = function(playerId)
 end
 
 Inventory.ConfiscateInventory = function(source)
-  return exports.ox_inventory:ConfiscateInventory(source)
+  exports.ox_inventory:ConfiscateInventory(source)
 end
 
 Inventory.ReturnInventory = function(source)
-  return exports.ox_inventory:ReturnInventory(source)
+  exports.ox_inventory:ReturnInventory(source)
 end
 
 ---@param inv inventory
 ---@param keep? string | string[] an item or list of items to ignore while clearing items
 Inventory.ClearInventory = function(inv, keep)
-  return exports.ox_inventory:ClearInventory(inv, keep)
+  exports.ox_inventory:ClearInventory(inv, keep)
 end
 
 ---@param inv inventory
@@ -274,17 +274,17 @@ end
 ---@param groups? table<string, number>
 ---@param coords? vector3|table<vector3>
 Inventory.RegisterStash = function(name, label, slots, maxWeight, owner, groups, coords)
-  return exports.ox_inventory:RegisterStash(name, label, slots, maxWeight, owner, groups, coords)
+  exports.ox_inventory:RegisterStash(name, label, slots, maxWeight, owner, groups, coords)
 end
 
 ---@param properties TemporaryStashProperties
 Inventory.CreateTemporaryStash = function(properties)
-  return exports.ox_inventory:CreateTemporaryStash(properties)
+  exports.ox_inventory:CreateTemporaryStash(properties)
 end
 
 
 Inventory.InspectInventory = function(playerId, invId)
-  return exports.ox_inventory:InspectInventory(playerId, invId)
+  exports.ox_inventory:InspectInventory(playerId, invId)
 end
 
 ---@param _ table?
@@ -304,13 +304,13 @@ end
 ---@param source number
 ---@param amount number
 Inventory.AddCash = function(source, amount)
-  return exports.ox_inventory:addCash(source, amount)
+  exports.ox_inventory:addCash(source, amount)
 end
 
 ---@param source number
 ---@param amount number
 Inventory.RemoveCash = function(source, amount)
-  return exports.ox_inventory:removeCash(source, amount)
+  exports.ox_inventory:removeCash(source, amount)
 end
 
 ---@param source number
@@ -328,11 +328,11 @@ end
 ---@param source number
 ---@param card table
 Inventory.GiveCard = function(source, card)
-  return exports.ox_inventory:giveCard(source, card)
+  exports.ox_inventory:giveCard(source, card)
 end
 
 ---@param shopType string
 ---@param shopDetails OxShop
 Inventory.RegisterShop = function(shopType, shopDetails)
-  return exports.ox_inventory:RegisterShop(shopType, shopDetails)
+  exports.ox_inventory:RegisterShop(shopType, shopDetails)
 end

@@ -6,14 +6,14 @@ Inventory.LoadInventory = function (source, citizenid)
 end
 
 Inventory.SaveInventory = function (source, offline)
-  return exports['qb-inventory']:SaveInventory(source, offline)
+  exports['qb-inventory']:SaveInventory(source, offline)
 end
 
 --- @param identifier string The identifier of the player or inventory.
 --- @param items table The items to set in the inventory.
 --- @param reason string The reason for setting the items.
 Inventory.SetInventory = function (identifier, items, reason)
-  return exports['qb-inventory']:SetInventory(identifier, items, reason)
+  exports['qb-inventory']:SetInventory(identifier, items, reason)
 end
 
 --- @param source number The player's server ID.
@@ -27,7 +27,7 @@ Inventory.SetItemData = function (source, itemName, key, val, slot)
 end
 
 Inventory.UseItem = function (itemName, ...)
-  return exports['qb-inventory']:UseItem(itemName, ...)
+  exports['qb-inventory']:UseItem(itemName, ...)
 end
 
 --- @param items table The table containing the items.
@@ -98,7 +98,7 @@ Inventory.GetFreeWeight = function (source)
 end
 
 Inventory.ClearInventory = function (source, filterItems)
-  return exports['qb-inventory']:ClearInventory(source, filterItems)
+  exports['qb-inventory']:ClearInventory(source, filterItems)
 end
 
 --- @param items string|table - The item(s) to check for. Can be a table of items or a single item as a string.
@@ -109,42 +109,42 @@ Inventory.HasItem = function (items, amount)
 end
 
 Inventory.CloseInventory = function (source, identifier)
-  return exports['qb-inventory']:CloseInventory(source, identifier)
+  exports['qb-inventory']:CloseInventory(source, identifier)
 end
 
 --- @param source number - The player's server ID.
 --- @param targetId number - The ID of the player whose inventory will be opened.
 Inventory.OpenInventoryById = function (source, targetId)
-  return exports['qb-inventory']:OpenInventoryById(source, targetId)
+  exports['qb-inventory']:OpenInventoryById(source, targetId)
 end
 
 --- @param identifier string
 Inventory.ClearStash = function (identifier)
-  return exports['qb-inventory']:ClearStash(identifier)
+  exports['qb-inventory']:ClearStash(identifier)
 end
 
 --- @param shopData table The data of the shop to create.
 Inventory.CreateShop = function (shopData)
-  return exports['qb-inventory']:CreateShop(shopData)
+  exports['qb-inventory']:CreateShop(shopData)
 end
 
 --- @param source number The player's server ID.
 --- @param name string The identifier of the inventory to open.
 Inventory.OpenShop = function (source, name)
-  return exports['qb-inventory']:OpenShop(source, name)
+  exports['qb-inventory']:OpenShop(source, name)
 end
 
 --- @param source number The player's server ID.
 --- @param identifier string|nil The identifier of the inventory to open.
 --- @param data table|nil Additional data for initializing the inventory.
 Inventory.OpenInventory = function (source, identifier, data)
-  return exports['qb-inventory']:OpenInventory(source, identifier, data)
+  exports['qb-inventory']:OpenInventory(source, identifier, data)
 end
 
 --- @param identifier string The identifier of the inventory to create.
 --- @param data table Additional data for initializing the inventory.
 Inventory.CreateInventory = function (identifier, data)
-  return exports['qb-inventory']:CreateInventory(identifier, data)
+  exports['qb-inventory']:CreateInventory(identifier, data)
 end
 
 --- @param identifier string The identifier of the inventory to retrieve.
@@ -155,7 +155,7 @@ end
 
 --- @param identifier string The identifier of the inventory to remove.
 Inventory.RemoveInventory = function (identifier)
-  return exports['qb-inventory']:RemoveInventory(identifier)
+  exports['qb-inventory']:RemoveInventory(identifier)
 end
 
 --- @param identifier string The identifier of the player or inventory.

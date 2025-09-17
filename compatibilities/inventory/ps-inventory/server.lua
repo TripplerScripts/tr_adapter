@@ -6,7 +6,7 @@ Inventory.LoadInventory = function (source, citizenid)
 end
 
 Inventory.SaveInventory = function (source, offline)
-  return exports['ps-inventory']:SaveInventory(source, offline)
+  exports['ps-inventory']:SaveInventory(source, offline)
 end
 
 Inventory.GetTotalWeight = function (items)
@@ -42,11 +42,11 @@ Inventory.GetItemsByName = function (source, item)
 end
 
 Inventory.ClearInventory = function (source, filterItems)
-  return exports['ps-inventory']:ClearInventory(source, filterItems)
+  exports['ps-inventory']:ClearInventory(source, filterItems)
 end
 
 Inventory.SetInventory = function (source, items)
-  return exports['ps-inventory']:SetInventory(source, items)
+  exports['ps-inventory']:SetInventory(source, items)
 end
 
 Inventory.SetItemData = function (source, itemName, key, val)
@@ -58,7 +58,7 @@ Inventory.HasItem = function (items, amount)
 end
 
 Inventory.CreateUsableItem = function (itemName, data)
-  return exports['ps-inventory']:CreateUsableItem(itemName, data)
+  exports['ps-inventory']:CreateUsableItem(itemName, data)
 end
 
 Inventory.GetUsableItem = function (itemName)
@@ -66,29 +66,29 @@ Inventory.GetUsableItem = function (itemName)
 end
 
 Inventory.UseItem = function (itemName, ...)
-  return exports['ps-inventory']:UseItem(itemName, ...)
+  exports['ps-inventory']:UseItem(itemName, ...)
 end
 
 Inventory.OpenInventory = function (name, id, other, origin)
-  return exports['ps-inventory']:OpenInventory(name, id, other, origin)
+  exports['ps-inventory']:OpenInventory(name, id, other, origin)
 end
 
 Inventory.OpenInventoryById = function (source, targetId)
-  return exports['ps-inventory']:OpenInventoryById(source, targetId)
+  exports['ps-inventory']:OpenInventoryById(source, targetId)
 end
 
 Inventory.addTrunkItems = function (plate, items)
-  return exports['ps-inventory']:addTrunkItems(plate, items)
+  exports['ps-inventory']:addTrunkItems(plate, items)
 end
 
 Inventory.addGloveboxItems = function (plate, items)
-  return exports['ps-inventory']:addGloveboxItems(plate, items)
+  exports['ps-inventory']:addGloveboxItems(plate, items)
 end
 
 Inventory.CreateShop = function (shopData)
-  return exports['ps-inventory']:CreateShop(shopData)
+  exports['ps-inventory']:CreateShop(shopData)
 end
 
 Inventory.OpenShop = function (source, name)
-  return exports['ps-inventory']:OpenShop(source, name)
+  exports['ps-inventory']:OpenShop(source, name)
 end
