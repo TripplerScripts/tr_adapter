@@ -29,7 +29,6 @@ end
 ---        job.label string - The display name/label for the job (e.g., "Mechanic", "Police Department").
 --- @param initialBalance number? The starting balance of the account. Default is 0.
 --- @return table Returns the account table if found or successfully created. This function may raise an error if validation or database insertion fails.
-
 Banking.CreateJobAccount = function (job, initialBalance)
   return exports['Renewed-Banking']:CreateJobAccount(job, initialBalance)
 end
