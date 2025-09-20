@@ -19,16 +19,16 @@ function LoadScripts()
       local scriptSuccess, scriptError = pcall(function()
         local scriptContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/' .. data.name .. '/server.lua')
         if not scriptContent then
-          print(' - ^3[LOADER WARNING]^7 File not found: ' .. data.category .. '/' .. data.name .. '/server.lua', 'warn')
+          print(' - ^3[LOADER WARNING]^7 File not found: ' .. data.category .. '/' .. data.name .. 'server.lua', 'warn')
           return
         end
 
-        local chunkScript, errScript = load(scriptContent, '@' .. data.category .. '/' .. data.name .. '/server.lua')
+        local chunkScript, errScript = load(scriptContent, '@' .. data.category .. '/' .. data.name .. 'server.lua')
         if chunkScript then
           chunkScript()
-          print('^2 - [LOADER]^7 Successfully loaded: ' .. data.category .. '/' .. data.name .. '/server.lua', 'info')
+          print('^2 - [LOADER]^7 Successfully loaded: ' .. data.category .. '/' .. data.name .. 'server.lua', 'info')
         else
-          print('^1 - [LOADER ERROR]^7 Failed to compile ' .. data.category .. '/' .. data.name .. '/server.lua: ' .. (errScript or 'Unknown error'), 'error')
+          print('^1 - [LOADER ERROR]^7 Failed to compile ' .. data.category .. '/' .. data.name .. 'server.lua: ' .. (errScript or 'Unknown error'), 'error')
         end
       end)
 
@@ -44,7 +44,7 @@ function LoadScripts()
   end
 
   IsReadyToInit = true
-  InitScripts()
+  InitFunctions()
 end
 
 CreateThread(function()

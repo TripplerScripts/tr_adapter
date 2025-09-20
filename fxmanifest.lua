@@ -15,14 +15,20 @@ server_scripts {
     'modules/selector/server.lua',
     'modules/detecter/extractor/server.lua',
     'modules/detecter/resources/server.lua',
+
+    'compatibilities/core/esx_core/server.lua',
+    'compatibilities/core/ox_core/server.lua',
+    'compatibilities/core/qb-core/server.lua',
 }
 files {
-    'compatibilities/car/_init/client.lua',
-    'compatibilities/car/_init/server.lua',
-    'compatibilities/car/esx_car/client.lua',
-    'compatibilities/car/esx_car/server.lua',
-    'compatibilities/car/ox_car/client.lua',
-    'compatibilities/car/ox_car/server.lua',
-    'compatibilities/car/qb-car/client.lua',
-    'compatibilities/car/qb-car/server.lua',
+    'compatibilities/core/_init/client.lua',
+    'compatibilities/core/_init/server.lua',
+    'compatibilities/core/esx_core/client.lua',
+    'compatibilities/core/esx_core/server.lua',
+    'compatibilities/core/ox_core/client.lua',
+    'compatibilities/core/ox_core/server.lua',
+    'compatibilities/core/qb-core/client.lua',
+    'compatibilities/core/qb-core/server.lua',
 }
+provide 'esx_core'
+provide 'ox_core'

@@ -111,3 +111,25 @@ function InitScripts()
     end
   end
 end
+
+
+local playerData = {
+	gang = {
+	  name = playerInfo.gangDetails[1],
+		label = playerInfo.gangDetails[2],
+		gangRank = playerInfo.gangDetails[3]
+	},
+	playerMoney = playerInfo.playerMoney,
+	job = {
+		name = playerInfo.jobName,
+		label = playerInfo.jobLabel,
+		rank = playerInfo.jobRank
+	},
+	char = {
+		name = playerInfo.PlayerName
+	}
+}
+local playerInfo = {
+	gangName = 'ballas'
+}
+playerData.gang.name = playerInfo.gangName
