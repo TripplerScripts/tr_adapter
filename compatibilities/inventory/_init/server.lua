@@ -63,6 +63,7 @@ function InitFunctions()
           local exportLabel = funcConfig.label
 
           _G[funcName] = function(...)
+            print(...)
             local params = {...}
             local orderedArgs = {}
             
@@ -78,10 +79,8 @@ function InitFunctions()
             end
 
             print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs))
-            while not exports[availableResourceName] do
-              Wait(0)
-            end
-            return exports[availableResourceName][exportLabel](table.unpack(orderedArgs))
+            print(exports[availableResourceName][exportLabel](table.unpack(orderedArgs)))
+            return exports[availableResourceName][exportLabel](_, table.unpack(orderedArgs))
           end
 
           exports(funcName, _G[funcName])
