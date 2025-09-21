@@ -44,7 +44,11 @@ function LoadScripts()
   end
 
   IsReadyToInit = true
-  InitFunctions()
+  if next(AvailableScripts) then
+    InitFunctions()
+  else
+    print('^1[LOADER ERROR] Functions Initialization failed', 'error^7')
+  end
 end
 
 CreateThread(function()
