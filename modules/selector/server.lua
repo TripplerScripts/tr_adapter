@@ -12,28 +12,22 @@ function SelectScripts()
         break
       end
     end
-    if state == 'starting' then
-      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, restarting the server..."):format(GetCurrentResourceName(), data.name, state,  'error', '^0'))
-      ExecuteCommand("quit")
-      --goto skip
-    elseif state == 'started' then
-      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, restarting the server..."):format(GetCurrentResourceName(), data.name, state, 'error', '^0'))
-      ExecuteCommand("quit")
-      --goto skip
-    end
-    if state ~= "missing" and not foundInServer then
+    if state == ('started' or 'starting') and not foundInServer then
       print(("^4✓ Found: %s (^3Provided by another script)"):format(data.name), 'info')
     else
-      if state ~= "missing" then
+      if state == "started" then
         AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name, duplicityVersion = data
         .duplicityVersion }
         print(("^2✓ Started: %s"):format(data.name), 'info')
       else
-        ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
-        print(("^6✗ Missing: %s"):format(data.name), 'info')
+        if state == 'missing' then
+          ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
+          print(("^6✗ Missing: %s"):format(data.name), 'info')
+        else
+          print(true)
+        end
       end
     end
-    ::skip::
   end
 
   RegisterNetEvent('tr_adapter:server:selector_debug', function()
