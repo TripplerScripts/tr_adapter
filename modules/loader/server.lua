@@ -50,6 +50,9 @@ function LoadScripts()
     print('^1[LOADER ERROR] Functions Initialization failed', 'error^7')
   end
 end
-TriggerEvent('tr_adapter:server:extractor_debug')
-while not ExtractorDebugerFinished do Wait(1000) end
-TriggerEvent('tr_adapter:server:selector_debug')
+
+CreateThread(function()
+  TriggerEvent('tr_adapter:server:extractor_debug')
+  while not ExtractorDebugerFinished do Wait(1000) end
+  TriggerEvent('tr_adapter:server:selector_debug')
+end)

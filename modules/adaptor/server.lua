@@ -9,39 +9,63 @@ function InitFunctions()
   end
 
   for _, categoryInfo in pairs(Categories) do
+    local categoryName = categoryInfo.category
+    local availableResourceName = categoryInfo.availableResource
+
     local resourceTable = _G[categoryInfo.categoryVariable]
+    if not resourceTable then
+      print("No resource table found for category:", categoryInfo.categoryVariable, "warn")
+      goto continue
+    end
 
-    if not resourceTable then goto continue end
+    local availableResourceData = resourceTable[availableResourceName]
+    if not availableResourceData then
+      print("No config found for resource:", availableResourceName, "in category:", categoryName, "warn")
+      goto continue
+    end
 
-    for funcName, func in pairs(resourceTable) do
-      if type(func) == "function" then
-        exports(funcName, func)
+    local cleanResourceTable = {}
+    for resourceName, resourceData in pairs(resourceTable) do
+      if type(resourceData) == "table" and resourceData.functions then
+        cleanResourceTable[resourceName] = resourceData
       end
     end
 
-    local exportMappings = {
-      ['qb-core'] = {
-        SetPlayerData = 'setPlayerData',
-        GetPlayerData = 'getPlayerData'
-      },
-      ['ox_core'] = {
-        SetPlayerData = 'setPlayerInfo',
-        GetPlayerData = 'getPlayerInfo'
-      },
-      ['esx_core'] = {
-        SetPlayerData = 'setPlayerData',
-        GetPlayerData = 'getPlayerData'
-      }
-    }
+    for resourceName, resourceData in pairs(cleanResourceTable) do
+      for funcName, funcConfig in pairs(resourceData.functions) do
+        
+        if resourceName == availableResourceName and not _G[funcName] then
+          local exportLabel = funcConfig.label
 
-    for resourceName, funcMappings in pairs(exportMappings) do
-      if resourceName ~= categoryInfo.availableResource then
-        for localFuncName, exportName in pairs(funcMappings) do
-          if resourceTable[localFuncName] then
-            AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, exportName), function(setCB)
-              setCB(resourceTable[localFuncName])
-            end)
+          _G[funcName] = function(...)
+            print(...)
+            local params = {...}
+            local orderedArgs = {}
+            
+            if #params == 1 and type(params[1]) == "table" then
+              local dataObj = params[1]
+              for i, argName in ipairs(funcConfig.args) do
+                orderedArgs[i] = dataObj[argName]
+              end
+            else
+              for i = 1, #params do
+                orderedArgs[i] = params[i]
+              end
+            end
+
+            print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs))
+            return exports[availableResourceName][exportLabel](_, table.unpack(orderedArgs))
           end
+
+          exports(funcName, _G[funcName])
+          print("Registered export:", funcName)
+        end
+
+        if _G[funcName] and resourceName ~= availableResourceName then
+          AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, funcConfig.label), function(setCB)
+            setCB(_G[funcName])
+          end)
+          print("Created export listener:", resourceName, funcConfig.label)
         end
       end
     end

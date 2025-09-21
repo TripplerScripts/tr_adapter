@@ -1,6 +1,6 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
---[[ Inventory = {
+Inventory = {
   ['ox_inventory'] = {
     functions = {
       ['GetSlot'] = {
@@ -21,4 +21,4 @@ Inventory = {}
       }
     }
   },
-} ]]
+}
