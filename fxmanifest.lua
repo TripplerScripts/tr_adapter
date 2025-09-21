@@ -7,6 +7,7 @@ version '0.3.0'
 
 shared_script 'init.lua'
 server_scripts {
+    'modules/adaptor/server.lua',
     'modules/loader/server.lua',
     'modules/provider/server.lua',
     'modules/selector/server.lua',
