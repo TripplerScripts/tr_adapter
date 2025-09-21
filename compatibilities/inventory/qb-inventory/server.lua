@@ -71,7 +71,7 @@ end
 
 --- @param identifier number|string The player's identifier or the identifier of an inventory or drop.
 --- @return number, number - The total count of used slots and the total count of free slots. If no inventory is found, returns 0 and the maximum slots.
-Inventory.GetSlots = function (identifier)
+Inventory.GetSlot = function (identifier)
   return exports['qb-inventory']:GetSlots(identifier)
 end
 
@@ -93,7 +93,7 @@ end
 
 --- @param source number The player's server ID.
 --- @return number - Returns the free weight of the players inventory. Error will return 0
-Inventory.GetFreeWeight = function (source)
+Inventory.GetWeight = function (source)
   return exports['qb-inventory']:GetFreeWeight(source)
 end
 

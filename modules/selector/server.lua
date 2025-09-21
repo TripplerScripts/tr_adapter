@@ -24,7 +24,8 @@ function SelectScripts()
           ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
           print(("^6✗ Missing: %s"):format(data.name), 'info')
         else
-          print(true)
+          ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
+          print(("^6✗ Missing: %s"):format(data.name), 'info')
         end
       end
     end
