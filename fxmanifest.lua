@@ -17,14 +17,12 @@ server_scripts {
     'modules/detecter/resources/server.lua',
 }
 files {
-    'compatibilities/core/_init/client.lua',
-    'compatibilities/core/_init/server.lua',
-    'compatibilities/core/esx_core/client.lua',
-    'compatibilities/core/esx_core/server.lua',
-    'compatibilities/core/ox_core/client.lua',
-    'compatibilities/core/ox_core/server.lua',
-    'compatibilities/core/qb-core/client.lua',
-    'compatibilities/core/qb-core/server.lua',
+    'compatibilities/inventory/_init/client.lua',
+    'compatibilities/inventory/_init/server.lua',
+    'compatibilities/inventory/ox_inventory/client.lua',
+    'compatibilities/inventory/ox_inventory/server.lua',
+    'compatibilities/inventory/qb-inventory/client.lua',
+    'compatibilities/inventory/qb-inventory/server.lua',
 }
-provide 'esx_core'
-provide 'ox_core'
+
+provide 'qb-inventory'

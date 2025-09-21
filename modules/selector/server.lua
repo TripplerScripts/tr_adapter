@@ -13,11 +13,13 @@ function SelectScripts()
       end
     end
     if state == 'starting' then
-      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, please restart the server"):format(GetCurrentResourceName(), data.name, state,  'error', '^0'))
-      goto skip
+      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, restarting the server..."):format(GetCurrentResourceName(), data.name, state,  'error', '^0'))
+      ExecuteCommand("quit")
+      --goto skip
     elseif state == 'started' then
-      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, please restart the server"):format(GetCurrentResourceName(), data.name, state, 'error', '^0'))
-      goto skip
+      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, restarting the server..."):format(GetCurrentResourceName(), data.name, state, 'error', '^0'))
+      ExecuteCommand("quit")
+      --goto skip
     end
     if state ~= "missing" and not foundInServer then
       print(("^4✓ Found: %s (^3Provided by another script)"):format(data.name), 'info')

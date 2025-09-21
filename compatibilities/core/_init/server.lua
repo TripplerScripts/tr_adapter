@@ -22,7 +22,7 @@ Core.SetPlayerData = function(playerInfo)
   }
   return SetPlayerData(playerData)
 end ]]
-
+--[[ 
 Core = {
   ['qb-core'] = {
     functions = {
@@ -98,3 +98,4 @@ function InitFunctions()
     end
   end
 end
+ ]]

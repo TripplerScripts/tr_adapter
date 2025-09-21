@@ -22,3 +22,5 @@ functionX {
   },
   errorHandling = _SAME_ | _DIFFERENT_, -- returns nil vs throws error
 }
+
+add_ace resource.tr_adapter command.quit allow
