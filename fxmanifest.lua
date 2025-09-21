@@ -15,9 +15,10 @@ server_scripts {
     'modules/detecter/resources/server.lua',
 }
 files {
-    'compatibilities/inventory/_init/server.lua',
-    'compatibilities/inventory/ox_inventory/server.lua',
-    'compatibilities/inventory/qb-inventory/server.lua',
+    'compatibilities/core/_init/server.lua',
+    'compatibilities/core/esx_core/server.lua',
+    'compatibilities/core/ox_core/server.lua',
+    'compatibilities/core/qb-core/server.lua',
 }
-
-provide 'qb-inventory'
+provide 'esx_core'
+provide 'ox_core'
