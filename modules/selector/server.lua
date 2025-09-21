@@ -12,30 +12,37 @@ function SelectScripts()
         break
       end
     end
-
+    if state == 'starting' then
+      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, please restart the server"):format(GetCurrentResourceName(), data.name, state,  'error', '^0'))
+      goto skip
+    elseif state == 'started' then
+      print(("^1!Error: %s has been started unproperly\n - %s has been detected %s, this'll cause issues, please restart the server"):format(GetCurrentResourceName(), data.name, state, 'error', '^0'))
+      goto skip
+    end
     if state ~= "missing" and not foundInServer then
-      print("^4✓ Found: " .. data.name .. ' (^3Provided by another script)', 'info')
+      print(("^4✓ Found: %s (^3Provided by another script)"):format(data.name), 'info')
     else
       if state ~= "missing" then
         AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name, duplicityVersion = data
         .duplicityVersion }
-        print("^2✓ Started: " .. data.name, 'info')
+        print(("^2✓ Started: %s"):format(data.name), 'info')
       else
         ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
-        print("^1✗ Missing: " .. data.name, 'info')
+        print(("^6✗ Missing: %s"):format(data.name), 'info')
       end
     end
+    ::skip::
   end
 
   RegisterNetEvent('tr_adapter:server:selector_debug', function()
-    print("^2[Resource Selector] ^7Found " .. #ScriptsToSupport .. " scripts to support", 'info')
+    print(("^2[Resource Selector] ^7Found %s scripts to support"):format(#ScriptsToSupport), 'info')
     for _, data in ipairs(ScriptsToSupport) do
-      print("^3- ^4[" .. data.category .. "] ^7" .. data.name, 'info')
+      print(("^3- ^4[%s] ^7%s"):format(data.category, data.name), 'info')
       Wait(300)
     end
     Wait(1000)
 
-    print("^2[Resource Selector] ^7Found " .. #AvailableScripts .. " scripts that are going to provide", 'info')
+    print(("^2[Resource Selector] ^7Found %s scripts that are going to provide"):format(#AvailableScripts), 'info')
     local categoryLookup = {}
     for _, data in ipairs(SupportedResourcesData) do
       categoryLookup[data.name] = data.category
@@ -44,9 +51,9 @@ function SelectScripts()
     for _, data in ipairs(AvailableScripts) do
       local category = categoryLookup[data.name] or "unknown"
       Wait(300)
-      print("^3- ^7" .. data.name .. " ^4[" .. category .. "]", 'info')
+      print(("^3- ^7%s ^4[%s]"):format(data.name, category), 'info')
     end
-    print("^2[Resource Selector] ^7Selector debug finished", 'info')
+    print(("^2[Resource Selector] ^7Selector debug finished"):format(#AvailableScripts), 'info')
   end)
 
   IsReadyToProvide = true

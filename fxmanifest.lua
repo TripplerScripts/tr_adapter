@@ -15,10 +15,6 @@ server_scripts {
     'modules/selector/server.lua',
     'modules/detecter/extractor/server.lua',
     'modules/detecter/resources/server.lua',
-
-    'compatibilities/core/esx_core/server.lua',
-    'compatibilities/core/ox_core/server.lua',
-    'compatibilities/core/qb-core/server.lua',
 }
 files {
     'compatibilities/core/_init/client.lua',
