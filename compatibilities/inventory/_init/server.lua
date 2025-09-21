@@ -79,7 +79,6 @@ function InitFunctions()
             end
 
             print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs))
-            print(exports[availableResourceName][exportLabel](table.unpack(orderedArgs)))
             return exports[availableResourceName][exportLabel](_, table.unpack(orderedArgs))
           end
 
