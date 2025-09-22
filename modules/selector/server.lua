@@ -23,8 +23,9 @@ function SelectScripts()
         if state == 'missing' then
           ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
           print(("^6✗ Missing: %s"):format(data.name), 'info')
-        else
-          print(true)
+        else -- XD
+          ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
+          print(("^6✗ Missing: %s"):format(data.name), 'info')
         end
       end
     end
