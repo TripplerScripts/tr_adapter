@@ -44,18 +44,18 @@ function InitFunctions()
               end
             end
 
-            print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs))
+            print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs), 'info')
             return exports[availableResourceName][exportLabel](_, table.unpack(orderedArgs))
           end
 
           exports(funcName, _G[funcName])
-          print("Registered export:", funcName)
+          print("Registered export:", funcName, 'info')
           for scriptName, scriptConfig in pairs(resourceTable) do
             if scriptName ~= availableResourceName then
-              AddEventHandler(('__cfx_export_%s_%s'):format(scriptName, scriptConfig.label), function(setCB)
+              AddEventHandler(('__cfx_export_%s_%s'):format(scriptName, scriptConfig[funcName].label), function(setCB)
                 setCB(_G[funcName])
               end)
-              print("Created export listener:", scriptName, scriptConfig[funcName].label)
+              print("Created export listener:", scriptName, scriptConfig[funcName].label, 'info')
             end
           end
         end
