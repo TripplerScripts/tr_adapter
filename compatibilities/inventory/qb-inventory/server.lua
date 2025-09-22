@@ -1,4 +1,4 @@
----@diagnostic disable: duplicate-set-field
+--[[ ---@diagnostic disable: duplicate-set-field
 ---@version 2.0.0
 
 Inventory.LoadInventory = function (source, citizenid)
@@ -177,4 +177,4 @@ end
 --- @return boolean - Returns true if the item was successfully removed, false otherwise.
 Inventory.RemoveItem = function (identifier, item, amount, slot, reason)
   return exports['qb-inventory']:RemoveItem(identifier, item, amount, slot, reason)
-end
+end ]]

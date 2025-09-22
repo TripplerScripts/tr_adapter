@@ -30,7 +30,6 @@ function InitFunctions()
           local exportLabel = funcConfig.label
 
           _G[funcName] = function(...)
-            print(...)
             local params = { ... }
             local orderedArgs = {}
 
@@ -51,13 +50,17 @@ function InitFunctions()
 
           exports(funcName, _G[funcName])
           print("Registered export:", funcName)
-        end
 
-        if _G[funcName] and resourceName ~= availableResourceName then
-          AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, funcConfig.label), function(setCB)
-            setCB(_G[funcName])
-          end)
-          print("Created export listener:", resourceName, funcConfig.label)
+          print(json.encode(ScriptsToSupport, { indent = true }))
+          print(json.encode(AvailableScripts, { indent = true }))
+          print(json.encode(ServerResourcesNames, { indent = true }))
+          print(json.encode(SupportedResourcesData, { indent = true }))
+          --[[ for _, v in pairs(ScriptsToSupport[categoryName]) do
+            AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, funcConfig.label), function(setCB)
+              setCB(_G[funcName])
+            end)
+            print("Created export listener:", resourceName, funcConfig.label)
+          end ]]
         end
       end
     end

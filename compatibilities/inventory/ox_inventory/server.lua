@@ -1,4 +1,4 @@
----@diagnostic disable: duplicate-set-field
+--[[ ---@diagnostic disable: duplicate-set-field
 ---@version 2.44.6
 
 ---@param player table
@@ -335,4 +335,4 @@ end
 ---@param shopDetails OxShop
 Inventory.RegisterShop = function(shopType, shopDetails)
   exports.ox_inventory:RegisterShop(shopType, shopDetails)
-end
+end ]]

@@ -1,4 +1,4 @@
----@diagnostic disable: duplicate-set-field
+--[[ ---@diagnostic disable: duplicate-set-field
 ---@version 1.1.0
 
 Inventory.LoadInventory = function (source, citizenid)
@@ -91,4 +91,4 @@ end
 
 Inventory.OpenShop = function (source, name)
   exports['ps-inventory']:OpenShop(source, name)
-end
+end ]]
