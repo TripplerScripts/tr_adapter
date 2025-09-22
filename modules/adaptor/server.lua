@@ -50,17 +50,14 @@ function InitFunctions()
 
           exports(funcName, _G[funcName])
           print("Registered export:", funcName)
-
-          print(json.encode(ScriptsToSupport, { indent = true }))
-          print(json.encode(AvailableScripts, { indent = true }))
-          print(json.encode(ServerResourcesNames, { indent = true }))
-          print(json.encode(SupportedResourcesData, { indent = true }))
-          --[[ for _, v in pairs(ScriptsToSupport[categoryName]) do
-            AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, funcConfig.label), function(setCB)
-              setCB(_G[funcName])
-            end)
-            print("Created export listener:", resourceName, funcConfig.label)
-          end ]]
+          for scriptName, scriptConfig in pairs(resourceTable) do
+            if scriptName ~= availableResourceName then
+              AddEventHandler(('__cfx_export_%s_%s'):format(scriptName, scriptConfig.label), function(setCB)
+                setCB(_G[funcName])
+              end)
+              print("Created export listener:", scriptName, scriptConfig[funcName].label)
+            end
+          end
         end
       end
     end
