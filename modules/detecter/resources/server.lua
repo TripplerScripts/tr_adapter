@@ -9,6 +9,6 @@ for i = 0, numResources - 1 do
   end
 end
 
-exports.tr_lib:print("[Resource Detector] Stored " .. #ServerResourcesNames .. " resource names", 'info')
+exports.tr_lib:print("info", "[Resource Detector] Stored " .. #ServerResourcesNames .. " resource names")
 AreDetectedResourcesReady = true
 ExtractResourceNames()

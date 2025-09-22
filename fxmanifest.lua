@@ -4,6 +4,7 @@ lua54 'yes'
 
 author 'Trippler Hub'
 version '0.43.0'
+dependency 'tr_lib'
 
 shared_script 'init.lua'
 server_scripts {

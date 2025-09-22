@@ -1,12 +1,12 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
 Inventory.GetInventory = function()
-  exports.tr_lib:print('No inventory resource available - GetInventory called', 'warn')
+  exports.tr_lib:print('warn', 'No inventory resource available - GetInventory called')
   return {}
 end
 
 Inventory.LoadInventory = function()
-  exports.tr_lib:print('No inventory resource available - LoadInventory called', 'warn')
+  exports.tr_lib:print('warn', 'No inventory resource available - LoadInventory called')
   return {}
 end
 

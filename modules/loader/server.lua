@@ -4,40 +4,40 @@ function LoadScripts()
     local success, error = pcall(function()
       local initContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/server.lua')
       if not initContent then
-        exports.tr_lib:print('[LOADER WARNING] Init file not found: ' .. data.category .. '/_init/server.lua', 'warn')
+        exports.tr_lib:print('warn', '[LOADER WARNING] Init file not found: ' .. data.category .. '/_init/server.lua')
       else
         local chunkInit, errInit = load(initContent, '@' .. data.category .. '/_init/server.lua')
         if chunkInit then
           chunkInit()
-          exports.tr_lib:print('[LOADER] Successfully loaded: ' .. data.category .. '/_init/server.lua', 'info')
+          exports.tr_lib:print('info', '[LOADER] Successfully loaded: ' .. data.category .. '/_init/server.lua')
         else
-          exports.tr_lib:print('[LOADER ERROR] Failed to compile ' .. data.category .. '/_init/server.lua: ' .. (errInit or 'Unknown error'), 'error')
+          exports.tr_lib:print('error', '[LOADER ERROR] Failed to compile ' .. data.category .. '/_init/server.lua: ' .. (errInit or 'Unknown error'))
         end
       end
 
       --[[ local scriptSuccess, scriptError = pcall(function()
         local scriptContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/' .. data.name .. '/server.lua')
         if not scriptContent then
-          exports.tr_lib:print(' - [LOADER WARNING] File not found: ' .. data.category .. '/' .. data.name .. '/server.lua', 'warn')
+          exports.tr_lib:print('warn', '[LOADER WARNING] File not found: ' .. data.category .. '/' .. data.name .. '/server.lua')
           return
         end
 
         local chunkScript, errScript = load(scriptContent, '@' .. data.category .. '/' .. data.name .. '/server.lua')
         if chunkScript then
           chunkScript()
-          exports.tr_lib:print(' - [LOADER] Successfully loaded: ' .. data.category .. '/' .. data.name .. '/server.lua', 'info')
+          exports.tr_lib:print('info', '[LOADER] Successfully loaded: ' .. data.category .. '/' .. data.name .. '/server.lua')
         else
-          exports.tr_lib:print(' - [LOADER ERROR] Failed to compile ' .. data.category .. '/' .. data.name .. '/server.lua: ' .. (errScript or 'Unknown error'), 'error')
+          exports.tr_lib:print('error', '[LOADER ERROR] Failed to compile ' .. data.category .. '/' .. data.name .. '/server.lua: ' .. (errScript or 'Unknown error'))
         end
       end)
 
       if not scriptSuccess then
-        exports.tr_lib:print('[LOADER ERROR] ' .. scriptError, 'error')
+        exports.tr_lib:print('error', '[LOADER ERROR] ' .. scriptError)
       end ]]
     end)
 
     if not success then
-      exports.tr_lib:print('[LOADER ERROR] ' .. error, 'error')
+      exports.tr_lib:print('error', '[LOADER ERROR] ' .. error)
     end
     ::continue::
   end
@@ -46,7 +46,7 @@ function LoadScripts()
   if next(AvailableScripts) then
     InitFunctions()
   else
-    exports.tr_lib:print('[LOADER ERROR] Functions Initialization failed', 'error')
+    exports.tr_lib:print('error', '[LOADER ERROR] Functions Initialization failed')
   end
 end
 
