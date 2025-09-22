@@ -1,6 +1,5 @@
 ---@diagnostic disable: duplicate-set-field
 
-print('TR Adapter: Core compatibility loaded')
 --[[ Core = {}
 
 Core.SetPlayerData = function(playerInfo)

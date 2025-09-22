@@ -14,13 +14,13 @@ function InitFunctions()
 
     local resourceTable = _G[categoryInfo.categoryVariable]
     if not resourceTable then
-      print("No resource table found for category:", categoryInfo.categoryVariable, "warn")
+      exports.tr_lib:print("No resource table found for category:", categoryInfo.categoryVariable, "warn")
       goto continue
     end
 
     local availableResourceData = resourceTable[availableResourceName]
     if not availableResourceData then
-      print("No config found for resource:", availableResourceName, "in category:", categoryName, "warn")
+      exports.tr_lib:print("No config found for resource:", availableResourceName, "in category:", categoryName, "warn")
       goto continue
     end
 
@@ -44,18 +44,18 @@ function InitFunctions()
               end
             end
 
-            print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs), 'info')
+            exports.tr_lib:print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs), 'info')
             return exports[availableResourceName][exportLabel](_, table.unpack(orderedArgs))
           end
 
           exports(funcName, _G[funcName])
-          print("Registered export:", funcName, 'info')
+          exports.tr_lib:print("Registered export:", funcName, 'info')
           for scriptName, scriptConfig in pairs(resourceTable) do
             if scriptName ~= availableResourceName then
               AddEventHandler(('__cfx_export_%s_%s'):format(scriptName, scriptConfig[funcName].label), function(setCB)
                 setCB(_G[funcName])
               end)
-              print("Created export listener:", scriptName, scriptConfig[funcName].label, 'info')
+              exports.tr_lib:print("Created export listener:", scriptName, scriptConfig[funcName].label, 'info')
             end
           end
         end

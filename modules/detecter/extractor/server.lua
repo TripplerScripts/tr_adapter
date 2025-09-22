@@ -6,7 +6,7 @@ function ExtractResourceNames()
 
     local file = io.open(manifestPath, 'r')
     if not file then
-        print("^1[Resource Extractor] ^7Could not open fxmanifest.lua", 'error')
+        exports.tr_lib:print("[Resource Extractor] Could not open fxmanifest.lua", 'error')
         return
     end
 
@@ -42,17 +42,17 @@ function ExtractResourceNames()
 
     RegisterNetEvent('tr_adapter:server:extractor_debug', function()
         local currentCategory = ""
-        print("^2[Resource Extractor] ^7Found " .. #SupportedResourcesData .. " resource names:", 'info')
+        exports.tr_lib:print("[Resource Extractor] Found " .. #SupportedResourcesData .. " resource names:", 'info')
         for _, data in ipairs(SupportedResourcesData) do
             Wait(200)
             if data.category ~= currentCategory then
                 currentCategory = data.category
-                print("^4[" .. currentCategory:upper() .. "]", 'info')
+                exports.tr_lib:print("[" .. currentCategory:upper() .. "]", 'info')
                 Wait(200)
             end
-            print("^3  - ^7" .. data.name, 'info')
+            exports.tr_lib:print("  - " .. data.name, 'info')
         end
-        print("^2[Resource Extractor] ^7Extractor debug finished", 'info')
+        exports.tr_lib:print("[Resource Extractor] Extractor debug finished", 'info')
         ExtractorDebugerFinished = true
     end)
 

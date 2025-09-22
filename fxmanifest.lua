@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 author 'Trippler Hub'
-version '0.3.0'
+version '0.43.0'
 
 shared_script 'init.lua'
 server_scripts {
@@ -21,5 +21,5 @@ files {
     'compatibilities/inventory/ps-inventory/server.lua',
 }
 
+provide 'ox_inventory'
 provide 'ps-inventory'
-provide 'qb-inventory'
