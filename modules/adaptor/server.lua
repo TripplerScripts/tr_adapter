@@ -39,12 +39,34 @@ function InitFunctions()
                 orderedArgs[i] = dataObj[argName]
               end
             else
-              for i = 1, #params do
-                orderedArgs[i] = params[i]
+              -- Get the available resource's parameter order for this function
+              local availableResourceData = resourceTable[availableResourceName]
+              local availableFuncConfig = availableResourceData and availableResourceData[funcName]
+              
+              if availableFuncConfig and availableFuncConfig.args then
+                -- Map parameters from caller's order to available resource's expected order
+                local callerArgs = funcConfig.args      -- e.g., ['slot', 'target'] (ps-inventory)
+                local targetArgs = availableFuncConfig.args  -- e.g., ['target', 'slot'] (ox_inventory)
+                
+                -- Create mapping from caller position to target position
+                for targetPos, targetArg in ipairs(targetArgs) do
+                  for callerPos, callerArg in ipairs(callerArgs) do
+                    if callerArg == targetArg then
+                      orderedArgs[targetPos] = params[callerPos]
+                      break
+                    end
+                  end
+                end
+              else
+                -- Fallback: use original order
+                for i = 1, #params do
+                  orderedArgs[i] = params[i]
+                end
               end
             end
 
             print("Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs), 'info')
+
             return exports[availableResourceName][exportLabel](_, table.unpack(orderedArgs))
           end
 

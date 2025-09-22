@@ -5,13 +5,13 @@ Inventory = {
     ['GetSlots'] = {
       label = 'GetSlot',
       args = {
-        'inv', 'slotId'
+        'target', 'slot'
       }
     },
     ['GetItems'] = {
       label = 'GetItem',
       args = {
-        'inv', 'item', 'metadata', 'returnsCount'
+        'target', 'item', 'metadata', 'returnsCount'
       }
     },
   },
@@ -19,13 +19,13 @@ Inventory = {
     ['GetSlots'] = {
       label = 'GetItemBySlot',
       args = {
-        'source', 'slot'
+        'target', 'slot'
       }
     },
     ['GetItems'] = {
       label = 'GetItemByName',
       args = {
-        'source', 'item'
+        'target', 'item'
       }
     }
   },
@@ -33,13 +33,13 @@ Inventory = {
     ['GetSlots'] = {
       label = 'GetItemBySlot',
       args = {
-        'source', 'slot'
+        'slot', 'target'
       }
     },
     ['GetItems'] = {
       label = 'GetItemByName',
       args = {
-        'source', 'item'
+        'target', 'item'
       }
     }
   }
