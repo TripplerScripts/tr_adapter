@@ -2,23 +2,45 @@
 Inventory = {}
 Inventory = {
   ['ox_inventory'] = {
-    functions = {
-      ['GetSlot'] = {
-        label = 'GetSlot',
-        args = {
-          'inv', 'slotId'
-        }
-      },
-    }
+    ['GetSlots'] = {
+      label = 'GetSlot',
+      args = {
+        'inv', 'slotId'
+      }
+    },
+    ['GetItems'] = {
+      label = 'GetItem',
+      args = {
+        'inv', 'item', 'metadata', 'returnsCount'
+      }
+    },
   },
   ['qb-inventory'] = {
-    functions = {
-      ['GetSlot'] = {
-        label = 'GetItemBySlot',
-        args = {
-          'source', 'slot'
-        }
+    ['GetSlots'] = {
+      label = 'GetItemBySlot',
+      args = {
+        'source', 'slot'
+      }
+    },
+    ['GetItems'] = {
+      label = 'GetItemByName',
+      args = {
+        'source', 'item'
       }
     }
   },
+  ['ps-inventory'] = {
+    ['GetSlots'] = {
+      label = 'GetItemBySlot',
+      args = {
+        'source', 'slot'
+      }
+    },
+    ['GetItems'] = {
+      label = 'GetItemByName',
+      args = {
+        'source', 'item'
+      }
+    }
+  }
 }
