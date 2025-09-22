@@ -16,8 +16,6 @@ server_scripts {
 }
 files {
     'compatibilities/inventory/_init/server.lua',
-    'compatibilities/inventory/ox_inventory/server.lua',
-    'compatibilities/inventory/qb-inventory/server.lua',
 }
 
 provide 'qb-inventory'

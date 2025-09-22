@@ -24,24 +24,16 @@ function InitFunctions()
       goto continue
     end
 
-    local cleanResourceTable = {}
-    for resourceName, resourceData in pairs(resourceTable) do
-      if type(resourceData) == "table" and resourceData.functions then
-        cleanResourceTable[resourceName] = resourceData
-      end
-    end
-
-    for resourceName, resourceData in pairs(cleanResourceTable) do
-      for funcName, funcConfig in pairs(resourceData.functions) do
-        
-        if resourceName == availableResourceName and not _G[funcName] then
+    for resourceName, resourceConfig in pairs(resourceTable) do
+      for funcName, funcConfig in pairs(resourceConfig) do
+        if resourceName == availableResourceName then
           local exportLabel = funcConfig.label
 
           _G[funcName] = function(...)
             print(...)
-            local params = {...}
+            local params = { ... }
             local orderedArgs = {}
-            
+
             if #params == 1 and type(params[1]) == "table" then
               local dataObj = params[1]
               for i, argName in ipairs(funcConfig.args) do
