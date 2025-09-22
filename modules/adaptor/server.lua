@@ -14,13 +14,13 @@ function InitFunctions()
 
     local resourceTable = _G[categoryInfo.categoryVariable]
     if not resourceTable then
-      exports.tr_lib:print("warn", "No resource table found for category:", categoryInfo.categoryVariable)
+      exports.tr_lib:print({type = 'warn', message = 'No resource table found for category:', categoryInfo.categoryVariable})
       goto continue
     end
 
     local availableResourceData = resourceTable[availableResourceName]
     if not availableResourceData then
-      exports.tr_lib:print("warn", "No config found for resource:", availableResourceName, "in category:", categoryName)
+      exports.tr_lib:print({type = 'warn', message = 'No config found for resource:', availableResourceName, "in category:", categoryName})
       goto continue
     end
 
@@ -44,18 +44,18 @@ function InitFunctions()
               end
             end
 
-            exports.tr_lib:print("info", "Calling:", availableResourceName, exportLabel, "with args:", json.encode(orderedArgs))
+            exports.tr_lib:print({type = 'info', message = 'Calling:', availableResourceName, exportLabel, 'with args:', json.encode(orderedArgs)})
             return exports[availableResourceName][exportLabel](_, table.unpack(orderedArgs))
           end
 
           exports(funcName, _G[funcName])
-          exports.tr_lib:print("info", "Registered export:", funcName)
+          exports.tr_lib:print({type = 'info', message = 'Registered export:', funcName, path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
           for scriptName, scriptConfig in pairs(resourceTable) do
             if scriptName ~= availableResourceName then
               AddEventHandler(('__cfx_export_%s_%s'):format(scriptName, scriptConfig[funcName].label), function(setCB)
                 setCB(_G[funcName])
               end)
-              exports.tr_lib:print("info", "Created export listener:", scriptName, scriptConfig[funcName].label)
+              exports.tr_lib:print({type = 'info', message = 'Created export listener:', scriptName, scriptConfig[funcName].label, path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
             end
           end
         end

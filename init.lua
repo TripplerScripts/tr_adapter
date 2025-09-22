@@ -1,3 +1,9 @@
+exports.tr_lib:print({
+  type = "error",
+  message = "hello Lenix",
+  path = debug.getinfo(1, "Sl").short_src,
+  line = debug.getinfo(1, "Sl").currentline
+})
 AreDetectedResourcesReady = false
 AreSupportedResourcesReady = false
 IsReadyToProvide = false
