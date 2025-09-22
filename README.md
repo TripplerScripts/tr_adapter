@@ -69,3 +69,113 @@ and like this way we will be able to fake the function and make it work
 
 
  ]]
+
+before the call
+mapping(...)
+  local type = {...}.type
+  local availableScript = 'qb-inventory'
+  local target = availableScript[type]
+ qb-inventory.getcharacter(identifier)
+  ['name'] = exports['qb-inventory']:GetPlayerNameByIdentifier(identifier)
+  ['steam'] = exports['qb-inventory']:GetPlayerSteamByIdentifier(identifier)
+
+ ps-inventory.getped(steam)
+    ['name'] = exports['ps-inventory']:GetPlayerNameBySteam(steam)
+    ['identifier'] = exports['ps-inventory']:GetPlayerIdentifierBySteam(steam)
+
+ ox_inventory.getplayer(name)
+    ['identifier'] = exports['ox_inventory']:GetPlayerIdentifierByName(name)
+    ['steam'] = exports['ox_inventory']:GetPlayerSteamByName(name)
+
+basicaly every function that is inside a function we be used based on the script we have
+
+scenario
+tr_patrol: ox_inventory.getplayer:(name)
+
+tr_adapter intercept and redirect to a local function, search in the functions i have and go inside the script to find the function GetPlayer(name)
+
+now we can set GetPlayer(name)
+mapping(name(getplayernidentifierbyname))
+
+then we can set GetPlayer(identifier)
+mapping(identifier(getplayernamebyidentifier))
+and the function will return the player
+
+now the return values
+
+we have to draw a return values based on the script we have
+
+
+we need the expectation for each script
+
+currentAvaialableScript this is depends on every server and its scripts so its not const
+mapping = {
+  name = exports.currentAvaialableScript:getplayername(),
+  age = exports.currentAvaialableScript:getplayerage(),
+  nationality = exports.currentAvaialableScript:getplayernationality(),
+  items = {
+    {
+      name = exports.currentAvaialableScript:getplayeritemname(),
+      amount = exports.currentAvaialableScript:getplayeritemamount(),
+    }
+  },
+  bank = exports.currentAvaialableScript:getplayerbank(),
+  phone = exports.currentAvaialableScript:getplayerphone(),
+  height = exports.currentAvaialableScript:getplayerheight(),
+  blood = exports.currentAvaialableScript:getplayerblood(),
+  dob = exports.currentAvaialableScript:getplayerdob(),
+}
+
+['qb-inventory'] = {
+  ['getcharacter'] = {
+    ['expect'] = { we cant put default since its an array
+      'name', 'age', 'nationality'
+    }
+    ['data'] = {
+      expect.name = mapping.name,
+      expect.age = mapping.age,
+      expect.nationality = mapping.nationality,
+    }
+  }
+}
+
+['ps-inventory'] = {
+  ['getped'] = {
+    ['expect'] = {
+      items = {
+        {
+          name = 'string',
+          amount = 'number',
+        }
+      }
+      charinfo = {
+        name = 'string',
+        bank = 'number',
+        phone = 'string',
+      }
+    },
+    ['data'] = {
+      expect.items = mapping.items,
+      expect.charinfo = {
+        name = mapping.name,
+        bank = mapping.bank,
+        phone = mapping.phone,
+      }
+    }
+  }
+}
+
+['ox_inventory'] = {
+  ['getplayer'] = {
+    ['expect'] = {
+      height = 'number',
+      blood = 'string',
+      dob = 'string',
+    },
+    ['data'] = {
+      expect.height = mapping.height,
+      expect.blood = mapping.blood,
+      expect.dob = mapping.dob,
+    }
+  }
+}
