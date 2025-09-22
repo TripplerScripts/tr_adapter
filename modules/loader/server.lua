@@ -16,7 +16,7 @@ function LoadScripts()
         end
       end
 
-      local scriptSuccess, scriptError = pcall(function()
+      --[[ local scriptSuccess, scriptError = pcall(function()
         local scriptContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/' .. data.name .. '/server.lua')
         if not scriptContent then
           print(' - ^3[LOADER WARNING]^7 File not found: ' .. data.category .. '/' .. data.name .. '/server.lua', 'warn')
@@ -34,7 +34,7 @@ function LoadScripts()
 
       if not scriptSuccess then
         print('^1[LOADER ERROR]^7 ' .. scriptError, 'error')
-      end
+      end ]]
     end)
 
     if not success then
