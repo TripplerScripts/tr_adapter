@@ -51,7 +51,7 @@ Inventory = {
     ['GetItems'] = {
       label = 'GetItemByName',
       args = {
-        'target', 'item'
+        'item', 'target'
       }
     }
   }
