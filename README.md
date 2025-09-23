@@ -11,7 +11,7 @@ functionX {
     values  = _SAME_ | _DIFFERENT_,   -- actual values passed ||| ✅ supported (this is values not type of values)
     count   = _SAME_ | _DIFFERENT_,   -- number of params ||| ✅ ignored since it wont effect the result or the grabber orr arguments
     types   = _SAME_ | _DIFFERENT_,   -- type differences (number, string, table, etc.) ||| ❌ not yet
-    order   = _SAME_ | _DIFFERENT_,   -- param order ||| ✅ supported
+    order   = _SAME_ | _DIFFERENT_,   -- param order ||| ❌ not yet
   },
   returnals = {
     values  = _SAME_ | _DIFFERENT_,   -- actual returned values ||| ✅ supported
@@ -76,7 +76,7 @@ mapping(...)
   local availableScript = 'qb-inventory'
   local target = availableScript[type]
  qb-inventory.getcharacter(identifier)
-  ['name'] = exports['qb-inventory']:GetPlayerNameByIdentifier(identifier)
+  ['name'] = exports['qb-inventory']:GetPlayerSteamByName(name)
   ['steam'] = exports['qb-inventory']:GetPlayerSteamByIdentifier(identifier)
 
  ps-inventory.getped(steam)
@@ -85,14 +85,14 @@ mapping(...)
 
  ox_inventory.getplayer(name)
     ['identifier'] = exports['ox_inventory']:GetPlayerIdentifierByName(name)
-    ['steam'] = exports['ox_inventory']:GetPlayerSteamByName(name)
+    ['steam'] = exports['ox_inventory']:GetPlayerNameByIdentifier(identifier)
 
 basicaly every function that is inside a function we be used based on the script we have
 
 scenario
 tr_patrol: ox_inventory.getplayer:(name)
 
-tr_adapter intercept and redirect to a local function, search in the functions i have and go inside the script to find the function GetPlayer(name)
+tr_adapter intercept and redirect to a local function, search in the functions i have, and go inside the ?script to find the function GetPlayer(name)
 
 now we can set GetPlayer(name)
 mapping(name(getplayernidentifierbyname))
@@ -179,3 +179,50 @@ mapping = {
     }
   }
 }
+
+
+
+
+
+
+
+standard.GetPlayerId = function(source, name)
+  return exports['currentAvaialableScript']:depends on the current one(source, name)
+end
+
+['qb-inventory'].GetPlayerIdentity = {
+  ['source'] = standard.GetPlayerId.source,
+  ['name'] = standard.GetPlayerId.name,
+}
+['ps-inventory'].getplayeridentity = {
+  {
+    ['name'] = standard.GetPlayerId.name,
+    ['source'] = standard.GetPlayerId.source,
+  }
+}
+['ox_inventory'].getplayerIdentifier = {
+  ['name'] = standard.GetPlayerId.name,
+  ['source'] = standard.GetPlayerId.source,
+}
+
+missorder scenario
+tr_patrol: ox_inventory:getplayerIdentifier(name, source)
+
+the adapter will intercept, store the identity (which is ox_inventory) this call and redirect to local function
+and somehow he will manage go to ['ox_inventory'].getplayerIdentifier and grab right order
+like
+the adapter does do and say
+who is that?
+its says
+getplayerIdentifier from ox_inventory
+then
+oh you r the guys who has this order name, source right? ok hold on a sec
+then look for what i have in the server
+i have qb-inventory
+and qb-inventory has GetPlayerIdentity with this order {source, name}
+so we have two option
+either create a new var so we can switch vars with eaach other 
+or
+make every var point to the right order (preferred)
+
+then simply use standard.GetPLayerId(source, name) with the filtered args
