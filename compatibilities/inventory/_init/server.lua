@@ -1,58 +1,28 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
 Inventory = {
-  ['GLOBAL'] = {
-    ['GetSlots'] = {
-      args = {
-        'player', 'slot'
-      }
-    },
-    ['GetItems'] = {
-      args = {
-        'player', 'item', 'metadata', 'return'
-      }
-    }
-  },
   ['ox_inventory'] = {
-    ['GetSlots'] = {
-      label = 'GetSlot',
+    ['GetCountOfItem'] = {
+      label = 'GetItemCount',
       args = {
-        'target', 'slot'
-      }
-    },
-    ['GetItems'] = {
-      label = 'GetItem',
-      args = {
-        'target', 'item', 'metadata', 'returnsCount'
+        'inv', 'itemName', 'metadata', 'strict'
       }
     },
   },
   ['qb-inventory'] = {
-    ['GetSlots'] = {
-      label = 'GetItemBySlot',
+    ['GetCountOfItem'] = {
+      label = 'GetItemCount',
       args = {
-        'target', 'slot'
+        'source', 'items'
       }
     },
-    ['GetItems'] = {
-      label = 'GetItemByName',
-      args = {
-        'target', 'item'
-      }
-    }
   },
   ['ps-inventory'] = {
-    ['GetSlots'] = {
-      label = 'GetItemBySlot',
+    ['GetCountOfItem'] = {
+      label = 'GetItemCount',
       args = {
-        'slot', 'target'
+        'source', 'items'
       }
     },
-    ['GetItems'] = {
-      label = 'GetItemByName',
-      args = {
-        'item', 'target'
-      }
-    }
   }
 }
