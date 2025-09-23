@@ -4,41 +4,40 @@ function LoadScripts()
     local success, error = pcall(function()
       local initContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/_init/server.lua')
       if not initContent then
-        print('^3[LOADER WARNING]^7 Init file not found: ' .. data.category .. '/_init/server.lua', 'warn')
+        exports.tr_lib:print({type = 'warn', message = ('[LOADER WARNING] Init file not found: %s/_init/server.lua'):format(data.category), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
       else
         local chunkInit, errInit = load(initContent, '@' .. data.category .. '/_init/server.lua')
         if chunkInit then
           chunkInit()
-          print('^2[LOADER]^7 Successfully loaded: ' .. data.category .. '/_init/server.lua', 'info')
+          exports.tr_lib:print({type = 'info', message = ('[LOADER] Successfully loaded: %s/_init/server.lua'):format(data.category), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         else
-          print('^1[LOADER ERROR]^7 Failed to compile ' ..
-            data.category .. '/_init/server.lua: ' .. (errInit or 'Unknown error'), 'error')
+          exports.tr_lib:print({type = 'error', message = ('[LOADER ERROR] Failed to compile %s/_init/server.lua: %s'):format(data.category, errInit or 'Unknown error'), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         end
       end
 
       --[[ local scriptSuccess, scriptError = pcall(function()
         local scriptContent = LoadResourceFile(GetCurrentResourceName(), 'compatibilities/' .. data.category .. '/' .. data.name .. '/server.lua')
         if not scriptContent then
-          print(' - ^3[LOADER WARNING]^7 File not found: ' .. data.category .. '/' .. data.name .. '/server.lua', 'warn')
+          exports.tr_lib:print({type = 'warn', message = '[LOADER WARNING] File not found: ' .. data.category .. '/' .. data.name .. '/server.lua', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
           return
         end
 
         local chunkScript, errScript = load(scriptContent, '@' .. data.category .. '/' .. data.name .. '/server.lua')
         if chunkScript then
           chunkScript()
-          print('^2 - [LOADER]^7 Successfully loaded: ' .. data.category .. '/' .. data.name .. '/server.lua', 'info')
+          exports.tr_lib:print({type = 'info', message = ('[LOADER] Successfully loaded: %s/%s/server.lua'):format(data.category, data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         else
-          print('^1 - [LOADER ERROR]^7 Failed to compile ' .. data.category .. '/' .. data.name .. '/server.lua: ' .. (errScript or 'Unknown error'), 'error')
+          exports.tr_lib:print({type = 'error', message = ('[LOADER ERROR] Failed to compile %s/%s/server.lua: %s'):format(data.category, data.name, errScript or 'Unknown error'), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         end
       end)
 
       if not scriptSuccess then
-        print('^1[LOADER ERROR]^7 ' .. scriptError, 'error')
+        exports.tr_lib:print({type = 'error', message = ('[LOADER ERROR] ' .. scriptError):format(scriptError), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
       end ]]
     end)
 
     if not success then
-      print('^1[LOADER ERROR]^7 ' .. error, 'error')
+      exports.tr_lib:print({type = 'error', message = ('[LOADER ERROR] ' .. error):format(error), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
     end
     ::continue::
   end
@@ -47,7 +46,7 @@ function LoadScripts()
   if next(AvailableScripts) then
     InitFunctions()
   else
-    print('^1[LOADER ERROR] Functions Initialization failed', 'error^7')
+    exports.tr_lib:print({type = 'error', message = '[LOADER ERROR] Functions Initialization failed, No available script found, double check the fxmanifest', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   end
 end
 

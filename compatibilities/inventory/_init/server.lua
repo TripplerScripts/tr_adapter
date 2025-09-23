@@ -1,6 +1,18 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
 Inventory = {
+  ['GLOBAL'] = {
+    ['GetSlots'] = {
+      args = {
+        'player', 'slot'
+      }
+    },
+    ['GetItems'] = {
+      args = {
+        'player', 'item', 'metadata', 'return'
+      }
+    }
+  },
   ['ox_inventory'] = {
     ['GetSlots'] = {
       label = 'GetSlot',

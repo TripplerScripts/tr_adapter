@@ -13,33 +13,33 @@ function SelectScripts()
       end
     end
     if state == ('started' or 'starting') and not foundInServer then
-      print(("^4✓ Found: %s (^3Provided by another script)"):format(data.name), 'info')
+      exports.tr_lib:print({type = 'success', message = ("✓ Found: %s (Provided by another script)"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
     else
       if state == "started" then
         AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name, duplicityVersion = data
         .duplicityVersion }
-        print(("^2✓ Started: %s"):format(data.name), 'info')
+        exports.tr_lib:print({type = 'success', message = ("✓ Started: %s"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
       else
         if state == 'missing' then
           ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
-          print(("^6✗ Missing: %s"):format(data.name), 'info')
+          exports.tr_lib:print({type = 'info', message = ("✗ Missing: %s"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         else -- XD
           ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
-          print(("^6✗ Missing: %s"):format(data.name), 'info')
+          exports.tr_lib:print({type = 'info', message = ("✗ Missing: %s"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         end
       end
     end
   end
 
   RegisterNetEvent('tr_adapter:server:selector_debug', function()
-    print(("^2[Resource Selector] ^7Found %s scripts to support"):format(#ScriptsToSupport), 'info')
+    exports.tr_lib:print({type = 'info', message = ("[Resource Selector] Found %s scripts to support"):format(#ScriptsToSupport), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
     for _, data in ipairs(ScriptsToSupport) do
-      print(("^3- ^4[%s] ^7%s"):format(data.category, data.name), 'info')
+      exports.tr_lib:print({type = 'info', message = ("- [%s] %s"):format(data.category, data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
       Wait(300)
     end
     Wait(1000)
 
-    print(("^2[Resource Selector] ^7Found %s scripts that are going to provide"):format(#AvailableScripts), 'info')
+    exports.tr_lib:print({type = 'info', message = ("[Resource Selector] Found %s scripts that are going to provide"):format(#AvailableScripts), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
     local categoryLookup = {}
     for _, data in ipairs(SupportedResourcesData) do
       categoryLookup[data.name] = data.category
@@ -48,9 +48,9 @@ function SelectScripts()
     for _, data in ipairs(AvailableScripts) do
       local category = categoryLookup[data.name] or "unknown"
       Wait(300)
-      print(("^3- ^7%s ^4[%s]"):format(data.name, category), 'info')
+      exports.tr_lib:print({type = 'info', message = ("- %s [%s]"):format(data.name, category), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
     end
-    print(("^2[Resource Selector] ^7Selector debug finished"):format(#AvailableScripts), 'info')
+    exports.tr_lib:print({type = 'info', message = ("[Resource Selector] Selector debug finished"):format(#AvailableScripts), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   end)
 
   IsReadyToProvide = true

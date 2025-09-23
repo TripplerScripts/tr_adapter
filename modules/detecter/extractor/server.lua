@@ -6,7 +6,7 @@ function ExtractResourceNames()
 
     local file = io.open(manifestPath, 'r')
     if not file then
-        print("^1[Resource Extractor] ^7Could not open fxmanifest.lua", 'error')
+        exports.tr_lib:print({type = 'warn', message = ('[Resource Extractor] Could not open fxmanifest.lua'):format(), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         return
     end
 
@@ -42,17 +42,17 @@ function ExtractResourceNames()
 
     RegisterNetEvent('tr_adapter:server:extractor_debug', function()
         local currentCategory = ""
-        print("^2[Resource Extractor] ^7Found " .. #SupportedResourcesData .. " resource names:", 'info')
+        exports.tr_lib:print({type = 'info', message = ('[Resource Extractor] Found %s resource names:'):format(#SupportedResourcesData), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         for _, data in ipairs(SupportedResourcesData) do
             Wait(200)
             if data.category ~= currentCategory then
                 currentCategory = data.category
-                print("^4[" .. currentCategory:upper() .. "]", 'info')
+                exports.tr_lib:print({type = 'info', message = ('[' .. currentCategory:upper() .. ']:'):format(currentCategory), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
                 Wait(200)
             end
-            print("^3  - ^7" .. data.name, 'info')
+            exports.tr_lib:print({type = 'info', message = ('  - %s'):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         end
-        print("^2[Resource Extractor] ^7Extractor debug finished", 'info')
+        exports.tr_lib:print({type = 'info', message = '[Resource Extractor] Extractor debug finished', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         ExtractorDebugerFinished = true
     end)
 

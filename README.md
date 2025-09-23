@@ -8,15 +8,20 @@ we label and provide our compatibilities based on the functionality of the funct
 functionX {
   labels = _SAME_ | _DIFFERENT_, ✅ supported
   params = {
-    values  = _SAME_ | _DIFFERENT_,   -- actual values passed ||| ✅ supported (this is values not type of values)
-    count   = _SAME_ | _DIFFERENT_,   -- number of params ||| ✅ ignored since it wont effect the result or the grabber orr arguments
-    types   = _SAME_ | _DIFFERENT_,   -- type differences (number, string, table, etc.) ||| ❌ not yet
-    order   = _SAME_ | _DIFFERENT_,   -- param order ||| ✅ supported
+    methods = _SAME_ | _DIFFERENT_,   -- how params are passed (by name, by index, etc.)
+    values  = _SAME_ | _DIFFERENT_,   -- actual values passed
+    count   = _SAME_ | _DIFFERENT_,   -- number of params
+    types   = _SAME_ | _DIFFERENT_,   -- type differences (number, string, table, etc.)
+    order   = _SAME_ | _DIFFERENT_,   -- param order
   },
   returnals = {
-    values  = _SAME_ | _DIFFERENT_,   -- actual returned values ||| ✅ supported
-    types   = _SAME_ | _DIFFERENT_,   -- type differences ||| ❌ not yet
-    order   = _SAME_ | _DIFFERENT_,   -- order of multi-returns ||| ❌ untested
+    methods = _SAME_ | _DIFFERENT_,   -- how results are returned (direct, table, multiple values)
+    values  = _SAME_ | _DIFFERENT_,   -- actual returned values
+    count   = _SAME_ | _DIFFERENT_,   -- number of return values
+    types   = _SAME_ | _DIFFERENT_,   -- type differences
+    order   = _SAME_ | _DIFFERENT_,   -- order of multi-returns
   },
-  errorHandling = _SAME_ | _DIFFERENT_, -- returns nil vs throws error ||| ❌ not yet
+  errorHandling = _SAME_ | _DIFFERENT_, -- returns nil vs throws error
 }
+
+add_ace resource.tr_adapter command.quit allow

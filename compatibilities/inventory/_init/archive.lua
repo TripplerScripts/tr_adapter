@@ -1,12 +1,12 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
 Inventory.GetInventory = function()
-  print('No inventory resource available - GetInventory called', 'warn')
+  exports.tr_lib:print({type = 'warn', message = 'No inventory resource available - GetInventory called', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   return {}
 end
 
 Inventory.LoadInventory = function()
-  print('No inventory resource available - LoadInventory called', 'warn')
+  exports.tr_lib:print({type = 'warn', message = 'No inventory resource available - LoadInventory called', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   return {}
 end
 
@@ -102,8 +102,6 @@ end
 function InitScripts()
   for resourceName, aliases in pairs(AvailableScripts) do
     for functionName, func in pairs(Fuel) do
-      print(resourceName, aliases)
-      print(functionName)
       local exportName = aliases[functionName] or functionName
       --[[ AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, exportName), function(setCB)
         setCB(func)
