@@ -2,26 +2,26 @@
 Inventory = {}
 Inventory = {
   ['ox_inventory'] = {
-    ['GetCountOfItem'] = {
+    ['GetSlots'] = {
       label = 'GetItemCount',
       args = {
-        'inv', 'itemName', 'metadata', 'strict'
+        'item', 'target', 'metadata', 'strict'
       }
     },
   },
   ['qb-inventory'] = {
-    ['GetCountOfItem'] = {
+    ['GetSlots'] = {
       label = 'GetItemCount',
       args = {
-        'source', 'items'
+        'target', 'item'
       }
     },
   },
   ['ps-inventory'] = {
-    ['GetCountOfItem'] = {
+    ['GetSlots'] = {
       label = 'GetItemCount',
       args = {
-        'source', 'items'
+        'target', 'item'
       }
     },
   }
