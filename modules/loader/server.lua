@@ -46,7 +46,7 @@ function LoadScripts()
   if next(AvailableScripts) then
     InitFunctions()
   else
-    exports.tr_lib:print({type = 'error', message = '[LOADER ERROR] Functions Initialization failed', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+    exports.tr_lib:print({type = 'error', message = '[LOADER ERROR] Functions Initialization failed, No available script found, double check the fxmanifest', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   end
 end
 

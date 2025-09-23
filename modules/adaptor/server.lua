@@ -1,3 +1,13 @@
+-- Helper function for finding index
+local function indexOf(tbl, value)
+  for i, v in ipairs(tbl) do
+    if v == value then 
+      return i 
+    end
+  end
+  return nil
+end
+
 function InitFunctions()
   local Categories = {}
   for _, data in pairs(AvailableScripts) do
@@ -50,11 +60,49 @@ function InitFunctions()
 
           exports(funcName, _G[funcName])
           exports.tr_lib:print({type = 'info', message = ('Registered export: %s'):format(funcName), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+          
           for scriptName, scriptConfig in pairs(resourceTable) do
             if scriptName ~= availableResourceName then
+              -- Capture loop variables in closure
+              local capturedFuncName = funcName
+              local capturedExportLabel = exportLabel
+              local capturedScriptName = scriptName
+              
               AddEventHandler(('__cfx_export_%s_%s'):format(scriptName, scriptConfig[funcName].label), function(setCB)
-                setCB(_G[funcName])
+                
+                -- Create caller-specific wrapper
+                local callerSpecificFunction = function(...)
+                  local params = { ... }
+                  local orderedArgs = {}
+                  
+                  -- Get configs for reordering
+                  local callerConfig = resourceTable[capturedScriptName][capturedFuncName]
+                  local targetConfig = resourceTable[availableResourceName][capturedFuncName]
+                  
+                  if #params == 1 and type(params[1]) == "table" then
+                    local dataObj = params[1]
+                    for i, argName in ipairs(targetConfig.args) do
+                      orderedArgs[i] = dataObj[argName]
+                    end
+                  else
+                    -- REORDER: from caller order to target order
+                    for i, targetArgName in ipairs(targetConfig.args) do
+                      local callerIndex = indexOf(callerConfig.args, targetArgName)
+                      if callerIndex then
+                        orderedArgs[i] = params[callerIndex]
+                      else
+                        orderedArgs[i] = params[i] -- fallback to same position
+                      end
+                    end
+                  end
+                  
+                  exports.tr_lib:print({type = 'info', message = ('Caller: %s → Target: %s %s with args: %s'):format(capturedScriptName, availableResourceName, capturedExportLabel, json.encode(orderedArgs))})
+                  return exports[availableResourceName][capturedExportLabel](_, table.unpack(orderedArgs))
+                end
+                
+                setCB(callerSpecificFunction)
               end)
+              
               exports.tr_lib:print({type = 'info', message = ('Created export listener: %s %s'):format(scriptName, scriptConfig[funcName].label), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
             end
           end
