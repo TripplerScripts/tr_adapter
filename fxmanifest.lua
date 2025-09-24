@@ -8,12 +8,14 @@ dependency 'tr_lib'
 
 shared_script 'init.lua'
 server_scripts {
-    'modules/adaptor/server.lua',
-    'modules/loader/server.lua',
-    'modules/provider/server.lua',
-    'modules/selector/server.lua',
-    'modules/detecter/extractor/server.lua',
-    'modules/detecter/resources/server.lua',
+    'modules/print/shared.lua',
+    'modules/require/shared.lua',
+    'engine/adaptor/server.lua',
+    'engine/loader/server.lua',
+    'engine/provider/server.lua',
+    'engine/selector/server.lua',
+    'engine/detecter/extractor/server.lua',
+    'engine/detecter/resources/server.lua',
 }
 files {
     'compatibilities/inventory/_init/server.lua',
