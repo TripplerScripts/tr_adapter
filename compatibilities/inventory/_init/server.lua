@@ -1,35 +1,26 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
-Inventory.Standard = {
-  GetTargetItems = function()
-    local data = {}
-
-    return data
-  end
-}
 Inventory = {
+  ['__index'] = {
+    GetTargetItems = function(...)
+      local data = {...}
+      return data
+    end
+  },
   ['ox_inventory'] = {
     ['GetTargetItems'] = {
       label = 'Search',
-      args = {
-        'inv', 'search', 'items', 'metadata'
-      }
+      returns = ''
     },
   },
   ['qb-inventory'] = {
     ['GetTargetItems'] = {
       label = 'GetItemsByName',
-      args = {
-        'source', 'item'
-      }
     },
   },
   ['ps-inventory'] = {
     ['GetTargetItems'] = {
       label = 'GetItemsByName',
-      args = {
-        'source', 'item'
-      }
     },
   }
 }

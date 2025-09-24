@@ -8,39 +8,13 @@ function Init()
   end
 
   for _, categoryInfo in pairs(Categories) do
-    local availableResource = categoryInfo.availableResource
-
-    local categoryObject = _G[categoryInfo.categoryVariable]
-    for resourceName, resourceConfig in pairs(categoryObject) do
-      for funcName, funcConfig in pairs(resourceConfig) do
-        if resourceName == availableResource then
-          local exportLabel = funcConfig.label
-
-          _G[funcName] = function(...)
-            print(...)
-            local params = { ... }
-            local orderedArgs = {}
-
-            if #params == 1 and type(params[1]) == "table" then
-              local dataObj = params[1]
-              for i, argName in ipairs(funcConfig.args) do
-                orderedArgs[i] = dataObj[argName]
-              end
-            else
-              for i = 1, #params do
-                orderedArgs[i] = params[i]
-              end
-            end
-            print(("Calling: %s %s with args: %s"):format(availableResource, exportLabel, json.encode(orderedArgs)))
-            return exports[availableResource][exportLabel](_, table.unpack(orderedArgs))
-          end
-        end
-
-        if _G[funcName] and resourceName ~= availableResource then
-          AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, funcConfig.label), function(setCB)
-            setCB(_G[funcName])
+    local category = _G[categoryInfo.categoryVariable]
+    for resourceName, functions in pairs(category) do
+      for functionName, functionConfig in pairs(functions) do
+        if resourceName ~= categoryInfo.availableResource and resourceName ~= '__index' then
+          AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, functionConfig.label), function(callback)
+            callback(category.__index[functionName])
           end)
-          print(("Created export listener: %s %s"):format(resourceName, funcConfig.label))
         end
       end
     end
