@@ -9,6 +9,5 @@ for i = 0, numResources - 1 do
   end
 end
 
-exports.tr_lib:print({type = 'info', message = ('[Resource Detector] Stored %s resource names'):format(#ServerResourcesNames), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
-AreDetectedResourcesReady = true
+print({type = 'info', message = ('[Resource Detector] Stored %s resource names'):format(#ServerResourcesNames), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
 ExtractResourceNames()

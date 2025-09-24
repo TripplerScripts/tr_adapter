@@ -50,7 +50,6 @@ function ProvideScripts()
   writeFile:write(newContent)
   writeFile:close()
 
-  IsReadyToLoad = true
   LoadScripts()
   TriggerClientEvent('tr_adapter:api', -1)
 end
