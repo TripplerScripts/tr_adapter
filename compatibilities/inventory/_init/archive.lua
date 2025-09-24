@@ -1,12 +1,12 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
 Inventory.GetInventory = function()
-  exports.tr_lib:print({type = 'warn', message = 'No inventory resource available - GetInventory called', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+  print({type = 'warn', message = 'No inventory resource available - GetInventory called', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   return {}
 end
 
 Inventory.LoadInventory = function()
-  exports.tr_lib:print({type = 'warn', message = 'No inventory resource available - LoadInventory called', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+  print({type = 'warn', message = 'No inventory resource available - LoadInventory called', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   return {}
 end
 
