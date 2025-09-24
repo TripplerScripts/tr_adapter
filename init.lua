@@ -1,8 +1,3 @@
-AreDetectedResourcesReady = false
-AreSupportedResourcesReady = false
-IsReadyToProvide = false
-IsReadyToLoad = false
-IsReadyToInit = false
 ExtractorDebugerFinished = false
 
 ---@type table<string>
