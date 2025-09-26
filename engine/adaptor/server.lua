@@ -12,8 +12,10 @@ function Init()
     for resourceName, functions in pairs(category) do
       for functionName, functionConfig in pairs(functions) do
         if resourceName ~= categoryInfo.availableResource and resourceName ~= '__index' then
-          AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, functionConfig.label), function(callback)
-            callback(category.__index[functionName]('test'))
+          AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, functionConfig.label), function(cb)
+            cb(function(...)
+              return category.__index[functionName](GetInvokingResource(), resourceName, categoryInfo.availableResource, ...)
+            end)
           end)
         end
       end

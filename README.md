@@ -11,11 +11,7 @@ functionX {
     values  = _SAME_ | _DIFFERENT_,   -- actual values passed ||| ✅ supported (this is values not type of values)
     count   = _SAME_ | _DIFFERENT_,   -- number of params ||| ✅ ignored since it wont effect the result or the grabber orr arguments
     types   = _SAME_ | _DIFFERENT_,   -- type differences (number, string, table, etc.) ||| ❌ not yet
-<<<<<<< HEAD
-    order   = _SAME_ | _DIFFERENT_,   -- param order ||| ✅ supported
-=======
     order   = _SAME_ | _DIFFERENT_,   -- param order ||| ❌ not yet
->>>>>>> cc7c30b687de12d55f34757ad1b0081415007872
   },
   returnals = {
     values  = _SAME_ | _DIFFERENT_,   -- actual returned values ||| ✅ supported
@@ -23,9 +19,6 @@ functionX {
     order   = _SAME_ | _DIFFERENT_,   -- order of multi-returns ||| ❌ untested
   },
   errorHandling = _SAME_ | _DIFFERENT_, -- returns nil vs throws error ||| ❌ not yet
-<<<<<<< HEAD
-}
-=======
 }
 
 --[[ param
@@ -235,4 +228,3 @@ make every var point to the right order (preferred)
 then simply use standard.GetPLayerId(source, name) with the filtered args
 
 the return value make it the original since we are focusing on the params first
->>>>>>> cc7c30b687de12d55f34757ad1b0081415007872
