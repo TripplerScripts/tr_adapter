@@ -13,7 +13,7 @@ function Init()
       for functionName, functionConfig in pairs(functions) do
         if resourceName ~= categoryInfo.availableResource and resourceName ~= '__index' then
           AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, functionConfig.label), function(callback)
-            callback(category.__index[functionName])
+            callback(category.__index[functionName]('test'))
           end)
         end
       end
