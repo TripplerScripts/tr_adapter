@@ -1,249 +1,205 @@
-ResourceAdapter = {}
+---@diagnostic disable: duplicate-set-field
+Inventory = {}
 
-local function detectAvailableSystems()
-  local availableSystems = {}
-
-  for systemName, _ in pairs(ResourceAdapter) do
-    if systemName ~= '__index' and GetResourceState(systemName) == 'started' then
-      availableSystems[systemName] = true
-    end
-  end
-
-  return availableSystems
-end
-
-local function handleExceptions(functionConfig, args)
-  if not functionConfig.exceptions then
-    return '1'
-  end
-
-  for _, exception in ipairs(functionConfig.exceptions) do
-    if exception.condition(args) then
-      return exception.returnType
-    end
-  end
-
-  return '1'
-end
-
-local function convertToExpectedFormat(rawResult, sourceSystem, expectedFormat, functionConfig, returnType)
-  local targetFormat = functionConfig.returns[returnType]
-
-  if type(targetFormat) == 'table' and #targetFormat == 1 then
-    local primitiveType = targetFormat[1]
-
-    if primitiveType == 'number' then
-      if type(rawResult) == 'table' and #rawResult > 0 then
-        local total = 0
-        for _, item in ipairs(rawResult) do
-          total = total + (item.count or item.amount or item.qty or 1)
+local function getAvailableSystem()
+    local systems = { 'ox_inventory', 'qb-inventory', 'ps-inventory' }
+    for _, system in ipairs(systems) do
+        if GetResourceState(system) == 'started' then
+            return system
         end
-        return total
-      elseif type(rawResult) == 'number' then
-        return rawResult
-      else
-        return 0
-      end
-    elseif primitiveType == 'boolean' then
-      return not not rawResult
-    elseif primitiveType == 'string' then
-      return tostring(rawResult or '')
     end
-  end
-
-  if type(rawResult) ~= 'table' then
-    return rawResult
-  end
-
-  if sourceSystem == expectedFormat then
-    return rawResult
-  end
-
-  local convertedItems = {}
-  for _, rawItem in ipairs(rawResult) do
-    local convertedItem = convertItemToFormat(rawItem, sourceSystem, expectedFormat)
-    table.insert(convertedItems, convertedItem)
-  end
-
-  return convertedItems
+    return nil
 end
 
-function convertItemToFormat(rawItem, sourceSystem, targetFormat)
-  if sourceSystem == targetFormat then
-    return rawItem
-  end
-
-  if targetFormat == 'ox_inventory' then
-    return {
-      metadata = rawItem.info or rawItem.metadata or {},
-      name = rawItem.name or '',
-      weight = rawItem.weight or 0,
-      label = rawItem.label or '',
-      count = rawItem.amount or rawItem.count or 0,
-      close = rawItem.shouldClose or rawItem.close or false,
-      slot = rawItem.slot or 0,
-      stack = not (rawItem.unique or false)
-    }
-  elseif targetFormat == 'qb-inventory' or targetFormat == 'ps-inventory' then
-    return {
-      amount = rawItem.count or rawItem.amount or 0,
-      type = rawItem.type or 'item',
-      useable = rawItem.useable or rawItem.usable or false,
-      info = rawItem.metadata or rawItem.info or {},
-      weight = rawItem.weight or 0,
-      image = rawItem.image or (rawItem.name and rawItem.name .. '.png') or 'default.png',
-      description = rawItem.description or rawItem.label or '',
-      shouldClose = rawItem.close or rawItem.shouldClose or false,
-      label = rawItem.label or '',
-      slot = rawItem.slot or 0,
-      name = rawItem.name or '',
-      unique = rawItem.unique or not (rawItem.stack or false)
-    }
-  end
-
-  return rawItem
-end
-
-local function createUniversalFunction(functionName)
-  return function(expectedFormat, ...)
-    local args = { ... }
-    local caller = GetInvokingResource()
-
-    local availableSystems = detectAvailableSystems()
-    local targetSystem = nil
-    local functionConfig = nil
-
-    for systemName, _ in pairs(availableSystems) do
-      if ResourceAdapter[systemName] and ResourceAdapter[systemName][functionName] then
-        targetSystem = systemName
-        functionConfig = ResourceAdapter[systemName][functionName]
-        break
-      end
+local function convertItem(rawItem, fromSystem, toSystem, toFormat)
+    if fromSystem == toSystem then
+        return rawItem
     end
 
-    if not targetSystem or not functionConfig then
-      error('Function "' .. functionName .. '" not available in any loaded system')
+    local converted = {}
+
+    for field, fieldType in pairs(toFormat) do
+        if field == 'metadata' then
+            converted.metadata = rawItem.info or rawItem.metadata or {}
+        elseif field == 'info' then
+            converted.info = rawItem.metadata or rawItem.info or {}
+        elseif field == 'name' then
+            converted.name = rawItem.name or ''
+        elseif field == 'label' then
+            converted.label = rawItem.label or ''
+        elseif field == 'weight' then
+            converted.weight = rawItem.weight or 0
+        elseif field == 'count' then
+            converted.count = rawItem.amount or rawItem.count or 0
+        elseif field == 'amount' then
+            converted.amount = rawItem.count or rawItem.amount or 0
+        elseif field == 'slot' then
+            converted.slot = rawItem.slot or 0
+        elseif field == 'close' then
+            converted.close = rawItem.shouldClose or rawItem.close or false
+        elseif field == 'shouldClose' then
+            converted.shouldClose = rawItem.close or rawItem.shouldClose or false
+        elseif field == 'stack' then
+            converted.stack = not (rawItem.unique or false)
+        elseif field == 'unique' then
+            converted.unique = not (rawItem.stack or false)
+        elseif field == 'useable' then
+            converted.useable = rawItem.useable or false
+        elseif field == 'type' then
+            converted.type = rawItem.type or 'item'
+        elseif field == 'image' then
+            converted.image = rawItem.image or (rawItem.name and rawItem.name .. '.png') or 'default.png'
+        elseif field == 'description' then
+            converted.description = rawItem.description or rawItem.label or ''
+        else
+            if rawItem[field] ~= nil then
+                converted[field] = rawItem[field]
+            elseif fieldType == 'string' then
+                converted[field] = ''
+            elseif fieldType == 'number' then
+                converted[field] = 0
+            elseif fieldType == 'boolean' then
+                converted[field] = false
+            elseif fieldType == 'table' then
+                converted[field] = {}
+            end
+        end
     end
 
-    local returnType = handleExceptions(functionConfig, args)
-
-    functionConfig.functionName = functionName
-
-    local actualFunction = functionConfig.label
-    local rawResult = exports[targetSystem][actualFunction](table.unpack(args))
-
-    return convertToExpectedFormat(rawResult, targetSystem, expectedFormat, functionConfig, returnType)
-  end
+    return converted
 end
 
-ResourceAdapter = {
-  ['__index'] = {},
+Inventory = {
+    ['__index'] = {
+        GetTargetItems = function(expectedFormat, ...)
+            local args = { ... }
+            local availableSystem = getAvailableSystem()
 
-  ['ox_inventory'] = {
-    ['GetItems'] = {
-      label = 'Search',
-      returns = {
-        ['1'] = {
-          name = 'string',
-          label = 'string',
-          amount = 'number',
-          weight = 'number',
-          slot = 'number',
-          metadata = 'table',
-          usable = 'boolean'
+            if not availableSystem then
+                error('No inventory system available')
+            end
+
+            local systemConfig = Inventory[availableSystem]
+            if not systemConfig or not systemConfig.GetTargetItems then
+                error('GetTargetItems not configured for ' .. availableSystem)
+            end
+
+            local funcConfig = systemConfig.GetTargetItems
+            local actualFunction = funcConfig.label
+
+            local returnType = '1'
+            if expectedFormat == 'ox_inventory' and #args == 4 and args[2] == 2 then
+                returnType = '2'
+            end
+
+            local success, rawResult = pcall(function()
+                return exports[availableSystem][actualFunction](table.unpack(args))
+            end)
+
+            if not success then
+                error('Failed to call ' .. availableSystem .. ':' .. actualFunction)
+            end
+
+            local expectedConfig = Inventory[expectedFormat]
+            if not expectedConfig or not expectedConfig.GetTargetItems then
+                return rawResult -- fallback
+            end
+
+            local expectedReturns = expectedConfig.GetTargetItems.returns[returnType]
+
+            if expectedReturns and expectedReturns[1] == 'number' then
+                if type(rawResult) == 'table' and #rawResult > 0 then
+                    local total = 0
+                    for _, item in ipairs(rawResult) do
+                        total = total + (item.count or item.amount or 1)
+                    end
+                    return total
+                elseif type(rawResult) == 'number' then
+                    return rawResult
+                else
+                    return 0
+                end
+            end
+
+            if type(rawResult) == 'table' and expectedReturns then
+                local convertedItems = {}
+                for _, rawItem in ipairs(rawResult) do
+                    local converted = convertItem(rawItem, availableSystem, expectedFormat, expectedReturns)
+                    table.insert(convertedItems, converted)
+                end
+                return convertedItems
+            end
+
+            return rawResult
+        end
+    },
+
+    ['ox_inventory'] = {
+        ['GetTargetItems'] = {
+            label = 'Search',
+            returns = {
+                ['1'] = {
+                    metadata = 'table',
+                    name = 'string',
+                    weight = 'number',
+                    label = 'string',
+                    count = 'number',
+                    close = 'boolean',
+                    slot = 'number',
+                    stack = 'boolean'
+                },
+                ['2'] = {
+                    'number'
+                }
+            }
         },
-        ['2'] = { 'number' }
-      },
-      exceptions = {
-        {
-          condition = function(args) return #args == 4 and args[2] == 2 end,
-          returnType = '2'
-        }
-      }
     },
-    ['AddItem'] = {
-      label = 'AddItem',
-      returns = { ['1'] = { 'boolean' } }
-    },
-    ['RemoveItem'] = {
-      label = 'RemoveItem',
-      returns = { ['1'] = { 'boolean' } }
-    },
-    ['GetWeight'] = {
-      label = 'GetWeight',
-      returns = { ['1'] = { 'number' } }
-    }
-  },
 
-  ['qb-inventory'] = {
-    ['GetItems'] = {
-      label = 'GetItemsByName',
-      returns = {
-        ['1'] = {
-          name = 'string',
-          label = 'string',
-          amount = 'number',
-          weight = 'number',
-          slot = 'number',
-          metadata = 'table',
-          usable = 'boolean'
-        }
-      }
+    ['qb-inventory'] = {
+        ['GetTargetItems'] = {
+            label = 'GetItemsByName',
+            returns = {
+                ['1'] = {
+                    amount = 'number',
+                    type = 'string',
+                    useable = 'boolean',
+                    info = 'table',
+                    weight = 'number',
+                    image = 'string',
+                    description = 'string',
+                    shouldClose = 'boolean',
+                    label = 'string',
+                    slot = 'number',
+                    name = 'string',
+                    unique = 'boolean'
+                }
+            }
+        },
     },
-    ['AddItem'] = {
-      label = 'AddItem',
-      returns = { ['1'] = { 'boolean' } }
-    },
-    ['RemoveItem'] = {
-      label = 'RemoveItem',
-      returns = { ['1'] = { 'boolean' } }
-    },
-    ['GetWeight'] = {
-      label = 'GetTotalWeight',
-      returns = { ['1'] = { 'number' } }
-    }
-  },
 
-  ['ps-inventory'] = {
-    ['GetItems'] = {
-      label = 'GetItemsByName',
-      returns = {
-        ['1'] = {
-          name = 'string',
-          label = 'string',
-          amount = 'number',
-          weight = 'number',
-          slot = 'number',
-          metadata = 'table',
-          usable = 'boolean'
-        }
-      }
-    },
-    ['AddItem'] = {
-      label = 'AddItem',
-      returns = { ['1'] = { 'boolean' } }
+    ['ps-inventory'] = {
+        ['GetTargetItems'] = {
+            label = 'GetItemsByName',
+            returns = {
+                ['1'] = {
+                    amount = 'number',
+                    type = 'string',
+                    useable = 'boolean',
+                    info = 'table',
+                    weight = 'number',
+                    image = 'string',
+                    description = 'string',
+                    shouldClose = 'boolean',
+                    label = 'string',
+                    slot = 'number',
+                    name = 'string',
+                    unique = 'boolean'
+                }
+            }
+        },
     }
-  },
 }
 
-local function initializeUniversalSystem()
-  local allFunctions = {}
-
-  for systemName, systemConfig in pairs(ResourceAdapter) do
-    if systemName ~= '__index' then
-      for functionName, _ in pairs(systemConfig) do
-        allFunctions[functionName] = true
-      end
-    end
-  end
-
-  for functionName, _ in pairs(allFunctions) do
-    ResourceAdapter['__index'][functionName] = createUniversalFunction(functionName)
-
-    exports(functionName, function(expectedFormat, ...)
-      return createUniversalFunction(functionName)(expectedFormat, ...)
-    end)
-  end
-end
-
-initializeUniversalSystem()
+exports('GetTargetItems', function(expectedFormat, ...)
+    return Inventory.__index.GetTargetItems(expectedFormat, ...)
+end)
