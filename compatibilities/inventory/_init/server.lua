@@ -54,27 +54,30 @@ Inventory = {
       }
       if called == 'ox_inventory' then
         if args[2] == 1 then
-          item = {
-            Inventory['ox_inventory']['GetTargetItems']['returns']['1']
-          }
+          item = Inventory['ox_inventory']['GetTargetItems']['returns']['1']
           for missingArg, missingValue in pairs(item) do
             for shopArg, shopValue in pairs(shop) do
-              if missingArg == shopArg then
-                item[missingArg] = shopValue or 'yep'
+              if missingValue == shopArg then
+                item[missingArg] = shopValue
               end
             end
           end
         elseif args[2] == 2 then
-          item = {
-            Inventory['ox_inventory']['GetTargetItems']['returns']['2']
-          }
+          item = Inventory['ox_inventory']['GetTargetItems']['returns']['2']
+          for missingArg, missingValue in pairs(item) do
+            for shopArg, shopValue in pairs(shop) do
+              if missingValue == shopArg then
+                item = shopValue
+              end
+            end
+          end
         end
       elseif called == 'qb-inventory' or called == 'ps-inventory' then
         item = {}
         for missingArg, missingValue in pairs(item) do
           for shopArg, shopValue in pairs(shop) do
             if missingArg == shopArg then
-              item[missingArg] = shopValue or 'yep'
+              item[missingArg] = shopValue
             end
           end
         end

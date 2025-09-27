@@ -1,3 +1,3 @@
-function print(object)
+--[[ function print(object)
   exports.tr_lib:print(object)
-end
+end ]]
