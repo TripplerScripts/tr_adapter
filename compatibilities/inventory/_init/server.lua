@@ -31,14 +31,13 @@ Inventory = {
       
       local exportLabel = Inventory[handler].GetTargetItems.label
       local map = mapArguments(args, Inventory[called].GetTargetItems.args, Inventory[handler].GetTargetItems.args)
-      
-      export = handler == 'ox_inventory' and exports[handler][exportLabel](_, table.unpack(map))[1] or exports[handler][exportLabel](_, table.unpack(map))
-      
+      export = exports[handler][exportLabel](_, table.unpack(map))[1]
+
       if not export then
         print({type = 'error', message = ('calling the handler returned %s'):format(export:upper())})
         return {}
       end
-
+      print(json.encode(export))
       local shop = {
         weight = export.weight,
         label = export.label,
@@ -63,7 +62,7 @@ Inventory = {
           item = Inventory[called].GetTargetItems.returns['1']
           for missingArg, missingValue in pairs(item) do
             for shopArg, shopValue in pairs(shop) do
-              if missingValue == shopArg then
+              if missingArg == shopArg then
                 item[missingArg] = shopValue
               end
             end
