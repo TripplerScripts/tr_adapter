@@ -1,63 +1,66 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
+
 local function mapArguments(inputArgs, fromArgsConfig, toArgsConfig)
-  print(json.encode(inputArgs))
-  print(json.encode(fromArgsConfig))
-  print(json.encode(toArgsConfig))
   local mappedArgs = {}
   
-  -- Map each argument from 'to' config to 'from' config
-  for i, toArgName in ipairs(toArgsConfig) do
-      local found = false
-      -- Find matching argument in 'from' config
-      for j, fromArgName in ipairs(fromArgsConfig) do
-          if toArgName == fromArgName then
-              mappedArgs[i] = inputArgs[j]
-              found = true
-              break
-          end
-      end
-      -- If no match found, use positional fallback
-      if not found then
-          mappedArgs[i] = inputArgs[i]
+  local fromLookup = {}
+  for i, argConfig in ipairs(fromArgsConfig) do
+      fromLookup[argConfig.name] = i
+  end
+  
+  for i, argConfig in ipairs(toArgsConfig) do
+      local argName = argConfig.name
+      local defaultValue = argConfig.defaultValue
+      
+      if fromLookup[argName] and inputArgs[fromLookup[argName]] ~= nil then
+          mappedArgs[i] = inputArgs[fromLookup[argName]]
+      elseif defaultValue ~= nil then
+          mappedArgs[i] = defaultValue
       end
   end
-  print(json.encode(mappedArgs))
+  
   return mappedArgs
 end
+
 Inventory = {
-  ['__index'] = {
+  __index = {
     GetTargetItems = function(called, handler, ...)
       local args = {...}
       local item = {}
-      local exportLabel = Inventory[handler]['GetTargetItems']['label']
-      local map = mapArguments({...}, Inventory[called]['GetTargetItems']['args'], Inventory[handler]['GetTargetItems']['args'])
-      local export = exports[handler][exportLabel](exports[handler], table.unpack(map))
+      
+      local exportLabel = Inventory[handler].GetTargetItems.label
+      local map = mapArguments(args, Inventory[called].GetTargetItems.args, Inventory[handler].GetTargetItems.args)
+      
+      export = handler == 'ox_inventory' and exports[handler][exportLabel](_, table.unpack(map))[1] or exports[handler][exportLabel](_, table.unpack(map))
+      
+      if not export then
+        print({type = 'error', message = ('calling the handler returned %s'):format(export:upper())})
+        return {}
+      end
+
       local shop = {
-        --both
-        ['weight'] = export.weight,
-        ['label'] = export.label,
-        ['slot'] = export.slot,
-        ['name'] = export.name,
-        --ox
-        ['metadata'] = export.metadata,
-        ['count'] = export.count,
-        ['close'] = export.close,
-        ['stack'] = export.stack,
-        --qb
-        ['info'] = export.info,
-        ['amount'] = export.amount,
-        ['shouldClose'] = export.shouldClose,
-        ['unique'] = export.unique,
-        
-        ['useable'] = export.useable,
-        ['image'] = export.image,
-        ['description'] = export.description,
-        ['type'] = export.type,
+        weight = export.weight,
+        label = export.label,
+        slot = export.slot,
+        name = export.name,
+        metadata = export.info,
+        count = export.amount,
+        close = export.shouldClose,
+        stack = export.unique,
+        info = export.metadata,
+        amount = export.count,
+        shouldClose = export.close,
+        unique = export.stack,
+        useable = export.useable,
+        image = export.image,
+        description = export.description,
+        type = export.type,
       }
+      
       if called == 'ox_inventory' then
         if args[2] == 1 then
-          item = Inventory['ox_inventory']['GetTargetItems']['returns']['1']
+          item = Inventory[called].GetTargetItems.returns['1']
           for missingArg, missingValue in pairs(item) do
             for shopArg, shopValue in pairs(shop) do
               if missingValue == shopArg then
@@ -66,7 +69,7 @@ Inventory = {
             end
           end
         elseif args[2] == 2 then
-          item = Inventory['ox_inventory']['GetTargetItems']['returns']['2']
+          item = Inventory[called].GetTargetItems.returns['2']
           for missingArg, missingValue in pairs(item) do
             for shopArg, shopValue in pairs(shop) do
               if missingValue == shopArg then
@@ -76,11 +79,15 @@ Inventory = {
           end
         end
       elseif called == 'qb-inventory' or called == 'ps-inventory' then
-        item = {}
+        item = Inventory[called].GetTargetItems.returns
         for missingArg, missingValue in pairs(item) do
-          for shopArg, shopValue in pairs(shop) do
-            if missingValue == shopArg then
-              item[missingArg] = shopValue
+          if missingValue == 'image' then
+            item[missingArg] = (shop.name or 'item') .. '.png'
+          else
+            for shopArg, shopValue in pairs(shop) do
+              if missingArg == shopArg then
+                item[missingArg] = shopValue
+              end
             end
           end
         end
@@ -89,64 +96,78 @@ Inventory = {
       return item
     end
   },
+  
   ['ox_inventory'] = {
-    ['GetTargetItems'] = {
+    GetTargetItems = {
       label = 'Search',
-      args = {'target', 'type', 'items', 'metadata'},
+      args = {
+        { name = 'target' },
+        { name = 'type', defaultValue = 1 },
+        { name = 'items' },
+        { name = 'metadata' }
+      },
       returns = {
         ['1'] = {
-          ['name'] = 'name',
-          ['weight'] = 'weight',
-          ['label'] = 'label',
-          ['slot'] = 'slot',
-          ['metadata'] = 'info',
-          ['count'] = 'amount',
-          ['close'] = 'shouldClose',
-          ['stack'] = 'unique'
+          name = 'name',
+          weight = 'weight',
+          label = 'label',
+          slot = 'slot',
+          metadata = 'info',
+          count = 'amount',
+          close = 'shouldClose',
+          stack = 'unique'
         },
         ['2'] = {
-          ['count'] = 'amount'
+          count = 'amount'
         }
       }
     },
   },
+  
   ['qb-inventory'] = {
-    ['GetTargetItems'] = {
+    GetTargetItems = {
       label = 'GetItemsByName',
-      args = {'target', 'items'},
+      args = {
+        { name = 'target' },
+        { name = 'items' }
+      },
       returns = {
-        ['label'] = 'label',
-        ['weight'] = 'weight',
-        ['slot'] = 'slot',
-        ['name'] = 'name',
-        ['amount'] = 'count',
-        ['info'] = 'metadata',
-        ['shouldClose'] = 'close',
-        ['unique'] = 'stack',
-        ['type'] = 'DEFAULT',
-        ['useable'] = 'DEFAULT',
-        ['image'] = 'DEFAULT',
-        ['description'] = 'DEFAULT',
+        label = 'label',
+        weight = 'weight',
+        slot = 'slot',
+        name = 'name',
+        amount = 'count',
+        info = 'metadata',
+        shouldClose = 'close',
+        unique = 'stack',
+        type = 'item',
+        useable = true,
+        image = 'image',
+        description = '',
       }
     },
   },
+  
   ['ps-inventory'] = {
-    ['GetTargetItems'] = {
+    GetTargetItems = {
       label = 'GetItemsByName',
-      args = {'target', 'items'},
+      args = {
+        { name = 'target' },
+        { name = 'items' }
+      },
       returns = {
-        ['label'] = 'label',
-        ['weight'] = 'weight',
-        ['slot'] = 'slot',
-        ['name'] = 'name',
-        ['amount'] = 'count',
-        ['info'] = 'metadata',
-        ['shouldClose'] = 'close',
-        ['unique'] = 'stack',
-        ['type'] = 'DEFAULT',
-        ['useable'] = 'DEFAULT',
-        ['image'] = 'DEFAULT',
-        ['description'] = 'DEFAULT',
+        label = 'label',
+        weight = 'weight',
+        slot = 'slot',
+        name = 'name',
+        amount = 'count',
+        info = 'metadata',
+        shouldClose = 'close',
+        unique = 'stack',
+        type = 'item',
+        useable = true,
+        image = 'image',
+        description = '',
       }
     },
   }
