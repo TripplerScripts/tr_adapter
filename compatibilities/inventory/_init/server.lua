@@ -1,44 +1,21 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
 
-local function mapArguments(inputArgs, fromArgsConfig, toArgsConfig)
-  local mappedArgs = {}
-  
-  local fromLookup = {}
-  for i, argConfig in ipairs(fromArgsConfig) do
-      fromLookup[argConfig.name] = i
-  end
-  
-  for i, argConfig in ipairs(toArgsConfig) do
-      local argName = argConfig.name
-      local defaultValue = argConfig.defaultValue
-      
-      if fromLookup[argName] and inputArgs[fromLookup[argName]] ~= nil then
-          mappedArgs[i] = inputArgs[fromLookup[argName]]
-      elseif defaultValue ~= nil then
-          mappedArgs[i] = defaultValue
-      end
-  end
-  
-  return mappedArgs
-end
-
 Inventory = {
   __index = {
     GetTargetItems = function(called, handler, ...)
-      local args = {...}
       local item = {}
       
       local exportLabel = Inventory[handler].GetTargetItems.label
-      local map = mapArguments(args, Inventory[called].GetTargetItems.args, Inventory[handler].GetTargetItems.args)
+      local map = MapArguments({...}, Inventory[called].GetTargetItems.args, Inventory[handler].GetTargetItems.args)
       export = exports[handler][exportLabel](_, table.unpack(map))[1]
 
       if not export then
         print({type = 'error', message = ('calling the handler returned %s'):format(export:upper())})
         return {}
       end
-      print(json.encode(export))
-      local shop = {
+
+      local convertion = {
         weight = export.weight,
         label = export.label,
         slot = export.slot,
@@ -56,23 +33,25 @@ Inventory = {
         description = export.description,
         type = export.type,
       }
-      
+      --Inventory scripts exception
+      --[[ start ]]
       if called == 'ox_inventory' then
-        if args[2] == 1 then
+        if {...}[2] == 1 then
           item = Inventory[called].GetTargetItems.returns['1']
           for missingArg, missingValue in pairs(item) do
-            for shopArg, shopValue in pairs(shop) do
+            for shopArg, shopValue in pairs(convertion) do
               if missingArg == shopArg then
                 item[missingArg] = shopValue
               end
             end
           end
-        elseif args[2] == 2 then
+        elseif {...}[2] == 2 then
           item = Inventory[called].GetTargetItems.returns['2']
           for missingArg, missingValue in pairs(item) do
-            for shopArg, shopValue in pairs(shop) do
+            for shopArg, shopValue in pairs(convertion) do
               if missingValue == shopArg then
                 item = shopValue
+                break
               end
             end
           end
@@ -81,9 +60,9 @@ Inventory = {
         item = Inventory[called].GetTargetItems.returns
         for missingArg, missingValue in pairs(item) do
           if missingValue == 'image' then
-            item[missingArg] = (shop.name or 'item') .. '.png'
+            item[missingArg] = (convertion.name or 'item') .. '.png'
           else
-            for shopArg, shopValue in pairs(shop) do
+            for shopArg, shopValue in pairs(convertion) do
               if missingArg == shopArg then
                 item[missingArg] = shopValue
               end
@@ -91,11 +70,12 @@ Inventory = {
           end
         end
       end
+      --[[ end ]]
 
       return item
     end
   },
-  
+
   ['ox_inventory'] = {
     GetTargetItems = {
       label = 'Search',
