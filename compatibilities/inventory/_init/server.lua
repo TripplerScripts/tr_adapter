@@ -1,6 +1,9 @@
 ---@diagnostic disable: duplicate-set-field
 Inventory = {}
 local function mapArguments(inputArgs, fromArgsConfig, toArgsConfig)
+  print(json.encode(inputArgs))
+  print(json.encode(fromArgsConfig))
+  print(json.encode(toArgsConfig))
   local mappedArgs = {}
   
   -- Map each argument from 'to' config to 'from' config
@@ -19,7 +22,7 @@ local function mapArguments(inputArgs, fromArgsConfig, toArgsConfig)
           mappedArgs[i] = inputArgs[i]
       end
   end
-  
+  print(json.encode(mappedArgs))
   return mappedArgs
 end
 Inventory = {
@@ -29,7 +32,7 @@ Inventory = {
       local item = {}
       local exportLabel = Inventory[handler]['GetTargetItems']['label']
       local map = mapArguments({...}, Inventory[called]['GetTargetItems']['args'], Inventory[handler]['GetTargetItems']['args'])
-      local export = exports[handler][exportLabel](exports[handler], table.unpack(map))[1]
+      local export = exports[handler][exportLabel](exports[handler], table.unpack(map))
       local shop = {
         --both
         ['weight'] = export.weight,

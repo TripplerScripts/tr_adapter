@@ -23,5 +23,5 @@ files {
     'compatibilities/inventory/qb-inventory/server.lua',
     'compatibilities/inventory/ps-inventory/server.lua',
 }
-provide 'ox_inventory'
 provide 'ps-inventory'
+provide 'qb-inventory'
