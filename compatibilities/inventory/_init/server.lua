@@ -76,7 +76,7 @@ Inventory = {
         item = {}
         for missingArg, missingValue in pairs(item) do
           for shopArg, shopValue in pairs(shop) do
-            if missingArg == shopArg then
+            if missingValue == shopArg then
               item[missingArg] = shopValue
             end
           end
