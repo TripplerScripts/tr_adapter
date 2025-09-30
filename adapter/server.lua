@@ -1,5 +1,4 @@
 function AdapterSetup()
-  local ScriptsFunctions = {}
   local Categories = {}
   for _, categoryData in pairs(SupportedResourcesData) do
     local categoryVariable = string.upper(string.sub(categoryData.category, 1, 1)) .. string.sub(categoryData.category, 2)
@@ -15,33 +14,32 @@ function AdapterSetup()
     end
   end
 
-  for categoryVariable, resources in pairs(Categories) do
+  for categoryVariable, _ in pairs(Categories) do
     local category = (categoryVariable):lower()
     local categoryName = _G[categoryVariable]
-    
-    for _, resourceData in ipairs(resources) do
-      for resourceName, functionsObject in pairs(categoryName) do
-        for functionName, functionConfig in pairs(functionsObject) do
-          if not ScriptsFunctions[category] then
-            ScriptsFunctions[category] = {}
+    local handler  = AvailableScripts[category][1]
+    for resourceName, functionsObject in pairs(categoryName) do
+      for functionName, functionConfig in pairs(functionsObject) do
+        if not ScriptsFunctions[category] then
+          ScriptsFunctions[category] = {}
+        end
+        table.insert(ScriptsFunctions[category], functionName)
+        if resourceName ~= handler and resourceName ~= 'tr_adapter' then
+          categoryName.tr_adapter[functionName] = function(calledResource, handlerResource, ...)
+            local param = {...}
+            local convertion = InitENV(categoryName, handlerResource, functionName, param, calledResource)
+            local functionsSettings = InitOrder(categoryName, convertion, functionName, calledResource)
+
+            return functionsSettings
           end
-          table.insert(ScriptsFunctions[category], functionName)
-          if resourceName ~= AvailableScripts[category][1] and resourceName ~= 'tr_adapter' then
-            AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, functionConfig.label), function(cb)
-              cb(function(...)
-                categoryName.tr_adapter = function(...)
-                  for _, functionName in pairs(ScriptsFunctions[category]) do
-                    functionName(...)
-                    local functionsSettings = GenerateFunctionENV(categoryName, resourceName, functionName, ...)
-                    return functionsSettings
-                  end
-                end
-              end)
+
+          AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, functionConfig.label), function(cb)
+            cb(function(...)
+              return categoryName.tr_adapter[functionName](resourceName, handler, ...)
             end)
-          end
+          end)
         end
       end
     end
   end
-  Init()
 end
