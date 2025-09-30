@@ -4,40 +4,23 @@ Inventory = {}
 Inventory = {
   __index = {
     GetTargetItems = function(called, handler, ...)
+      -- a normal and usual steps
+      --[[ start ]]
       local item = {}
-      
+      local param = {...}
+
       local exportLabel = Inventory[handler].GetTargetItems.label
-      local map = MapArguments({...}, Inventory[called].GetTargetItems.args, Inventory[handler].GetTargetItems.args)
-      export = exports[handler][exportLabel](_, table.unpack(map))[1]
+      local map = MapArguments(param, Inventory[called].GetTargetItems.args, Inventory[handler].GetTargetItems.args)
+      local export = exports[handler][exportLabel](_, table.unpack(map))[1]
+      local convertion = BuildConversionTable(export, Inventory)
+      --[[ end ]]
 
-      if not export then
-        print({type = 'error', message = ('calling the handler returned %s'):format(export:upper())})
-        return {}
-      end
-
-      local convertion = {
-        weight = export.weight,
-        label = export.label,
-        slot = export.slot,
-        name = export.name,
-        metadata = export.info,
-        count = export.amount,
-        close = export.shouldClose,
-        stack = export.unique,
-        info = export.metadata,
-        amount = export.count,
-        shouldClose = export.close,
-        unique = export.stack,
-        useable = export.useable,
-        image = export.image,
-        description = export.description,
-        type = export.type,
-      }
       --Inventory scripts exception
       --[[ start ]]
+      
       if called == 'ox_inventory' then
-        if {...}[2] == 1 then
-          item = Inventory[called].GetTargetItems.returns['1']
+        if param[2] == 1 then
+          item = Inventory[called].GetTargetItems.returns
           for missingArg, missingValue in pairs(item) do
             for shopArg, shopValue in pairs(convertion) do
               if missingArg == shopArg then
@@ -45,8 +28,8 @@ Inventory = {
               end
             end
           end
-        elseif {...}[2] == 2 then
-          item = Inventory[called].GetTargetItems.returns['2']
+        elseif param[2] == 2 then
+          item = Inventory[called].GetTargetItems.returns.count
           for missingArg, missingValue in pairs(item) do
             for shopArg, shopValue in pairs(convertion) do
               if missingValue == shopArg then
@@ -75,7 +58,8 @@ Inventory = {
       return item
     end
   },
-
+  -- unique script's functions and declaration
+  --[[ start ]]
   ['ox_inventory'] = {
     GetTargetItems = {
       label = 'Search',
@@ -86,19 +70,14 @@ Inventory = {
         { name = 'metadata' }
       },
       returns = {
-        ['1'] = {
-          name = 'name',
-          weight = 'weight',
-          label = 'label',
-          slot = 'slot',
-          metadata = 'info',
-          count = 'amount',
-          close = 'shouldClose',
-          stack = 'unique'
-        },
-        ['2'] = {
-          count = 'amount'
-        }
+        name = 'name',
+        weight = 'weight',
+        label = 'label',
+        slot = 'slot',
+        metadata = 'info',
+        count = 'amount',
+        close = 'shouldClose',
+        stack = 'unique'
       }
     },
   },
@@ -150,4 +129,5 @@ Inventory = {
       }
     },
   }
+  --[[ end ]]
 }
