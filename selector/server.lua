@@ -3,29 +3,30 @@
 -- will be provided by the tr_adapter | stored in AvailableScripts
 -- provided by another script | ignored
 function SelectScripts()
-  for _, data in ipairs(SupportedResourcesData) do
-    local state = GetResourceState(data.name)
-    local foundInServer = false
-    for _, serverName in ipairs(ServerResourcesNames) do
-      if serverName == data.name then
-        foundInServer = true
-        break
+  for _, categoryData in ipairs(SupportedResourcesData) do
+    for _, resourceName in ipairs(categoryData.names) do
+      local state = GetResourceState(resourceName)
+      local foundInServer = false
+      for _, serverName in ipairs(ServerResourcesNames) do
+        if serverName == resourceName then
+          foundInServer = true
+          break
+        end
       end
-    end
-    if state == ('started' or 'starting') and not foundInServer then
-      print({type = 'success', message = ("✓ Found: %s (Provided by another script)"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
-    else
-      if state == "started" then
-        AvailableScripts[#AvailableScripts + 1] = { category = data.category, name = data.name, duplicityVersion = data
-        .duplicityVersion }
-        print({type = 'success', message = ("✓ Started: %s"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+      if state == ('started' or 'starting') and not foundInServer then
+        print({type = 'success', message = ("✓ Found: %s (Provided by another script)"):format(resourceName), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
       else
-        if state == 'missing' then
-          ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
-          print({type = 'info', message = ("✗ Missing: %s"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
-        else -- XD
-          ScriptsToSupport[#ScriptsToSupport + 1] = { category = data.category, name = data.name }
-          print({type = 'info', message = ("✗ Missing: %s"):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+        if state == "started" then
+          AvailableScripts[#AvailableScripts + 1] = { category = categoryData.category, name = resourceName }
+          print({type = 'success', message = ("✓ Started: %s"):format(resourceName), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+        else
+          if state == 'missing' then
+            ScriptsToSupport[#ScriptsToSupport + 1] = { category = categoryData.category, name = resourceName }
+            print({type = 'info', message = ("✗ Missing: %s"):format(resourceName), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+          else
+            ScriptsToSupport[#ScriptsToSupport + 1] = { category = categoryData.category, name = resourceName }
+            print({type = 'info', message = ("✗ Missing: %s"):format(resourceName), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+          end
         end
       end
     end
@@ -40,15 +41,9 @@ function SelectScripts()
     Wait(1000)
 
     print({type = 'info', message = ("[Resource Selector] Found %s scripts that are going to provide"):format(#AvailableScripts), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
-    local categoryLookup = {}
-    for _, data in ipairs(SupportedResourcesData) do
-      categoryLookup[data.name] = data.category
-    end
-
     for _, data in ipairs(AvailableScripts) do
-      local category = categoryLookup[data.name] or "unknown"
       Wait(300)
-      print({type = 'info', message = ("- %s [%s]"):format(data.name, category), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+      print({type = 'info', message = ("- %s [%s]"):format(data.name, data.category), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
     end
     print({type = 'info', message = ("[Resource Selector] Selector debug finished"):format(#AvailableScripts), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   end)

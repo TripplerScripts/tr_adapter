@@ -1,60 +1,52 @@
 -- this will import the names of all resources that are located in /compatibilities/ folder
     -- store the category and name of the resource in a table
-function ExtractResourceNames()
+    function ExtractResourceNames()
     local currentResource = GetCurrentResourceName()
     local manifestPath = GetResourcePath(currentResource) .. '/fxmanifest.lua'
-
+ 
     local file = io.open(manifestPath, 'r')
     if not file then
         print({type = 'warn', message = ('[Resource Extractor] Could not open fxmanifest.lua'):format(), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         return
     end
-
+ 
     local content = file:read('*all')
     file:close()
-
+ 
     local foundNames = {}
     local foundData = {}
-
+ 
     for line in content:gmatch("[^\r\n]+") do
         local category, resourceName, fileName = line:match("'compatibilities/([^/]+)/([^/]+)/([^/]+%.lua)'")
         if category and resourceName and resourceName ~= '_init' then
+            if not foundData[category] then
+                foundData[category] = {}
+            end
             foundNames[resourceName] = true
-            foundData[resourceName] = {
-                category = category,
-                name = resourceName,
-                duplicityVersion = fileName == "server.lua",
-            }
+            table.insert(foundData[category], resourceName)
         end
     end
-
-    for name, _ in pairs(foundNames) do
-        table.insert(SupportedResourcesData, foundData[name])
+ 
+    for category, names in pairs(foundData) do
+        table.insert(SupportedResourcesData, {
+            category = category,
+            names = names
+        })
     end
-
-
-    table.sort(SupportedResourcesData, function(a, b)
-        if a.category == b.category then
-            return a.name < b.name
-        end
-        return a.category < b.category
-    end)
-
+ 
     RegisterNetEvent('tr_adapter:server:extractor_debug', function()
-        local currentCategory = ""
-        print({type = 'info', message = ('[Resource Extractor] Found %s resource names:'):format(#SupportedResourcesData), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+        print({type = 'info', message = ('[Resource Extractor] Found resources:'):format(), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         for _, data in ipairs(SupportedResourcesData) do
             Wait(200)
-            if data.category ~= currentCategory then
-                currentCategory = data.category
-                print({type = 'info', message = ('[' .. currentCategory:upper() .. ']:'):format(currentCategory), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+            print({type = 'info', message = ('[' .. data.category:upper() .. ']:'):format(), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
+            for _, name in ipairs(data.names) do
                 Wait(200)
+                print({type = 'info', message = ('  - %s'):format(name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
             end
-            print({type = 'info', message = ('  - %s'):format(data.name), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         end
         print({type = 'info', message = '[Resource Extractor] Extractor debug finished', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         ExtractorDebugerFinished = true
     end)
-
+ 
     SelectScripts()
 end
