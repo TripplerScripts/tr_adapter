@@ -3,13 +3,16 @@ game 'gta5'
 lua54 'yes'
 
 author 'Trippler Hub'
-version '0.79.0'
+version '0.91.0'
 dependency 'tr_lib'
 
 shared_script 'init.lua'
 server_scripts {
     'modules/print/shared.lua',
     'modules/require/shared.lua',
+    'call/server.lua',
+    'order/server.lua',
+    'env/server.lua',
     'adapter/server.lua',
     'loader/server.lua',
     'provider/server.lua',

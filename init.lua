@@ -24,3 +24,5 @@ AvailableScripts = {}
 ---@field category string
 ---@field duplicityVersion boolean
 SupportedResourcesData = {}
+
+ScriptsFunctions = {}
