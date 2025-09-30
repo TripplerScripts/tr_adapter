@@ -6,7 +6,7 @@ Inventory = {
     GetTargetItems = function(called, handler, ...)
       -- a normal and usual steps
       --[[ start ]]
-      local item = {}
+      local functionsSettings = {}
       local param = {...}
 
       local exportLabel = Inventory[handler].GetTargetItems.label
@@ -17,37 +17,38 @@ Inventory = {
 
       --Inventory scripts exception
       --[[ start ]]
+      -- look, this is an exception, can we create like a another function that we put our functions's exception like
       
       if called == 'ox_inventory' then
         if param[2] == 1 then
-          item = Inventory[called].GetTargetItems.returns
-          for missingArg, missingValue in pairs(item) do
+          functionsSettings = Inventory[called].GetTargetItems.returns
+          for missingArg, missingValue in pairs(functionsSettings) do
             for shopArg, shopValue in pairs(convertion) do
               if missingArg == shopArg then
-                item[missingArg] = shopValue
+                functionsSettings[missingArg] = shopValue
               end
             end
           end
         elseif param[2] == 2 then
-          item = Inventory[called].GetTargetItems.returns.count
-          for missingArg, missingValue in pairs(item) do
+          functionsSettings = Inventory[called].GetTargetItems.returns
+          for missingArg, missingValue in pairs(functionsSettings) do
             for shopArg, shopValue in pairs(convertion) do
-              if missingValue == shopArg then
-                item = shopValue
+              if shopArg == 'count' and missingArg == 'count' then
+                functionsSettings = shopValue
                 break
               end
             end
           end
         end
-      elseif called == 'qb-inventory' or called == 'ps-inventory' then
-        item = Inventory[called].GetTargetItems.returns
-        for missingArg, missingValue in pairs(item) do
+      elseif called == 'qb-inventory' then
+        functionsSettings = Inventory[called].GetTargetItems.returns
+        for missingArg, missingValue in pairs(functionsSettings) do
           if missingValue == 'image' then
-            item[missingArg] = (convertion.name or 'item') .. '.png'
+            functionsSettings[missingArg] = (convertion.name or 'item') .. '.png'
           else
             for shopArg, shopValue in pairs(convertion) do
               if missingArg == shopArg then
-                item[missingArg] = shopValue
+                functionsSettings[missingArg] = shopValue
               end
             end
           end
@@ -55,79 +56,7 @@ Inventory = {
       end
       --[[ end ]]
 
-      return item
+      return functionsSettings
     end
-  },
-  -- unique script's functions and declaration
-  --[[ start ]]
-  ['ox_inventory'] = {
-    GetTargetItems = {
-      label = 'Search',
-      args = {
-        { name = 'target' },
-        { name = 'type', defaultValue = 1 },
-        { name = 'items' },
-        { name = 'metadata' }
-      },
-      returns = {
-        name = 'name',
-        weight = 'weight',
-        label = 'label',
-        slot = 'slot',
-        metadata = 'info',
-        count = 'amount',
-        close = 'shouldClose',
-        stack = 'unique'
-      }
-    },
-  },
-  
-  ['qb-inventory'] = {
-    GetTargetItems = {
-      label = 'GetItemsByName',
-      args = {
-        { name = 'target' },
-        { name = 'items' }
-      },
-      returns = {
-        label = 'label',
-        weight = 'weight',
-        slot = 'slot',
-        name = 'name',
-        amount = 'count',
-        info = 'metadata',
-        shouldClose = 'close',
-        unique = 'stack',
-        type = 'item',
-        useable = true,
-        image = 'image',
-        description = '',
-      }
-    },
-  },
-  
-  ['ps-inventory'] = {
-    GetTargetItems = {
-      label = 'GetItemsByName',
-      args = {
-        { name = 'target' },
-        { name = 'items' }
-      },
-      returns = {
-        label = 'label',
-        weight = 'weight',
-        slot = 'slot',
-        name = 'name',
-        amount = 'count',
-        info = 'metadata',
-        shouldClose = 'close',
-        unique = 'stack',
-        type = 'item',
-        useable = true,
-        image = 'image',
-        description = '',
-      }
-    },
   }
-  --[[ end ]]
 }
