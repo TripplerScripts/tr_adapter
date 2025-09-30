@@ -10,7 +10,7 @@ shared_script 'init.lua'
 server_scripts {
     'modules/print/shared.lua',
     'modules/require/shared.lua',
-    'adaptor/server.lua',
+    'adapter/server.lua',
     'loader/server.lua',
     'provider/server.lua',
     'selector/server.lua',

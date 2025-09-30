@@ -17,7 +17,10 @@ function SelectScripts()
         print({type = 'success', message = ("✓ Found: %s (Provided by another script)"):format(resourceName), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
       else
         if state == "started" then
-          AvailableScripts[#AvailableScripts + 1] = { category = categoryData.category, name = resourceName }
+          if not AvailableScripts[categoryData.category] then
+            AvailableScripts[categoryData.category] = {}
+          end
+          table.insert(AvailableScripts[categoryData.category], resourceName)
           print({type = 'success', message = ("✓ Started: %s"):format(resourceName), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
         else
           if state == 'missing' then

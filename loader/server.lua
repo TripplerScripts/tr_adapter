@@ -50,7 +50,7 @@ function LoadScripts()
   end
 
   if next(SupportedResourcesData) then
-    Init()
+    AdapterSetup()
   else
     print({type = 'error', message = '[LOADER ERROR] Functions Initialization failed, No available script found, double check the fxmanifest', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
   end
