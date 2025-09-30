@@ -16,6 +16,7 @@ server_scripts {
     'selector/server.lua',
     'detecter/extractor/server.lua',
     'detecter/resources/server.lua',
+    'mapper/server.lua'
 }
 files {
     'compatibilities/inventory/_init/server.lua',
