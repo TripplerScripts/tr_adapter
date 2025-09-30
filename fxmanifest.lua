@@ -10,12 +10,12 @@ shared_script 'init.lua'
 server_scripts {
     'modules/print/shared.lua',
     'modules/require/shared.lua',
-    'engine/adaptor/server.lua',
-    'engine/loader/server.lua',
-    'engine/provider/server.lua',
-    'engine/selector/server.lua',
-    'engine/detecter/extractor/server.lua',
-    'engine/detecter/resources/server.lua',
+    'adaptor/server.lua',
+    'loader/server.lua',
+    'provider/server.lua',
+    'selector/server.lua',
+    'detecter/extractor/server.lua',
+    'detecter/resources/server.lua',
 }
 files {
     'compatibilities/inventory/_init/server.lua',
