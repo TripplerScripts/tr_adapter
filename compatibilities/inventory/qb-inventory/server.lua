@@ -108,11 +108,25 @@ Inventory['qb-inventory'].GetItemByName = {
 --- @param source number The player's server ID.
 --- @param item string The name of the item to search for.
 --- @return table|nil - containing the items with the specified name.
-Inventory['qb-inventory'].GetItemsByName = {
+Inventory['qb-inventory'].GetTargetItems = {
   label = 'GetItemsByName',
   args = {
-    { name = 'source' },
-    { name = 'item' }
+    { name = 'target' },
+    { name = 'items' }
+  },
+  returns = {
+    label = 'label',
+    weight = 'weight',
+    slot = 'slot',
+    name = 'name',
+    amount = 'count',
+    info = 'metadata',
+    shouldClose = 'close',
+    unique = 'stack',
+    type = 'item',
+    useable = true,
+    image = 'image',
+    description = '',
   }
 }
 

@@ -16,6 +16,5 @@ function MapArguments(inputArgs, fromArgsConfig, toArgsConfig)
           mappedArgs[i] = defaultValue
       end
   end
-
   return mappedArgs
 end

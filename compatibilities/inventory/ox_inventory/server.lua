@@ -238,7 +238,7 @@ Inventory.ox_inventory.AddItem = {
 ---@param search string|number slots|1, count|2
 ---@param items table | string
 ---@param metadata? table | string
-Inventory.ox_inventory.Search = {
+Inventory.ox_inventory.GetTargetItems = {
   label = 'Search',
   args = {
     { name = 'target' },
