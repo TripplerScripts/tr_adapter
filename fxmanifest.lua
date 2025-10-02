@@ -17,8 +17,8 @@ server_scripts {
     'loader/server.lua',
     'provider/server.lua',
     'selector/server.lua',
-    'detecter/extractor/server.lua',
-    'detecter/resources/server.lua',
+    'extractor/server.lua',
+    'resources/server.lua',
     'mapper/server.lua',
     'converter/server.lua',
 }

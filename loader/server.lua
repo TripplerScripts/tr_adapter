@@ -58,6 +58,6 @@ end
 
 CreateThread(function()
   TriggerEvent('tr_adapter:server:extractor_debug')
-  while not ExtractorDebugerFinished do Wait(1000) end
+  while not ExtractorDebuggerFinished do Wait(1000) end
   TriggerEvent('tr_adapter:server:selector_debug')
 end)

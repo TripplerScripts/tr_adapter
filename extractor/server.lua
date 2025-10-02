@@ -45,7 +45,7 @@
             end
         end
         print({type = 'info', message = '[Resource Extractor] Extractor debug finished', path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline})
-        ExtractorDebugerFinished = true
+        ExtractorDebuggerFinished = true
     end)
  
     SelectScripts()

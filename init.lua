@@ -1,4 +1,4 @@
-ExtractorDebugerFinished = false
+ExtractorDebuggerFinished = false
 
 ---@type table<string>
 ---@class ServerResourcesNames
