@@ -1,5 +1,3 @@
--- this will import the names of all resources that are located in /compatibilities/ folder
--- store the category and name of the resource in a table
 function ExtractResourceNames()
     local currentResource = GetCurrentResourceName()
     local manifestPath = GetResourcePath(currentResource) .. '/fxmanifest.lua'
@@ -17,7 +15,7 @@ function ExtractResourceNames()
 
     for line in content:gmatch("[^\r\n]+") do
         local category, resourceName, _ = line:match("'compatibilities/([^/]+)/([^/]+)/([^/]+%.lua)'")
-        if category and resourceName and resourceName ~= '_init' then
+        if category and resourceName and resourceName ~= '_exception' then
             if not foundData[category] then
                 foundData[category] = {}
             end
@@ -45,8 +43,6 @@ function ExtractResourceNames()
                 debug.getinfo(1, "Sl").currentline })
             end
         end
-        print({ type = 'info', message = 'Extractor debug finished', path = debug.getinfo(1, "Sl")
-        .short_src, line = debug.getinfo(1, "Sl").currentline })
         ExtractorDebuggerFinished = true
     end)
 

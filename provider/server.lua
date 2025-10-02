@@ -1,4 +1,3 @@
--- this will edit your fxmanifest providing the scripts that are missing automatically :)
 function ProvideScripts()
   local manifestPath = GetResourcePath(GetCurrentResourceName()) .. '/fxmanifest.lua'
 
