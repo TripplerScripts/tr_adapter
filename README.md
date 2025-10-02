@@ -39,7 +39,7 @@ We track compatibility based on function behavior:
 | **Return Types** | ❌ | Type conversion (planned) |
 | **Error Handling** | ❌ | nil vs exceptions (planned) |
 
-## Architecture <!-- outdated -->
+## Architecture (outdated)
 
 ### 1. Standard Mapping Layer
 
