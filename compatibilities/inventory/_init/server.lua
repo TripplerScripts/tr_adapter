@@ -1,7 +1,6 @@
 ---@diagnostic disable: duplicate-set-field
 
 Inventory = {}
-Inventory.tr_adapter = {}
 
 Inventory.tr_adapter.GetTargetItem = function(called, param, functionName, convertion)
   local functionsSettings

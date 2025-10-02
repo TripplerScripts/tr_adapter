@@ -1,14 +1,18 @@
 ---@diagnostic disable: duplicate-set-field
 
 ---@return player.isDead
-Ambulance.IsDead = function ()
-  return exports.ars_ambulance:isDead()
-end
+Ambulance.ars_ambulance.IsDead = {
+  label = 'isDead',
+  args = {},
+  returns = {}
+}
 
-Ambulance.CreateDistressCall = function ()
-  exports.ars_ambulance:createDistressCall()
-end
+Ambulance.ars_ambulance.CreateDistressCall = {
+  label = 'createDistressCall',
+  args = {}
+}
 
-Ambulance.OpenDistressCalls = function ()
-  exports.ars_ambulance:openDistressCalls()
-end
+Ambulance.ars_ambulance.OpenDistressCalls = {
+  label = 'openDistressCalls',
+  args = {}
+}

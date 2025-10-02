@@ -8,19 +8,23 @@
 ---@class setFuelType
 ---@return type function, SetFuelType
 
----@class GetFuel
----@param entity integer
----@return type number
-Fuel.GetFuel = function(entity)
-  return exports.lc_fuel:GetFuel(entity)
-end
+Fuel.lc_fuel.GetFuel = {
+  label = 'GetFuel',
+  args = {
+    { name = 'entity' }
+  },
+  returns = {}
+}
 
----@class SetFuel
 ---@param entity integer
 ---@param fuel number
-Fuel.SetFuel = function(entity, fuel)
-  exports.lc_fuel:SetFuel(entity, fuel | 100) -- Optional / Default Values
-end
+Fuel.lc_fuel.SetFuel = {
+  label = 'SetFuel',
+  args = {
+    { name = 'entity' },
+    { name = 'fuel' }
+  },
+}
 
 ---@class getFuel
 ---@return type function, GetFuel

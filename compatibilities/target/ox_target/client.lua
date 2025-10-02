@@ -2,131 +2,216 @@
 
 ---@param data OxTargetPolyZone | table
 ---@return number
-Target.AddPolyZone = function(data)
-  return exports.ox_target:addPolyZone(data)
-end
+Target.ox_target.AddPolyZone = {
+  label = 'addPolyZone',
+  args = {
+    { name = 'data' }
+  },
+  returns = {}
+}
 
 ---@param data OxTargetBoxZone | table
 ---@return number
-Target.AddBoxZone = function(data)
-  return exports.ox_target:addBoxZone(data)
-end
+Target.ox_target.AddBoxZone = {
+  label = 'addBoxZone',
+  args = {
+    { name = 'data' }
+  },
+  returns = {}
+}
 
 ---@param data OxTargetSphereZone | table
 ---@return number
-Target.AddSphereZone = function(data)
-  return exports.ox_target:addSphereZone(data)
-end
+Target.ox_target.AddSphereZone = {
+  label = 'addSphereZone',
+  args = {
+    { name = 'data' }
+  },
+  returns = {}
+}
 
 ---@param id number | string The ID of the zone to check. It can be either a number or a string representing the zone's index or name, respectively.
 ---@return boolean returns true if the zone with the specified ID exists, otherwise false.
-Target.ZoneExists = function(id)
-  return exports.ox_target:zoneExists(id)
-end
+Target.ox_target.ZoneExists = {
+  label = 'zoneExists',
+  args = {
+    { name = 'id' }
+  },
+  returns = {}
+}
 
 ---@param id number | string
 ---@param suppressWarning boolean?
-Target.RemoveZone = function(id, suppressWarning)
-  exports.ox_target:removeZone(id, suppressWarning)
-end
+Target.ox_target.RemoveZone = {
+  label = 'removeZone',
+  args = {
+    { name = 'id' },
+    { name = 'suppressWarning' }
+  }
+}
 
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddGlobalPed = function(options)
-  exports.ox_target:addGlobalPed(options)
-end
+Target.ox_target.AddGlobalPed = {
+  label = 'addGlobalPed',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options string | string[]
-Target.RemoveGlobalPed = function(options)
-  exports.ox_target:removeGlobalPed(options)
-end
+Target.ox_target.RemoveGlobalPed = {
+  label = 'removeGlobalPed',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddGlobalVehicle = function(options)
-  exports.ox_target:addGlobalVehicle(options)
-end
+Target.ox_target.AddGlobalVehicle = {
+  label = 'addGlobalVehicle',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options string | string[]
-Target.RemoveGlobalVehicle = function(options)
-  exports.ox_target:removeGlobalVehicle(options)
-end
+Target.ox_target.RemoveGlobalVehicle = {
+  label = 'removeGlobalVehicle',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddGlobalObject = function(options)
-  exports.ox_target:addGlobalObject(options)
-end
+Target.ox_target.AddGlobalObject = {
+  label = 'addGlobalObject',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options string | string[]
-Target.RemoveGlobalObject = function(options)
-  exports.ox_target:removeGlobalObject(options)
-end
+Target.ox_target.RemoveGlobalObject = {
+  label = 'removeGlobalObject',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddGlobalPlayer = function(options)
-  exports.ox_target:addGlobalPlayer(options)
-end
+Target.ox_target.AddGlobalPlayer = {
+  label = 'addGlobalPlayer',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options string | string[]
-Target.RemoveGlobalPlayer = function(options)
-  exports.ox_target:removeGlobalPlayer(options)
-end
+Target.ox_target.RemoveGlobalPlayer = {
+  label = 'removeGlobalPlayer',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param arr (number | string) | (number | string)[]
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddModel = function(arr, options)
-  exports.ox_target:addModel(arr, options)
-end
+Target.ox_target.AddModel = {
+  label = 'addModel',
+  args = {
+    { name = 'arr' },
+    { name = 'options' }
+  }
+}
 
 ---@param arr (number | string) | (number | string)[]
 ---@param options? string | string[]
-Target.RemoveModel = function(arr, options)
-  exports.ox_target:removeModel(arr, options)
-end
+Target.ox_target.RemoveModel = {
+  label = 'removeModel',
+  args = {
+    { name = 'arr' },
+    { name = 'options' }
+  }
+}
 
 ---@param arr number | number[]
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddEntity = function(arr, options)
-  exports.ox_target:addEntity(arr, options)
-end
+Target.ox_target.AddEntity = {
+  label = 'addEntity',
+  args = {
+    { name = 'arr' },
+    { name = 'options' }
+  }
+}
 
 ---@param arr number | number[]
 ---@param options? string | string[]
-Target.RemoveEntity = function(arr, options)
-  exports.ox_target:removeEntity(arr, options)
-end
+Target.ox_target.RemoveEntity = {
+  label = 'removeEntity',
+  args = {
+    { name = 'arr' },
+    { name = 'options' }
+  }
+}
 
 ---@param arr number | number[]
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddLocalEntity = function(arr, options)
-  exports.ox_target:addLocalEntity(arr, options)
-end
+Target.ox_target.AddLocalEntity = {
+  label = 'addLocalEntity',
+  args = {
+    { name = 'arr' },
+    { name = 'options' }
+  }
+}
 
 ---@param arr number | number[]
 ---@param options? table
-Target.RemoveLocalEntity = function(arr, options)
-  exports.ox_target:removeLocalEntity(arr, options)
-end
+Target.ox_target.RemoveLocalEntity = {
+  label = 'removeLocalEntity',
+  args = {
+    { name = 'arr' },
+    { name = 'options' }
+  }
+}
 
 ---@param options OxTargetOption | OxTargetOption[]
-Target.AddGlobalOption = function(options)
-  exports.ox_target:addGlobalOption(options)
-end
+Target.ox_target.AddGlobalOption = {
+  label = 'addGlobalOption',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param options string | string[]
-Target.RemoveGlobalOption = function(options)
-  exports.ox_target:removeGlobalOption(options)
-end
+Target.ox_target.RemoveGlobalOption = {
+  label = 'removeGlobalOption',
+  args = {
+    { name = 'options' }
+  }
+}
 
 ---@param entity? number
 ---@param _type? number
 ---@param model? number
-Target.GetTargetOptions = function(entity, _type, model)
-  return exports.ox_target:getTargetOptions(entity, _type, model)
-end
+Target.ox_target.GetTargetOptions = {
+  label = 'getTargetOptions',
+  args = {
+    { name = 'entity' },
+    { name = '_type' },
+    { name = 'model' }
+  },
+  returns = {}
+}
 
-Target.DisableTargeting = function(value)
-  exports.ox_target:disableTargeting(value)
-end
+Target.ox_target.DisableTargeting = {
+  label = 'disableTargeting',
+  args = {
+    { name = 'value' }
+  }
+}
 
-Target.IsActive = function()
-  return exports.ox_target:isActive()
-end
+Target.ox_target.IsActive = {
+  label = 'isActive',
+  args = {},
+  returns = {}
+}

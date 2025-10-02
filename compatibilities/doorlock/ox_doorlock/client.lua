@@ -1,21 +1,32 @@
 ---@diagnostic disable: duplicate-set-field
 
-Doorlock.UseClosestDoor = function()
-  exports.ox_doorlock:useClosestDoor()
-end
+Doorlock.ox_doorlock.UseClosestDoor = {
+  label = 'useClosestDoor',
+  args = {}
+}
 
-Doorlock.GetClosestDoor = function()
-  return exports.ox_doorlock:getClosestDoor()
-end
+Doorlock.ox_doorlock.GetClosestDoor = {
+  label = 'getClosestDoor',
+  args = {},
+  returns = {}
+}
 
-Doorlock.GetClosestDoorId = function()
-  return exports.ox_doorlock:getClosestDoorId()
-end
+Doorlock.ox_doorlock.GetClosestDoorId = {
+  label = 'getClosestDoorId',
+  args = {},
+  returns = {}
+}
 
-Doorlock.GetDoorIdFromEntity = function(entity)
-  return exports.ox_doorlock:getDoorIdFromEntity(entity)
-end
+---@param entity number
+Doorlock.ox_doorlock.GetDoorIdFromEntity = {
+  label = 'getDoorIdFromEntity',
+  args = {
+    { name = 'entity' }
+  },
+  returns = {}
+}
 
-Doorlock.PickClosestDoor = function()
-  exports.ox_doorlock:pickClosestDoor()
-end
+Doorlock.ox_doorlock.PickClosestDoor = {
+  label = 'pickClosestDoor',
+  args = {}
+}

@@ -1,18 +1,32 @@
 ---@diagnostic disable: duplicate-set-field
 
-Management.AddBossMenuItem = function(menuItem)
-  return exports.qbx_management:AddBossMenuItem(menuItem)
-end
+Management.qbx_management.AddBossMenuItem = {
+  label = 'AddBossMenuItem',
+  args = {
+    { name = 'menuItem' }
+  },
+  returns = {}
+}
 
-Management.AddGangMenuItem = function(menuItem)
-  return exports.qbx_management:AddGangMenuItem(menuItem)
-end
+Management.qbx_management.AddGangMenuItem = {
+  label = 'AddGangMenuItem',
+  args = {
+    { name = 'menuItem' }
+  },
+  returns = {}
+}
 
-Management.RemoveBossMenuItem = function(id)
-  exports.qbx_management:RemoveBossMenuItem(id)
-end
+Management.qbx_management.RemoveBossMenuItem = {
+  label = 'RemoveBossMenuItem',
+  args = {
+    { name = 'id' }
+  }
+}
 
 ---@param groupType GroupType
-Management.OpenBossMenu = function(groupType)
-  exports.qbx_management:OpenBossMenu(groupType)
-end
+Management.qbx_management.OpenBossMenu = {
+  label = 'OpenBossMenu',
+  args = {
+    { name = 'groupType' }
+  }
+}

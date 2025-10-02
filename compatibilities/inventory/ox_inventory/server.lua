@@ -1,6 +1,5 @@
 ---@diagnostic disable: duplicate-set-field
 ---@version 2.44.6
-Inventory.ox_inventory = {}
 
 ---@param player table
 ---@param data table?

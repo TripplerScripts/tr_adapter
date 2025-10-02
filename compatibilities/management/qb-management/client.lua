@@ -1,17 +1,33 @@
 ---@diagnostic disable: duplicate-set-field
 
-Management.AddBossMenuItem = function(data, id)
-  return exports['qb-management']:AddBossMenuItem(data, id)
-end
+Management['qb-management'].AddBossMenuItem = {
+  label = 'AddBossMenuItem',
+  args = {
+    { name = 'data' },
+    { name = 'id' }
+  },
+  returns = {}
+}
 
-Management.RemoveBossMenuItem = function(id)
-  exports['qb-management']:RemoveBossMenuItem(id)
-end
+Management['qb-management'].RemoveBossMenuItem = {
+  label = 'RemoveBossMenuItem',
+  args = {
+    { name = 'id' }
+  }
+}
 
-Management.AddGangMenuItem = function(data, id)
-  return exports['qb-management']:AddGangMenuItem(data, id)
-end
+Management['qb-management'].AddGangMenuItem = {
+  label = 'AddGangMenuItem',
+  args = {
+    { name = 'data' },
+    { name = 'id' }
+  },
+  returns = {}
+}
 
-Management.RemoveGangMenuItem = function(id)
-  exports['qb-management']:RemoveGangMenuItem(id)
-end
+Management['qb-management'].RemoveGangMenuItem = {
+  label = 'RemoveGangMenuItem',
+  args = {
+    { name = 'id' }
+  }
+}

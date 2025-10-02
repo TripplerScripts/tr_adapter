@@ -1,225 +1,444 @@
 ---@diagnostic disable: duplicate-set-field
 
-Target.RaycastCamera = function(flag, playerCoords)
-  return exports['qb-target']:RaycastCamera(flag, playerCoords)
-end
+Target['qb-target'].RaycastCamera = {
+  label = 'RaycastCamera',
+  args = {
+    { name = 'flag' },
+    { name = 'playerCoords' }
+  },
+  returns = {}
+}
 
-Target.DisableNUI = function()
-  exports['qb-target']:DisableNUI()
-end
+Target['qb-target'].DisableNUI = {
+  label = 'DisableNUI',
+  args = {}
+}
 
-Target.EnableNUI = function(options)
-  exports['qb-target']:EnableNUI(options)
-end
+Target['qb-target'].EnableNUI = {
+  label = 'EnableNUI',
+  args = {
+    { name = 'options' }
+  }
+}
 
-Target.LeftTarget = function()
-  exports['qb-target']:LeftTarget()
-end
+Target['qb-target'].LeftTarget = {
+  label = 'LeftTarget',
+  args = {}
+}
 
-Target.DisableTarget = function(forcedisable)
-  exports['qb-target']:DisableTarget(forcedisable)
-end
+Target['qb-target'].DisableTarget = {
+  label = 'DisableTarget',
+  args = {
+    { name = 'forcedisable' }
+  }
+}
 
-Target.DrawOutlineEntity = function(entity, bool)
-  exports['qb-target']:DrawOutlineEntity(entity, bool)
-end
+Target['qb-target'].DrawOutlineEntity = {
+  label = 'DrawOutlineEntity',
+  args = {
+    { name = 'entity' },
+    { name = 'bool' }
+  }
+}
 
-Target.CheckEntity = function(flag, datatable, entity, distance)
-  exports['qb-target']:CheckEntity(flag, datatable, entity, distance)
-end
+Target['qb-target'].CheckEntity = {
+  label = 'CheckEntity',
+  args = {
+    { name = 'flag' },
+    { name = 'datatable' },
+    { name = 'entity' },
+    { name = 'distance' }
+  }
+}
 
-Target.CheckBones = function(coords, entity, bonelist)
-  return exports['qb-target']:CheckBones(coords, entity, bonelist)
-end
+Target['qb-target'].CheckBones = {
+  label = 'CheckBones',
+  args = {
+    { name = 'coords' },
+    { name = 'entity' },
+    { name = 'bonelist' }
+  },
+  returns = {}
+}
 
-Target.AddCircleZone = function(name, center, radius, options, targetoptions)
-  return exports['qb-target']:AddCircleZone(name, center, radius, options, targetoptions)
-end
+Target['qb-target'].AddCircleZone = {
+  label = 'AddCircleZone',
+  args = {
+    { name = 'name' },
+    { name = 'center' },
+    { name = 'radius' },
+    { name = 'options' },
+    { name = 'targetoptions' }
+  },
+  returns = {}
+}
 
-Target.AddBoxZone = function(name, center, length, width, options, targetoptions)
-  return exports['qb-target']:AddBoxZone(name, center, length, width, options, targetoptions)
-end
+Target['qb-target'].AddBoxZone = {
+  label = 'AddBoxZone',
+  args = {
+    { name = 'name' },
+    { name = 'center' },
+    { name = 'length' },
+    { name = 'width' },
+    { name = 'options' },
+    { name = 'targetoptions' }
+  },
+  returns = {}
+}
 
-Target.AddPolyZone= function(name, points, options, targetoptions)
-  return exports['qb-target']:AddPolyZone(name, points, options, targetoptions)
-end
+Target['qb-target'].AddPolyZone = {
+  label = 'AddPolyZone',
+  args = {
+    { name = 'name' },
+    { name = 'points' },
+    { name = 'options' },
+    { name = 'targetoptions' }
+  },
+  returns = {}
+}
 
-Target.AddComboZone = function(zones, options, targetoptions)
-  return exports['qb-target']:AddComboZone(zones, options, targetoptions)
-end
+Target['qb-target'].AddComboZone = {
+  label = 'AddComboZone',
+  args = {
+    { name = 'zones' },
+    { name = 'options' },
+    { name = 'targetoptions' }
+  },
+  returns = {}
+}
 
-Target.AddEntityZone = function(entity, options, targetoptions)
-  return exports['qb-target']:AddEntityZone(entity, options, targetoptions)
-end
+Target['qb-target'].AddEntityZone = {
+  label = 'AddEntityZone',
+  args = {
+    { name = 'entity' },
+    { name = 'options' },
+    { name = 'targetoptions' }
+  },
+  returns = {}
+}
 
-Target.RemoveZone = function(name)
-  exports['qb-target']:RemoveZone(name)
-end
+Target['qb-target'].RemoveZone = {
+  label = 'RemoveZone',
+  args = {
+    { name = 'name' }
+  }
+}
 
-Target.AddTargetBone = function(bones, parameters)
-  exports['qb-target']:AddTargetBone(bones, parameters)
-end
+Target['qb-target'].AddTargetBone = {
+  label = 'AddTargetBone',
+  args = {
+    { name = 'bones' },
+    { name = 'parameters' }
+  }
+}
 
-Target.RemoveTargetBone = function(bones, labels)
-  exports['qb-target']:RemoveTargetBone(bones, labels)
-end
+Target['qb-target'].RemoveTargetBone = {
+  label = 'RemoveTargetBone',
+  args = {
+    { name = 'bones' },
+    { name = 'labels' }
+  }
+}
 
-Target.AddTargetEntity = function(entities, parameters)
-  exports['qb-target']:AddTargetEntity(entities, parameters)
-end
+Target['qb-target'].AddTargetEntity = {
+  label = 'AddTargetEntity',
+  args = {
+    { name = 'entities' },
+    { name = 'parameters' }
+  }
+}
 
-Target.RemoveTargetEntity = function(entities, labels)
-  exports['qb-target']:RemoveTargetEntity(entities, labels)
-end
+Target['qb-target'].RemoveTargetEntity = {
+  label = 'RemoveTargetEntity',
+  args = {
+    { name = 'entities' },
+    { name = 'labels' }
+  }
+}
 
-Target.AddTargetModel = function(models, parameters)
-  exports['qb-target']:AddTargetModel(models, parameters)
-end
+Target['qb-target'].AddTargetModel = {
+  label = 'AddTargetModel',
+  args = {
+    { name = 'models' },
+    { name = 'parameters' }
+  }
+}
 
-Target.RemoveTargetModel = function(models, labels)
-  exports['qb-target']:RemoveTargetModel(models, labels)
-end
+Target['qb-target'].RemoveTargetModel = {
+  label = 'RemoveTargetModel',
+  args = {
+    { name = 'models' },
+    { name = 'labels' }
+  }
+}
 
-Target.AddGlobalType = function(type, parameters)
-  exports['qb-target']:AddGlobalType(type, parameters)
-end
+Target['qb-target'].AddGlobalType = {
+  label = 'AddGlobalType',
+  args = {
+    { name = 'type' },
+    { name = 'parameters' }
+  }
+}
 
-Target.AddGlobalPed = function(parameters)
-  exports['qb-target']:AddGlobalPed(parameters)
-end
+Target['qb-target'].AddGlobalPed = {
+  label = 'AddGlobalPed',
+  args = {
+    { name = 'parameters' }
+  }
+}
 
-Target.AddGlobalVehicle = function(parameters)
-  exports['qb-target']:AddGlobalVehicle(parameters)
-end
+Target['qb-target'].AddGlobalVehicle = {
+  label = 'AddGlobalVehicle',
+  args = {
+    { name = 'parameters' }
+  }
+}
 
-Target.AddGlobalObject = function(parameters)
-  exports['qb-target']:AddGlobalObject(parameters)
-end
+Target['qb-target'].AddGlobalObject = {
+  label = 'AddGlobalObject',
+  args = {
+    { name = 'parameters' }
+  }
+}
 
-Target.AddGlobalPlayer = function(parameters)
-  exports['qb-target']:AddGlobalPlayer(parameters)
-end
+Target['qb-target'].AddGlobalPlayer = {
+  label = 'AddGlobalPlayer',
+  args = {
+    { name = 'parameters' }
+  }
+}
 
-Target.RemoveGlobalType = function(typ, labels)
-  exports['qb-target']:RemoveGlobalType(typ, labels)
-end
+Target['qb-target'].RemoveGlobalType = {
+  label = 'RemoveGlobalType',
+  args = {
+    { name = 'typ' },
+    { name = 'labels' }
+  }
+}
 
-Target.RemoveGlobalPlayer = function(labels)
-  exports['qb-target']:RemoveGlobalPlayer(labels)
-end
+Target['qb-target'].RemoveGlobalPlayer = {
+  label = 'RemoveGlobalPlayer',
+  args = {
+    { name = 'labels' }
+  }
+}
 
-Target.DeletePeds = function()
-  exports['qb-target']:DeletePeds()
-end
+Target['qb-target'].DeletePeds = {
+  label = 'DeletePeds',
+  args = {}
+}
 
-Target.SpawnPed = function(data)
-  exports['qb-target']:SpawnPed(data)
-end
+Target['qb-target'].SpawnPed = {
+  label = 'SpawnPed',
+  args = {
+    { name = 'data' }
+  }
+}
 
-Target.RemoveSpawnedPed = function(peds)
-  exports['qb-target']:RemoveSpawnedPed(peds)
-end
+Target['qb-target'].RemoveSpawnedPed = {
+  label = 'RemoveSpawnedPed',
+  args = {
+    { name = 'peds' }
+  }
+}
 
-Target.RemoveGlobalPed = function(labels)
-  exports['qb-target']:RemoveGlobalPed(labels)
-end
+Target['qb-target'].RemoveGlobalPed = {
+  label = 'RemoveGlobalPed',
+  args = {
+    { name = 'labels' }
+  }
+}
 
-Target.RemoveGlobalVehicle = function(labels)
-  exports['qb-target']:RemoveGlobalVehicle(labels)
-end
+Target['qb-target'].RemoveGlobalVehicle = {
+  label = 'RemoveGlobalVehicle',
+  args = {
+    { name = 'labels' }
+  }
+}
 
-Target.RemoveGlobalObject = function(labels)
-  exports['qb-target']:RemoveGlobalObject(labels)
-end
+Target['qb-target'].RemoveGlobalObject = {
+  label = 'RemoveGlobalObject',
+  args = {
+    { name = 'labels' }
+  }
+}
 
-Target.IsTargetActive = function()
-  return exports['qb-target']:IsTargetActive()
-end
+Target['qb-target'].IsTargetActive = {
+  label = 'IsTargetActive',
+  args = {},
+  returns = {}
+}
 
-Target.IsTargetSuccess = function()
-  return exports['qb-target']:IsTargetSuccess()
-end
+Target['qb-target'].IsTargetSuccess = {
+  label = 'IsTargetSuccess',
+  args = {},
+  returns = {}
+}
 
-Target.GetGlobalTypeData = function(type, label)
-  exports['qb-target']:GetGlobalTypeData(type, label)
-end
+Target['qb-target'].GetGlobalTypeData = {
+  label = 'GetGlobalTypeData',
+  args = {
+    { name = 'type' },
+    { name = 'label' }
+  }
+}
 
-Target.GetZoneData = function(name)
-  return exports['qb-target']:GetZoneData(name)
-end
+Target['qb-target'].GetZoneData = {
+  label = 'GetZoneData',
+  args = {
+    { name = 'name' }
+  },
+  returns = {}
+}
 
-Target.GetTargetBoneData = function(bone, label)
-  return exports['qb-target']:GetTargetBoneData(bone, label)
-end
+Target['qb-target'].GetTargetBoneData = {
+  label = 'GetTargetBoneData',
+  args = {
+    { name = 'bone' },
+    { name = 'label' }
+  },
+  returns = {}
+}
 
-Target.GetTargetEntityData = function(bone, label)
-  return exports['qb-target']:GetTargetEntityData(bone, label)
-end
+Target['qb-target'].GetTargetEntityData = {
+  label = 'GetTargetEntityData',
+  args = {
+    { name = 'bone' },
+    { name = 'label' }
+  },
+  returns = {}
+}
 
-Target.GetTargetModelData = function(model, label)
-  return exports['qb-target']:GetTargetModelData(model, label)
-end
+Target['qb-target'].GetTargetModelData = {
+  label = 'GetTargetModelData',
+  args = {
+    { name = 'model' },
+    { name = 'label' }
+  },
+  returns = {}
+}
 
-Target.GetGlobalPedData = function(label)
-  return exports['qb-target']:GetGlobalPedData(label)
-end
+Target['qb-target'].GetGlobalPedData = {
+  label = 'GetGlobalPedData',
+  args = {
+    { name = 'label' }
+  },
+  returns = {}
+}
 
-Target.GetGlobalVehicleData = function(label)
-  return exports['qb-target']:GetGlobalVehicleData(label)
-end
+Target['qb-target'].GetGlobalVehicleData = {
+  label = 'GetGlobalVehicleData',
+  args = {
+    { name = 'label' }
+  },
+  returns = {}
+}
 
-Target.GetGlobalObjectData = function(label)
-  return exports['qb-target']:GetGlobalObjectData(label)
-end
+Target['qb-target'].GetGlobalObjectData = {
+  label = 'GetGlobalObjectData',
+  args = {
+    { name = 'label' }
+  },
+  returns = {}
+}
 
-Target.GetGlobalPlayerData = function(label)
-  return exports['qb-target']:GetGlobalPlayerData(label)
-end
+Target['qb-target'].GetGlobalPlayerData = {
+  label = 'GetGlobalPlayerData',
+  args = {
+    { name = 'label' }
+  },
+  returns = {}
+}
 
-Target.UpdateGlobalTypeData = function(type, label, data)
-  exports['qb-target']:UpdateGlobalTypeData(type, label, data)
-end
+Target['qb-target'].UpdateGlobalTypeData = {
+  label = 'UpdateGlobalTypeData',
+  args = {
+    { name = 'type' },
+    { name = 'label' },
+    { name = 'data' }
+  }
+}
 
-Target.UpdateZoneData = function(name, data)
-  exports['qb-target']:UpdateZoneData(name, data)
-end
+Target['qb-target'].UpdateZoneData = {
+  label = 'UpdateZoneData',
+  args = {
+    { name = 'name' },
+    { name = 'data' }
+  }
+}
 
-Target.UpdateTargetBoneData = function(bone, label, data)
-  exports['qb-target']:UpdateTargetBoneData(bone, label, data)
-end
+Target['qb-target'].UpdateTargetBoneData = {
+  label = 'UpdateTargetBoneData',
+  args = {
+    { name = 'bone' },
+    { name = 'label' },
+    { name = 'data' }
+  }
+}
 
-Target.UpdateTargetEntityData = function(entity, label, data)
-  exports['qb-target']:UpdateTargetEntityData(entity, label, data)
-end
+Target['qb-target'].UpdateTargetEntityData = {
+  label = 'UpdateTargetEntityData',
+  args = {
+    { name = 'entity' },
+    { name = 'label' },
+    { name = 'data' }
+  }
+}
 
-Target.UpdateTargetModelData = function(model, label, data)
-  exports['qb-target']:UpdateTargetModelData()
-end
+Target['qb-target'].UpdateTargetModelData = {
+  label = 'UpdateTargetModelData',
+  args = {}
+}
 
-Target.UpdateGlobalPedData = function(label, data)
-  exports['qb-target']:UpdateGlobalPedData(label, data)
-end
+Target['qb-target'].UpdateGlobalPedData = {
+  label = 'UpdateGlobalPedData',
+  args = {
+    { name = 'label' },
+    { name = 'data' }
+  }
+}
 
-Target.UpdateGlobalVehicleData = function(label, data)
-  exports['qb-target']:UpdateGlobalVehicleData(label, data)
-end
+Target['qb-target'].UpdateGlobalVehicleData = {
+  label = 'UpdateGlobalVehicleData',
+  args = {
+    { name = 'label' },
+    { name = 'data' }
+  }
+}
 
-Target.UpdateGlobalObjectData = function(label, data)
-  exports['qb-target']:UpdateGlobalObjectData(label, data)
-end
+Target['qb-target'].UpdateGlobalObjectData = {
+  label = 'UpdateGlobalObjectData',
+  args = {
+    { name = 'label' },
+    { name = 'data' }
+  }
+}
 
-Target.UpdateGlobalPlayerData = function(label, data)
-  exports['qb-target']:UpdateGlobalPlayerData(label, data)
-end
+Target['qb-target'].UpdateGlobalPlayerData = {
+  label = 'UpdateGlobalPlayerData',
+  args = {
+    { name = 'label' },
+    { name = 'data' }
+  }
+}
 
-Target.GetPeds = function()
-  return exports['qb-target']:GetPeds()
-end
+Target['qb-target'].GetPeds = {
+  label = 'GetPeds',
+  args = {},
+  returns = {}
+}
 
-Target.UpdatePedsData = function(index, data)
-  exports['qb-target']:UpdatePedsData(index, data)
-end
+Target['qb-target'].UpdatePedsData = {
+  label = 'UpdatePedsData',
+  args = {
+    { name = 'index' },
+    { name = 'data' }
+  }
+}
 
-Target.AllowTargeting = function(bool)
-  exports['qb-target']:AllowTargeting(bool)
-end
+Target['qb-target'].AllowTargeting = {
+  label = 'AllowTargeting',
+  args = {
+    { name = 'bool' }
+  }
+}

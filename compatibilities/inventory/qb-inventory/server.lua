@@ -1,6 +1,6 @@
 ---@diagnostic disable: duplicate-set-field
 ---@version 2.0.0
-Inventory['qb-inventory'] = {}
+
 Inventory['qb-inventory'].LoadInventory = {
   label = 'LoadInventory',
   args = {

@@ -1,21 +1,41 @@
 ---@diagnostic disable: duplicate-set-field
 
-Dispatch.CreateCall = function(data)
-  return exports['bub-mdt']:createCall(data)
-end
+Dispatch['bub-mdt'].CreateCall = {
+  label = 'createCall',
+  args = {
+    { name = 'data' }
+  },
+  returns = {}
+}
 
-Dispatch.UpdateCallCoords = function(callId, coords)
-  exports['bub-mdt']:updateCallCoords(callId, coords)
-end
+Dispatch['bub-mdt'].UpdateCallCoords = {
+  label = 'updateCallCoords',
+  args = {
+    { name = 'callId' },
+    { name = 'coords' }
+  }
+}
 
-Dispatch.IsVehicleBOLO = function(plate)
-  return exports['bub-mdt']:isVehicleBOLO(plate)
-end
+Dispatch['bub-mdt'].IsVehicleBOLO = {
+  label = 'isVehicleBOLO',
+  args = {
+    { name = 'plate' }
+  },
+  returns = {}
+}
 
-Dispatch.UpdateProfileImage = function(citizenId, image)
-  return exports['bub-mdt']:updateProfileImage(citizenId, image)
-end
+Dispatch['bub-mdt'].UpdateProfileImage = {
+  label = 'updateProfileImage',
+  args = {
+    { name = 'citizenId' },
+    { name = 'image' }
+  },
+  returns = {}
+}
 
-Dispatch.CreateProfileCard = function(data)
-  exports['bub-mdt']:createProfileCard(data)
-end
+Dispatch['bub-mdt'].CreateProfileCard = {
+  label = 'createProfileCard',
+  args = {
+    { name = 'data' }
+  }
+}

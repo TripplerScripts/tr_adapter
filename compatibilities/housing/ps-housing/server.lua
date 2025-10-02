@@ -1,21 +1,42 @@
 ---@diagnostic disable: duplicate-set-field
 
-Housing.GetMainDoor = function(propertyId, doorIndex, isShell)
-  return exports['ps-housing']:getMainDoor(propertyId, doorIndex, isShell)
-end
+Housing['ps-housing'].GetMainDoor = {
+  label = 'getMainDoor',
+  args = {
+    { name = 'propertyId' },
+    { name = 'doorIndex' },
+    { name = 'isShell' }
+  },
+  returns = {}
+}
 
-Housing.RegisterProperty = function(propertyData, preventEnter, source)
-  return exports['ps-housing']:registerProperty(propertyData, preventEnter, source)
-end
+Housing['ps-housing'].RegisterProperty = {
+  label = 'registerProperty',
+  args = {
+    { name = 'propertyData' },
+    { name = 'preventEnter' },
+    { name = 'source' }
+  },
+  returns = {}
+}
 
-Housing.IsOwner = function(src, property_id)
-  return exports['ps-housing']:IsOwner(src, property_id)
-end
+Housing['ps-housing'].IsOwner = {
+  label = 'IsOwner',
+  args = {
+    { name = 'src' },
+    { name = 'property_id' }
+  },
+  returns = {}
+}
 
-Housing.GetProperties = function()
-  return exports['ps-housing']:GetProperties()
-end
+Housing['ps-housing'].GetProperties = {
+  label = 'GetProperties',
+  args = {},
+  returns = {}
+}
 
-Housing.GetApartments = function()
-  return exports['ps-housing']:GetApartments()
-end
+Housing['ps-housing'].GetApartments = {
+  label = 'GetApartments',
+  args = {},
+  returns = {}
+}

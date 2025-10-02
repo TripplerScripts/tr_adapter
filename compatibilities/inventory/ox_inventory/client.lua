@@ -1,140 +1,236 @@
 ---@diagnostic disable: duplicate-set-field
 ---@version 2.44.6
 
-Inventory.GetCurrentWeapon = function(inv)
-  return exports.ox_inventory:getCurrentWeapon(inv)
-end
+Inventory.ox_inventory.GetCurrentWeapon = {
+  label = 'getCurrentWeapon',
+  args = {
+    { name = 'inv' }
+  },
+  returns = {}
+}
 
-Inventory.SetStashTarget = function(id, owner)
-  return exports.ox_inventory:setStashTarget(id, owner)
-end
+Inventory.ox_inventory.SetStashTarget = {
+  label = 'setStashTarget',
+  args = {
+    { name = 'id' },
+    { name = 'owner' }
+  },
+}
 
 ---@param inv string?
 ---@param data any?
 ---@return boolean?
-Inventory.OpenInventory = function(inv, data)
-  return exports.ox_inventory:openInventory(inv, data)
-end
+Inventory.ox_inventory.OpenInventory = {
+  label = 'openInventory',
+  args = {
+    { name = 'inv' },
+    { name = 'data' }
+  },
+  returns = {}
+}
 
 ---@param data table
 ---@param cb fun(response: SlotWithItem | false)?
 ---@param noAnim? boolean
-Inventory.UseItem = function(data, cb, noAnim)
-  return exports.ox_inventory:useItem(data, cb, noAnim)
-end
+Inventory.ox_inventory.UseItem = {
+  label = 'useItem',
+  args = {
+    { name = 'data' },
+    { name = 'cb' },
+    { name = 'noAnim' }
+  },
+}
 
 ---@param slot number
 ---@return boolean?
-Inventory.UseSlot = function(slot, noAnim)
-  return exports.ox_inventory:useSlot(slot, noAnim)
-end
+Inventory.ox_inventory.UseSlot = {
+  label = 'useSlot',
+  args = {
+    { name = 'slot' },
+    { name = 'noAnim' }
+  },
+}
 
-Inventory.OpenNearbyInventory = function()
-  return exports.ox_inventory:openNearbyInventory()
-end
+Inventory.ox_inventory.OpenNearbyInventory = {
+  label = 'openNearbyInventory',
+  args = {},
+  returns = {}
+}
 
-Inventory.CloseInventory = function(server)
-  return exports.ox_inventory:closeInventory(server)
-end
+Inventory.ox_inventory.CloseInventory = {
+  label = 'closeInventory',
+  args = {
+    { name = 'server' }
+  },
+}
 
-Inventory.GiveItemToTarget = function(serverId, slotId, count)
-  return exports.ox_inventory:giveItemToTarget(serverId, slotId, count)
-end
+Inventory.ox_inventory.GiveItemToTarget = {
+  label = 'giveItemToTarget',
+  args = {
+    { name = 'serverId' },
+    { name = 'slotId' },
+    { name = 'count' }
+  },
+}
 
 ---@param search 'slots' | 1 | 'count' | 2
 ---@param item table | string
 ---@param metadata? table | string
-Inventory.Search = function(search, item, metadata)
-  return exports.ox_inventory:Search(search, item, metadata)
-end
+Inventory.ox_inventory.Search = {
+  label = 'Search',
+  args = {
+    { name = 'search' },
+    { name = 'item' },
+    { name = 'metadata' }
+  },
+  returns = {}
+}
 
 ---@return ? PlayerData.inventory
-Inventory.GetPlayerItems = function()
-  return exports.ox_inventory:GetPlayerItems()
-end
+Inventory.ox_inventory.GetPlayerItems = {
+  label = 'GetPlayerItems',
+  args = {},
+  returns = {}
+}
 
 ---@return ? PlayerData.weight
-Inventory.GetPlayerWeight = function()
-  return exports.ox_inventory:GetPlayerWeight()
-end
+Inventory.ox_inventory.GetPlayerWeight = {
+  label = 'GetPlayerWeight',
+  args = {},
+  returns = {}
+}
 
 ---@return ? PlayerData.maxWeight
-Inventory.GetPlayerMaxWeight = function()
-  return exports.ox_inventory:GetPlayerMaxWeight()
-end
+Inventory.ox_inventory.GetPlayerMaxWeight = {
+  label = 'GetPlayerMaxWeight',
+  args = {},
+  returns = {}
+}
 
 ---@param itemName string
 ---@param metadata? any
 ---@param strict? boolean Strictly match metadata properties, otherwise use partial matching.
 ---@return SlotWithItem?
-Inventory.GetSlotIdWithItem = function(itemName, metadata, strict)
-  return exports.ox_inventory:GetSlotIdWithItem(itemName, metadata, strict)
-end
+Inventory.ox_inventory.GetSlotIdWithItem = {
+  label = 'GetSlotIdWithItem',
+  args = {
+    { name = 'itemName' },
+    { name = 'metadata' },
+    { name = 'strict' }
+  },
+  returns = {}
+}
 
 ---@param itemName string
 ---@param metadata? any
 ---@param strict? boolean Strictly match metadata properties, otherwise use partial matching.
 ---@return SlotWithItem[]?
-Inventory.GetSlotsWithItem = function()
-  return exports.ox_inventory:GetSlotsWithItem(itemName, metadata, strict)
-end
+Inventory.ox_inventory.GetSlotsWithItem = {
+  label = 'GetSlotsWithItem',
+  args = {
+    { name = 'itemName' },
+    { name = 'metadata' },
+    { name = 'strict' }
+  },
+  returns = {}
+}
 
 ---@param itemName string
 ---@param metadata? any
 ---@param strict? boolean Strictly match metadata properties, otherwise use partial matching.
 ---@return number
-Inventory.GetItemCount = function(itemName, metadata, strict)
-  return exports.ox_inventory:GetItemCount(itemName, metadata, strict)
-end
+Inventory.ox_inventory.GetItemCount = {
+  label = 'GetItemCount',
+  args = {
+    { name = 'itemName' },
+    { name = 'metadata' },
+    { name = 'strict' }
+  },
+  returns = {}
+}
 
 --- use array of single key value pairs to dictate order
 ---@param metadata string | table<string, string> | table<string, string>[]
 ---@param value? string
-Inventory.DisplayMetadata = function(metadata, value)
-  return exports.ox_inventory:displayMetadata(metadata, value)
-end
+Inventory.ox_inventory.DisplayMetadata = {
+  label = 'displayMetadata',
+  args = {
+    { name = 'metadata' },
+    { name = 'value' }
+  },
+  returns = {}
+}
 
 ---@param _ table?
 ---@param name string?
 ---@return table?
-Inventory.Items = function(_, name)
-  return exports.ox_inventory:Items(_, name)
-end
+Inventory.ox_inventory.Items = {
+  label = 'Items',
+  args = {
+    { name = '_' },
+    { name = 'name' }
+  },
+  returns = {}
+}
 
 ---@param _ table?
 ---@param name string?
 ---@return table?
-Inventory.ItemList = function(_, name)
-  return exports.ox_inventory:ItemList(_, name)
-end
+Inventory.ox_inventory.ItemList = {
+  label = 'ItemList',
+  args = {
+    { name = '_' },
+    { name = 'name' }
+  },
+  returns = {}
+}
 
 ---@param data table
-Inventory.Notify = function(data)
-  return exports.ox_inventory:notify(data)
-end
+Inventory.ox_inventory.Notify = {
+  label = 'notify',
+  args = {
+    { name = 'data' }
+  },
+}
 
 ---@param value boolean
-Inventory.SuppressItemNotifications = function(value)
-  return exports.ox_inventory:suppressItemNotifications(value)
-end
+Inventory.ox_inventory.SuppressItemNotifications = {
+  label = 'suppressItemNotifications',
+  args = {
+    { name = 'value' }
+  },
+}
 
 ---@param state boolean
-Inventory.WeaponWheel = function(state)
-  return exports.ox_inventory:weaponWheel(state)
-end
+Inventory.ox_inventory.WeaponWheel = {
+  label = 'weaponWheel',
+  args = {
+    { name = 'state' }
+  },
+  returns = {}
+}
 
-Inventory.Keyboard = function()
-  return exports.ox_inventory:Keyboard()
-end
+Inventory.ox_inventory.Keyboard = {
+  label = 'Keyboard',
+  args = {},
+  returns = {}
+}
 
-Inventory.Progress = function(options, completed)
-  return exports.ox_inventory:Progress(options, completed)
-end
+Inventory.ox_inventory.Progress = {
+  label = 'Progress',
+  args = {
+    { name = 'options' },
+    { name = 'completed' }
+  },
+}
 
-Inventory.CancelProgress = function()
-  return exports.ox_inventory:CancelProgress()
-end
+Inventory.ox_inventory.CancelProgress = {
+  label = 'CancelProgress',
+  args = {},
+}
 
-Inventory.ProgressActive = function()
-  return exports.ox_inventory:ProgressActive()
-end
+Inventory.ox_inventory.ProgressActive = {
+  label = 'ProgressActive',
+  args = {},
+  returns = {}
+}

@@ -1,41 +1,62 @@
 ---@diagnostic disable: duplicate-set-field
 
-Housing.GetProperties = function()
-  return exports['ps-housing']:GetProperties()
-end
+Housing['ps-housing'].GetProperties = {
+  label = 'GetProperties',
+  args = {},
+  returns = {}
+}
 
-Housing.GetProperty = function(property_id)
-  return exports['ps-housing']:GetProperty(property_id)
-end
+Housing['ps-housing'].GetProperty = {
+  label = 'GetProperty',
+  args = {
+    { name = 'property_id' }
+  },
+  returns = {}
+}
 
-Housing.GetApartments = function()
-  return exports['ps-housing']:GetApartments()
-end
+Housing['ps-housing'].GetApartments = {
+  label = 'GetApartments',
+  args = {},
+  returns = {}
+}
 
-Housing.GetApartment = function(apartment_id)
-  return exports['ps-housing']:GetApartment(apartment_id)
-end
+Housing['ps-housing'].GetApartment = {
+  label = 'GetApartment',
+  args = {
+    { name = 'apartment_id' }
+  },
+  returns = {}
+}
 
-Housing.GetShells = function()
-  return exports['ps-housing']:GetShells()
-end
+Housing['ps-housing'].GetShells = {
+  label = 'GetShells',
+  args = {},
+  returns = {}
+}
 
-Housing.CreateTempShell = function(shellName, position, rotation, leaveCb)
-  return exports['ps-housing']:CreateTempShell(shellName, position, rotation, leaveCb)
-end
+Housing['ps-housing'].CreateTempShell = {
+  label = 'CreateTempShell',
+  args = {
+    { name = 'shellName' },
+    { name = 'position' },
+    { name = 'rotation' },
+    { name = 'leaveCb' }
+  },
+  returns = {}
+}
 
-Housing.GetShellData = function(shellName)
-  return exports['ps-housing']:GetShellData(shellName)
-end
+Housing['ps-housing'].GetShellData = {
+  label = 'GetShellData',
+  args = {
+    { name = 'shellName' }
+  },
+  returns = {}
+}
 
-Housing.DespawnTempShell = function(shellEntity)
-  return exports['ps-housing']:DespawnTempShell(shellEntity)
-end
-
-Housing.GetProperties = function()
-  return exports['ps-housing']:GetProperties()
-end
-
-Housing.GetApartments = function()
-  return exports['ps-housing']:GetApartments()
-end
+Housing['ps-housing'].DespawnTempShell = {
+  label = 'DespawnTempShell',
+  args = {
+    { name = 'shellEntity' }
+  },
+  returns = {}
+}

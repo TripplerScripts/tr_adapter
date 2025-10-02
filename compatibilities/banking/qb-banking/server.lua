@@ -1,45 +1,105 @@
 ---@diagnostic disable: duplicate-set-field
 
-Banking.CreatePlayerAccount = function(playerId, accountName, accountBalance, accountUsers)
-  return exports['qb-banking']:CreatePlayerAccount(playerId, accountName, accountBalance, accountUsers)
-end
+Banking['qb-banking'].CreatePlayerAccount = {
+  label = 'CreatePlayerAccount',
+  args = {
+    { name = 'playerId' },
+    { name = 'accountName' },
+    { name = 'accountBalance' },
+    { name = 'accountUsers' }
+  },
+  returns = {}
+}
 
-Banking.CreateJobAccount = function(accountName, accountBalance)
-  return exports['qb-banking']:CreateJobAccount(accountName, accountBalance)
-end
+Banking['qb-banking'].CreateJobAccount = {
+  label = 'CreateJobAccount',
+  args = {
+    { name = 'accountName' },
+    { name = 'accountBalance' }
+  },
+  returns = {}
+}
 
-Banking.CreateGangAccount = function(accountName, accountBalance)
-  return exports['qb-banking']:CreateGangAccount(accountName, accountBalance)
-end
+Banking['qb-banking'].CreateGangAccount = {
+  label = 'CreateGangAccount',
+  args = {
+    { name = 'accountName' },
+    { name = 'accountBalance' }
+  },
+  returns = {}
+}
 
-Banking.CreateBankStatement = function(playerId, account, amount, reason, statementType, accountType)
-  return exports['qb-banking']:CreateBankStatement(playerId, account, amount, reason, statementType, accountType)
-end
+Banking['qb-banking'].CreateBankStatement = {
+  label = 'CreateBankStatement',
+  args = {
+    { name = 'playerId' },
+    { name = 'account' },
+    { name = 'amount' },
+    { name = 'reason' },
+    { name = 'statementType' },
+    { name = 'accountType' }
+  },
+  returns = {}
+}
 
-Banking.AddMoney = function(accountName, amount, reason)
-  return exports['qb-banking']:AddMoney(accountName, amount, reason)
-end
+Banking['qb-banking'].AddMoney = {
+  label = 'AddMoney',
+  args = {
+    { name = 'accountName' },
+    { name = 'amount' },
+    { name = 'reason' }
+  },
+  returns = {}
+}
 
-Banking.AddGangMoney = function(accountName, amount, reason)
-  return exports['qb-banking']:AddGangMoney(accountName, amount, reason)
-end
+Banking['qb-banking'].AddGangMoney = {
+  label = 'AddGangMoney',
+  args = {
+    { name = 'accountName' },
+    { name = 'amount' },
+    { name = 'reason' }
+  },
+  returns = {}
+}
 
-Banking.RemoveMoney = function(accountName, amount, reason)
-  return exports['qb-banking']:RemoveMoney(accountName, amount, reason)
-end
+Banking['qb-banking'].RemoveMoney = {
+  label = 'RemoveMoney',
+  args = {
+    { name = 'accountName' },
+    { name = 'amount' },
+    { name = 'reason' }
+  },
+  returns = {}
+}
 
-Banking.RemoveGangMoney = function(accountName, amount, reason)
-  return exports['qb-banking']:RemoveGangMoney(accountName, amount, reason)
-end
+Banking['qb-banking'].RemoveGangMoney = {
+  label = 'RemoveGangMoney',
+  args = {
+    { name = 'accountName' },
+    { name = 'amount' },
+    { name = 'reason' }
+  },
+  returns = {}
+}
 
-Banking.GetAccount = function()
-  return exports['qb-banking']:GetAccount()
-end
+Banking['qb-banking'].GetAccount = {
+  label = 'GetAccount',
+  args = {},
+  returns = {}
+}
 
-Banking.GetGangAccount = function(accountName)
-  return exports['qb-banking']:GetGangAccount(accountName)
-end
+Banking['qb-banking'].GetGangAccount = {
+  label = 'GetGangAccount',
+  args = {
+    { name = 'accountName' }
+  },
+  returns = {}
+}
 
-Banking.GetAccountBalance = function(accountName)
-  return exports['qb-banking']:GetAccountBalance(accountName)
-end
+Banking['qb-banking'].GetAccountBalance = {
+  label = 'GetAccountBalance',
+  args = {
+    { name = 'accountName' }
+  },
+  returns = {}
+}

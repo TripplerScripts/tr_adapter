@@ -1,17 +1,28 @@
 ---@diagnostic disable: duplicate-set-field
 
-Doorlock.GetClosestDoor = function()
-  return exports['qb-doorlock']:GetClosestDoor()
-end
+Doorlock['qb-doorlock'].GetClosestDoor = {
+  label = 'GetClosestDoor',
+  args = {},
+  returns = {}
+}
 
-Doorlock.GetNearbyDoors = function()
-  return exports['qb-doorlock']:GetNearbyDoors()
-end
+Doorlock['qb-doorlock'].GetNearbyDoors = {
+  label = 'GetNearbyDoors',
+  args = {},
+  returns = {}
+}
 
-Doorlock.GetDoorList = function(entity)
-  return exports['qb-doorlock']:GetDoorList(entity)
-end
+---@param entity number
+Doorlock['qb-doorlock'].GetDoorList = {
+  label = 'GetDoorList',
+  args = {
+    { name = 'entity' }
+  },
+  returns = {}
+}
 
-Doorlock.GetDoorStates = function()
-  return exports['qb-doorlock']:GetDoorStates()
-end
+Doorlock['qb-doorlock'].GetDoorStates = {
+  label = 'GetDoorStates',
+  args = {},
+  returns = {}
+}

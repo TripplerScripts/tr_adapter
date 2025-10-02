@@ -1,33 +1,45 @@
 ---@diagnostic disable: duplicate-set-field
 
-Dispatch.CustomAlert = function(data)
-  exports['bub-mdt']:CustomAlert(data)
-end
+Dispatch['bub-mdt'].CustomAlert = {
+  label = 'CustomAlert',
+  args = {
+    { name = 'data' }
+  }
+}
 
-Dispatch.VehicleTheft = function()
-  exports['bub-mdt']:VehicleTheft()
-end
+Dispatch['bub-mdt'].VehicleTheft = {
+  label = 'VehicleTheft',
+  args = {}
+}
 
-Dispatch.Shooting = function()
-  exports['bub-mdt']:Shooting()
-end
+Dispatch['bub-mdt'].Shooting = {
+  label = 'Shooting',
+  args = {}
+}
 
-Dispatch.VehicleShooting = function()
-  exports['bub-mdt']:VehicleShooting()
-end
+Dispatch['bub-mdt'].VehicleShooting = {
+  label = 'VehicleShooting',
+  args = {}
+}
 
-Dispatch.SpeedingVehicle = function()
-  exports['bub-mdt']:SpeedingVehicle()
-end
+Dispatch['bub-mdt'].SpeedingVehicle = {
+  label = 'SpeedingVehicle',
+  args = {}
+}
 
-Dispatch.CarJacking = function(vehicle)
-  exports['bub-mdt']:CarJacking(vehicle)
-end
+Dispatch['bub-mdt'].CarJacking = {
+  label = 'CarJacking',
+  args = {
+    { name = 'vehicle' }
+  }
+}
 
-Dispatch.OfficerDown = function()
-  exports['bub-mdt']:OfficerDown()
-end
+Dispatch['bub-mdt'].OfficerDown = {
+  label = 'OfficerDown',
+  args = {}
+}
 
-Dispatch.OpenMdt = function()
-  exports['bub-mdt']:openMdt()
-end
+Dispatch['bub-mdt'].OpenMdt = {
+  label = 'openMdt',
+  args = {}
+}

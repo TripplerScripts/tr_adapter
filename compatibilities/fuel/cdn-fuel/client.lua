@@ -14,16 +14,22 @@
 ---@class UpdateStationInfo
 ---@param info string
 
----@class GetFuel
 ---@param entity integer
----@return type number
-Fuel.GetFuel = function(entity)
-  return exports['cdn-fuel']:GetFuel(entity)
-end
+---@return number
+Fuel['cdn-fuel'].GetFuel = {
+  label = 'GetFuel',
+  args = {
+    { name = 'entity' }
+  },
+  returns = { 'number' }
+}
 
----@class SetFuelType
 ---@param entity integer
 ---@param fuel number
-Fuel.SetFuel = function(entity, fuel)
-  exports['cdn-fuel']:SetFuel(entity, fuel)
-end
+Fuel['cdn-fuel'].SetFuel = {
+  label = 'SetFuel',
+  args = {
+    { name = 'entity' },
+    { name = 'fuel' }
+  },
+}

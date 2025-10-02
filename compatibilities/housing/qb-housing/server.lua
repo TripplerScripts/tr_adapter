@@ -1,9 +1,13 @@
 ---@diagnostic disable: duplicate-set-field
 
-Housing.HasKey = function()
-  return exports['qb-housing']:hasKey()
-end
+Housing['qb-housing'].HasKey = {
+  label = 'hasKey',
+  args = {},
+  returns = {}
+}
 
-Housing.GetKeyHolderData = function()
-  return exports['qb-housing']:getKeyHolderData()
-end
+Housing['qb-housing'].GetKeyHolderData = {
+  label = 'getKeyHolderData',
+  args = {},
+  returns = {}
+}

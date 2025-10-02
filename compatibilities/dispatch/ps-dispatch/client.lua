@@ -1,6 +1,9 @@
 ---@diagnostic disable: duplicate-set-field
 
-Dispatch.CustomAlert = function(data)
-  exports['ps-dispatch']:CustomAlert(data)
-end
+Dispatch['ps-dispatch'].CustomAlert = {
+  label = 'CustomAlert',
+  args = {
+    { name = 'data' }
+  }
+}
 ---@TODO: Add more functions

@@ -1,21 +1,48 @@
 ---@diagnostic disable: duplicate-set-field
 
-Doorlock.GetDoor = function(door)
-  return exports.ox_doorlock:getDoor(door)
-end
+---@param door any
+Doorlock.ox_doorlock.GetDoor = {
+  label = 'getDoor',
+  args = {
+    { name = 'door' }
+  },
+  returns = {}
+}
 
-Doorlock.GetAllDoors = function()
-  return exports.ox_doorlock:getAllDoors()
-end
+Doorlock.ox_doorlock.GetAllDoors = {
+  label = 'getAllDoors',
+  args = {},
+  returns = {}
+}
 
-Doorlock.GetDoorFromName = function(name)
-  return exports.ox_doorlock:getDoorFromName(name)
-end
+---@param name string
+Doorlock.ox_doorlock.GetDoorFromName = {
+  label = 'getDoorFromName',
+  args = {
+    { name = 'name' }
+  },
+  returns = {}
+}
 
-Doorlock.EditDoor = function(id, data)
-  exports.ox_doorlock:editDoor(id, data)
-end
+---@param id any
+---@param data table
+Doorlock.ox_doorlock.EditDoor = {
+  label = 'editDoor',
+  args = {
+    { name = 'id' },
+    { name = 'data' }
+  }
+}
 
-Doorlock.SetDoorState = function(id, state, lockpick)
-  return exports.ox_doorlock:setDoorState(id, state, lockpick)
-end
+---@param id any
+---@param state any
+---@param lockpick any
+Doorlock.ox_doorlock.SetDoorState = {
+  label = 'setDoorState',
+  args = {
+    { name = 'id' },
+    { name = 'state' },
+    { name = 'lockpick' }
+  },
+  returns = {}
+}
