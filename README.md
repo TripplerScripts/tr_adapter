@@ -11,12 +11,12 @@ functionX {
     values  = _SAME_ | _DIFFERENT_,   -- actual values passed ||| ✅ supported (this is values not type of values)
     count   = _SAME_ | _DIFFERENT_,   -- number of params ||| ✅ ignored since it wont effect the result or the grabber orr arguments
     types   = _SAME_ | _DIFFERENT_,   -- type differences (number, string, table, etc.) ||| ❌ not yet
-    order   = _SAME_ | _DIFFERENT_,   -- param order ||| ❌ not yet
+    order   = _SAME_ | _DIFFERENT_,   -- param order ||| ✅ supported
   },
   returnals = {
     values  = _SAME_ | _DIFFERENT_,   -- actual returned values ||| ✅ supported
     types   = _SAME_ | _DIFFERENT_,   -- type differences ||| ❌ not yet
-    order   = _SAME_ | _DIFFERENT_,   -- order of multi-returns ||| ❌ untested
+    order   = _SAME_ | _DIFFERENT_,   -- order of multi-returns ||| ✅ supported
   },
   errorHandling = _SAME_ | _DIFFERENT_, -- returns nil vs throws error ||| ❌ not yet
 }

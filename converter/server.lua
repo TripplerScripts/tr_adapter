@@ -3,7 +3,7 @@ function BuildConversionTable(export, Category)
 
   for scriptName, scriptConfig in pairs(Category) do
     if scriptName ~= 'tr_adapter' then
-      for funcName, funcConfig in pairs(scriptConfig) do
+      for _, funcConfig in pairs(scriptConfig) do
         if funcConfig.returns then
           local returns = funcConfig.returns
 

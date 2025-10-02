@@ -6,7 +6,7 @@ function ExtractResourceNames()
 
     local file = io.open(manifestPath, 'r')
     if not file then
-        print({ type = 'warn', message = ('Could not open fxmanifest.lua'):format(), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline })
+        print({ type = 'error', message = ('Could not open fxmanifest.lua'):format(), path = debug.getinfo(1, "Sl").short_src, line = debug.getinfo(1, "Sl").currentline })
         return
     end
 
