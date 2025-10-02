@@ -1,25 +1,4 @@
 function AdapterSetup()
-  local Categories = {}
-  for _, categoryData in pairs(SupportedResourcesData) do
-    local categoryVariable = string.upper(string.sub(categoryData.category, 1, 1)) .. string.sub(categoryData.category, 2)
-
-    if not _G[categoryVariable] then
-      _G[categoryVariable] = {}
-    end
-
-    if not Categories[categoryVariable] then
-      Categories[categoryVariable] = {}
-    end
-
-    for _, resourceName in ipairs(categoryData.names) do
-      _G[categoryVariable][resourceName] = {}
-
-      table.insert(Categories[categoryVariable], {
-        name = resourceName
-      })
-    end
-  end
-
   for categoryVariable, _ in pairs(Categories) do
     local category = (categoryVariable):lower()
     local categoryName = _G[categoryVariable]
@@ -34,9 +13,11 @@ function AdapterSetup()
           categoryName.tr_adapter[functionName] = function(calledResource, handlerResource, ...)
             local param = { ... }
             local convertion = InitENV(categoryName, handlerResource, functionName, param, calledResource)
-            local functionsSettings = InitOrder(categoryName, convertion, functionName, calledResource)
+            print(json.encode(convertion))
+            local functionSettings = InitOrder(categoryName, convertion, functionName, calledResource)
+            print(json.encode(functionSettings))
 
-            return functionsSettings
+            return functionSettings
           end
 
           AddEventHandler(('__cfx_export_%s_%s'):format(resourceName, functionConfig.label), function(cb)

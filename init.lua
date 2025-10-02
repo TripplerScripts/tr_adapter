@@ -26,3 +26,5 @@ AvailableScripts = {}
 SupportedResourcesData = {}
 
 ScriptsFunctions = {}
+
+Categories = {}
