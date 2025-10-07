@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
-author 'Trippler Hub'
+author 'Trippler Scripts'
 version '0.91.0'
 dependency 'tr_lib'
 
