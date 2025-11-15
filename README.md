@@ -1,4 +1,4 @@
-# tr_adapter
+# tr_adapter (Still on Development)
 
 **Universal FiveM Resource Adapter** - Use any FiveM resource without dependency conflicts.
 
